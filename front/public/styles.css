@@ -19,6 +19,7 @@
     border-width: 2px; border-top-width: 0.5px;}
 .modalScreen{background-color: blueviolet; position: absolute; height: auto; width: auto; top: 10%;}
 .symtomsContainer{display: flex; height: 8vh;}
+.invisible{opacity: 0%;}
 /*reciclarn't*/
 
 /* Fragmentos de registro*/

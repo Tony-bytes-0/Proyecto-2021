@@ -3,12 +3,13 @@ import React, { Component } from 'react';//if(document.getElementById('Checkbox'
 
 
 export default class Symtomps extends Component {
-    delete = function(id){
-        document.getElementById(id).remove()
+    delete = function(id, symptom ){
+        //document.getElementById(id).remove() borrar nodo
+        this.props.onClickFunction(id, symptom)//borrar del estado por ende, del renderizado
     }
-    autoUnCheck = function(id, id2){
-        console.log(document.getElementById(id).checked = false)
-        console.log(document.getElementById(id2).checked = false)
+    autoUnCheck = function(id, id2){//desmarca las opciones no seleccionadas
+        document.getElementById(id).checked = false
+        document.getElementById(id2).checked = false
     }
 
     render() { 
@@ -34,7 +35,7 @@ export default class Symtomps extends Component {
                 </input>
             
             <button className='col-1 btn btn-danger fitContent' style={{"fontSize":"2vh"}} 
-                onClick={() =>{this.delete(this.props.id)}}
+                onClick={() =>{this.delete(this.props.id, this.props.symptom)}}
             >Eliminar</button>
         </div>);
     }
