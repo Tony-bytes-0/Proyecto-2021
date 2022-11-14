@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { useState } from 'react';
 import Section from './Independientes/Section';
 import FieldMap from './Independientes/FieldMap';
 import Direction from './registerModules/Direction';
@@ -8,15 +8,20 @@ import InputFile from './Independientes/InputFile';
 import MedicalRecord from './MedicalRecord';
 
 import { genders, allergies, cronicDiseases, discapacities, bloodTypes } from './Independientes/staticValuesList';
-//si posee enfermedades cronicas
 
 
-class Register extends Component {
+function Register () {
+    // const [activeCronicDiseases, setCronic] = useState({
+    //     name:''
+    // })
 
-    render() { 
-        let medicalRecord = ''
-        if(this.props.renderMedicalRecord){medicalRecord = <MedicalRecord />}
-        return (<div id='RegisterMainFrame' className='col'>
+
+    // const handleChangue = (e) => {
+    //     setCronic({...activeCronicDiseases,  [e.target.name]: e.target.value})
+    // }
+        let medicalRecord = <MedicalRecord />
+        return <div id='RegisterMainFrame' className='col'>
+            
                 {medicalRecord}
                 <Section tittle={'Informacion Personal'} classes={'azul-Oscuro smallMargin'}/>
                 <InputFile classes={"centrate"} />
@@ -52,8 +57,7 @@ class Register extends Component {
                 <div className='container centrate end smallMargin'>
                     <button className='centrate btn btn-primary'>Registrar</button>
                 </div>
-        </div>);
-    }
+        </div>
 }
  
 export default Register;

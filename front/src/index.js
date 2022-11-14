@@ -1,4 +1,4 @@
-import App from './components/App';
+import Application from './components/App';
 import { createRoot } from 'react-dom/client';
 
 //redux
@@ -13,7 +13,7 @@ const root = createRoot(container); // createRoot(container!) if you use TypeScr
 
 root.render(
     <Provider store={store}>
-        <App />
+        <Application />
     </Provider>
     
 );

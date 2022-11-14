@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from './features/counter/sliceCounter'
+import activeSymptoms from './features/Symptoms/ActiveSymptoms'
 
 export default configureStore({
-  reducer: {counterReducer},
+  reducer: {
+    activeSymptoms},
 })
