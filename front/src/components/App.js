@@ -3,12 +3,10 @@ import SideBar from './Modulos/SideBar';
 import Register from './Modulos/Register';
 // import Query from './Modulos/Query';
 //redux
-import { useSelector } from 'react-redux';
-
-//esto aun no lo uso :v
+//import { useSelector } from 'react-redux';
 
 export default function Application(){
-    
+
     return<>
         <SideBar options={['Registro', 'Consulta']}/>
         <Register renderMedicalRecord = {true} />    

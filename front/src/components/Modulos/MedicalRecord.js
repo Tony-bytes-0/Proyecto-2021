@@ -1,3 +1,4 @@
+//React
 import { useState } from 'react';
 import FieldMap from './Independientes/FieldMap';
 import SimplePicker from './Independientes/SimplePicker';
@@ -5,11 +6,23 @@ import Section from './Independientes/Section';
 import Symtomps from './medicalRecordModules/Symtomps'
 
 //redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {addSymptom} from '../../indexModles/features/Symptoms/ActiveSymptoms';
+
 
 
 export default function MedicalRecord (props)  {
+    //estados - SELECTOR DE SINTOMA
+    const [actualSelector, setSelector] = useState({
+        value:''
+    })
+    //redux
     const symptoms = useSelector(state => state.activeSymptoms)
+    const dispatch = useDispatch()
+
+    let showMeValue = function(){
+        dispatch(addSymptom('prueba de sonido'))
+    }
 
     let symtompsList = ['Fiebre','Malestar','Etc','Dolor de Cabeza','Nauseas','Mareos','Tos','Tos Seca','Insomnio']
     let temperature = ['Celcius', 'Farenheit', 'Kelvin']
@@ -38,7 +51,13 @@ export default function MedicalRecord (props)  {
 
             <div id='Medical Record 3st' className='row container-fluid smallMargin'>
                 <SimplePicker label={'Sintomas: '} list={symtompsList} />
-                <button className='btn btn-success col-2' >Añadir</button>
+                <button className='btn btn-success col-2' 
+                onClick={() => {
+                    setSelector({
+                        actualSelector: document.getElementById('Sintomas: id').value
+                    });
+                    dispatch(addSymptom(actualSelector))
+                }}>Añadir</button>
             </div>
 
             {symptoms.map((e) => <Symtomps key={e.id} id={e.id} symptom={e.body} 

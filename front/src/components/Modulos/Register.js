@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Section from './Independientes/Section';
 import FieldMap from './Independientes/FieldMap';
 import Direction from './registerModules/Direction';
@@ -14,8 +13,6 @@ function Register () {
     // const [activeCronicDiseases, setCronic] = useState({
     //     name:''
     // })
-
-
     // const handleChangue = (e) => {
     //     setCronic({...activeCronicDiseases,  [e.target.name]: e.target.value})
     // }

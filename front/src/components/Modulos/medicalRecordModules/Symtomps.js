@@ -4,16 +4,25 @@ export default function Symtomps(props){
         document.getElementById(id).checked = false
         document.getElementById(id2).checked = false
     }
-    
-
+    let deleteSymptom = function(){
+        console.log('accediendo a borrar')
+    }
         return (<div id={props.id} className='row symtomsContainer SIDEBAR container-fluid autoBorders' >
+                
+                {/* <button onClick={() => {
+                    markCheckboxes(//chequear si las casillas deberian marcarse
+                    [props.id + 'moderadoCheckbox', props.id + 'severoCheckbox', props.id + 'leveCheckbox'],
+                    [props.leve, props.moderado, props.severo]
+                )
+                }}> </button> */}
+
                 <label className='col-1'>Sintoma:</label> 
                 <label className='col'><b>{props.symptom}</b></label>
 
                 <label className='col-1'>Gravedad: </label>
                 <label className='col-1'><b>Leve</b></label>
                 <input className='col-1' type='checkbox' value='1' id={props.id+'leveCheckbox'} 
-                    onClick={() => {autoUnCheck(props.id+'moderadoCheckbox', props.id+'severoCheckbox')}}>
+                    onClick={() => {autoUnCheck(props.id+'moderadoCheckbox', props.id+'severoCheckbox')}} >
                 
                 </input>
 
@@ -27,7 +36,8 @@ export default function Symtomps(props){
                     onClick={() => {autoUnCheck(props.id+'leveCheckbox' , props.id+'moderadoCheckbox' )}}>
                 </input>
             
-            <button className='col-1 btn btn-danger fitContent' style={{"fontSize":"2vh"}} >Eliminar</button>
+            <button className='col-1 btn btn-danger fitContent' style={{"fontSize":"2vh"}} 
+            onClick={() => {deleteSymptom()}}>Eliminar</button>
         </div>);
 }
  
