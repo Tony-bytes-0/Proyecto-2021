@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { v4 as uuid}  from 'uuid'
 
 const exampleObjects = [
-  {id: "01", body: "fiebreEstatica", leve: false, moderado: false, severo: false},
-  {id: "02", body: "tosEstatica", leve: false, moderado: false, severo: false},
+  {id: "01", body: "fiebreEstatica"},
+  {id: "02", body: "tosEstatica"},
 ]
 
 export const activeSymptoms = createSlice({
@@ -10,8 +11,8 @@ export const activeSymptoms = createSlice({
   initialState:exampleObjects,
   reducers: {
     addSymptom: (state, action) => {
-      state.push(action.payload)
-      console.log(state, action)
+      state.push({id:uuid(), body: action.payload})
+      //console.log(Object.values(action.payload))
     }
   }
 })

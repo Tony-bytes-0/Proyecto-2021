@@ -4,8 +4,8 @@ export default function Symtomps(props){
         document.getElementById(id).checked = false
         document.getElementById(id2).checked = false
     }
-    let deleteSymptom = function(){
-        console.log('accediendo a borrar')
+    let deleteSymptom = function(deleteId){
+        console.log('accediendo a borrar el registro con id: ', deleteId)
     }
         return (<div id={props.id} className='row symtomsContainer SIDEBAR container-fluid autoBorders' >
                 
@@ -37,7 +37,7 @@ export default function Symtomps(props){
                 </input>
             
             <button className='col-1 btn btn-danger fitContent' style={{"fontSize":"2vh"}} 
-            onClick={() => {deleteSymptom()}}>Eliminar</button>
+            onClick={() => {deleteSymptom(props.id)}}>Eliminar</button>
         </div>);
 }
  

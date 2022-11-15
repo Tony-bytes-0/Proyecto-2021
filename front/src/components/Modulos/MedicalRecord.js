@@ -13,16 +13,11 @@ import {addSymptom} from '../../indexModles/features/Symptoms/ActiveSymptoms';
 
 export default function MedicalRecord (props)  {
     //estados - SELECTOR DE SINTOMA
-    const [actualSelector, setSelector] = useState({
-        value:''
-    })
+
     //redux
     const symptoms = useSelector(state => state.activeSymptoms)
     const dispatch = useDispatch()
 
-    let showMeValue = function(){
-        dispatch(addSymptom('prueba de sonido'))
-    }
 
     let symtompsList = ['Fiebre','Malestar','Etc','Dolor de Cabeza','Nauseas','Mareos','Tos','Tos Seca','Insomnio']
     let temperature = ['Celcius', 'Farenheit', 'Kelvin']
@@ -53,15 +48,11 @@ export default function MedicalRecord (props)  {
                 <SimplePicker label={'Sintomas: '} list={symtompsList} />
                 <button className='btn btn-success col-2' 
                 onClick={() => {
-                    setSelector({
-                        actualSelector: document.getElementById('Sintomas: id').value
-                    });
-                    dispatch(addSymptom(actualSelector))
+                    dispatch(addSymptom(document.getElementById('Sintomas: id').value))//añadir el valor en el selector
                 }}>Añadir</button>
             </div>
 
-            {symptoms.map((e) => <Symtomps key={e.id} id={e.id} symptom={e.body} 
-                leve={e.leve} moderado={e.moderado} severo={e.severo} />)}
+            {symptoms.map((e) => <Symtomps key={e.id} id={e.id} symptom={e.body}  />)}
             
             
             
