@@ -1,5 +1,4 @@
 //React
-import { useState } from 'react';
 import FieldMap from './Independientes/FieldMap';
 import SimplePicker from './Independientes/SimplePicker';
 import Section from './Independientes/Section';
@@ -7,7 +6,7 @@ import Symtomps from './medicalRecordModules/Symtomps'
 
 //redux
 import { useDispatch, useSelector } from 'react-redux';
-import {addSymptom} from '../../indexModles/features/Symptoms/ActiveSymptoms';
+import {addSymptom, removeSymptom} from '../../indexModles/features/Symptoms/ActiveSymptoms';
 
 
 

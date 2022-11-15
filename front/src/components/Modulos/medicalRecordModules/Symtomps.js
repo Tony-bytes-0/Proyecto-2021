@@ -1,5 +1,11 @@
-export default function Symtomps(props){
+//redux
+import { removeSymptom } from '../../../indexModles/features/Symptoms/ActiveSymptoms';
+import { useDispatch } from 'react-redux';
 
+export default function Symtomps(props){
+    //redux
+    const dispatch = useDispatch()
+    
     let autoUnCheck = function(id, id2){//desmarca las opciones no seleccionadas
         document.getElementById(id).checked = false
         document.getElementById(id2).checked = false
@@ -37,7 +43,7 @@ export default function Symtomps(props){
                 </input>
             
             <button className='col-1 btn btn-danger fitContent' style={{"fontSize":"2vh"}} 
-            onClick={() => {deleteSymptom(props.id)}}>Eliminar</button>
+            onClick={() => {dispatch(removeSymptom(props.id))}}>Eliminar</button>
         </div>);
 }
  
