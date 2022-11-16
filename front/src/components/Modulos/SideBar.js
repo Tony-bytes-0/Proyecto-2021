@@ -1,4 +1,3 @@
-import FieldMap from './Independientes/FieldMap';
 import {useNavigate} from 'react-router-dom';
 
 

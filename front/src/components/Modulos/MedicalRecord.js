@@ -6,7 +6,7 @@ import Symtomps from './medicalRecordModules/Symtomps'
 
 //redux
 import { useDispatch, useSelector } from 'react-redux';
-import {addSymptom, removeSymptom} from '../../indexModles/features/Symptoms/ActiveSymptoms';
+import { addSymptom } from '../../indexModles/features/Symptoms/ActiveSymptoms';
 
 
 

@@ -4,6 +4,11 @@ import Register from './Modulos/Register';
 import Query from './Modulos/Query'
 //React-Router
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
+// 11 azules coste 16 / 8 rojos - coste 13
+//dobles
+// 17  /  17 rojos
+
+//a sacar, algo azul, un invocador rojo, para meter tierra roja
 
 export default function Application(){
 
