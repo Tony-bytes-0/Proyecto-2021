@@ -1,20 +1,13 @@
-import React, { Component } from 'react';
 import FieldMap from './Independientes/FieldMap';
+import {useNavigate} from 'react-router-dom';
 
 
-export default class SideBar extends Component {
+export default function SideBar(props) {
 
-    render() { 
+    const navigate = useNavigate()
+
         return (<div className='col-1.5 verticalFlex SIDEBAR'>
-            {
-                this.props.options.map((e) => <FieldMap 
-                    type={'button'} fields={e} 
-                    key={e + 'id'} 
-                    id={e}
-                    styles={{"margin":"7px","padding":"15px"}} 
-                onClickFunction={this.props.onClickFunction}
-                />)
-            }
+            <button className='btn btn-primary basicBorders' onClick={() => {navigate('/')}}>Registro</button>
+            <button className='btn btn-primary basicBorders' onClick={() => {navigate('/query')}}>Consulta</button>
         </div>);
-    }
 }

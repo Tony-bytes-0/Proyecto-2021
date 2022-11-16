@@ -29,11 +29,10 @@ state = { buttonId:this.props.id, //asignar id dinamicos a los botones generados
         return( <button 
             className={this.state.buttonDefaultClasses + this.props.classes}
             style={this.props.styles} 
-            id={this.props.id} 
-            onClick={() => this.props.onClickFunction(this.state.buttonId)}>{/*al hacer click se ejecuta la funcion que recibe*/}
+            id={this.props.id}>
                 {this.props.fields}
                 {this.props.img}
-        </button>)
+            </button>)
     }
 }//render  close
 }//class close

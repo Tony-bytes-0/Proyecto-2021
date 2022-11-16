@@ -1,17 +1,30 @@
 import SideBar from './Modulos/SideBar';
 
 import Register from './Modulos/Register';
-// import Query from './Modulos/Query';
-//redux
-//import { useSelector } from 'react-redux';
+import Query from './Modulos/Query'
+//React-Router
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
 export default function Application(){
 
     return<>
-        <SideBar options={['Registro', 'Consulta']}/>
-        <Register renderMedicalRecord = {true} />    
+        <BrowserRouter>
+            <Routes>
+                <Route path ='/' element = {<> {/*Ruta de inicio*/}
+                    <SideBar />
+                    <Register renderMedicalRecord = {true}/>
+                </>} />
+
+                <Route path='/query' element = {<> 
+                    <SideBar />
+                    <Query />
+                </>} />
+                
+                
+            </Routes>
+        </BrowserRouter>
     </>
-};
+}
 
 //esto era lo viejo, en forma de clase
 // export default class App extends Component{state = {active:"Registro"};//active es accesible desde onClickFunction
