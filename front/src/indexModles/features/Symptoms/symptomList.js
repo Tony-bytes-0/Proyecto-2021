@@ -16,10 +16,13 @@ export const symptomList = createSlice({
       if (found){//si conseguiste el id en la lista, eleminar uno de ellos usando splice *
         state.splice(state.indexOf(found), 1)
       }
-      
+    },
+
+    showList: (state, action) => {
+        console.log( state )
     }
   }
 })
 
-export const { addSymptom, removeSymptom} = symptomList.actions
+export const { addSymptom, removeSymptom, showList} = symptomList.actions
 export default symptomList.reducer

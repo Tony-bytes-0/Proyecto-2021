@@ -1,5 +1,6 @@
 //redux
 import { removeSymptom } from '../../../indexModles/features/Symptoms/ActiveSymptoms';
+import { addSymptom } from '../../../indexModles/features/Symptoms/symptomList';
 import { useDispatch } from 'react-redux';
 
 export default function Symtomps(props){
@@ -11,7 +12,6 @@ export default function Symtomps(props){
         document.getElementById(id).checked = false
         document.getElementById(id2).checked = false
     }
-
 
         return (<div id={props.id} className='row symtomsContainer SIDEBAR container-fluid autoBorders' >
 
@@ -36,7 +36,11 @@ export default function Symtomps(props){
                 </input>
             
             <button className='col-1 btn btn-danger fitContent' style={{"fontSize":"2vh"}} 
-            onClick={() => {dispatch(removeSymptom(props.id))}}>Eliminar</button>
+            onClick={() => {
+                dispatch(removeSymptom(props.id))
+                dispatch(addSymptom(props.symptom))
+                document.getElementById('addBtn').disabled = false
+            }}>Eliminar</button>
         </div>);
 }
  

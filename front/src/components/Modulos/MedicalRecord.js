@@ -7,18 +7,21 @@ import Symtomps from './medicalRecordModules/Symtomps'
 //redux
 import { useDispatch, useSelector } from 'react-redux';
 import { addSymptom } from '../../indexModles/features/Symptoms/ActiveSymptoms';
+import { removeSymptom } from '../../indexModles/features/Symptoms/symptomList';//para mostrar la lista de sintomas
 
 
 
 export default function MedicalRecord (props)  {
-    //estados - SELECTOR DE SINTOMA
-
+    var listIsEmpty = false
     //redux
-    const symptoms = useSelector(state => state.activeSymptoms)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch()//para usar los metodos declarados del store
+        //estados - SELECTOR DE SINTOMA
+    const activeSymptoms = useSelector(state => state.activeSymptoms)//sintomas activos por defecto = [] 
+    const symptomList = useSelector(state => state.symptomList)//valor del selector de sintomas
+    //Validaciones de Selector mediante estado de la lista
 
+    let checkListForEmptyValues = function(target){ return target === '' ? true : false } // if(target === ''){ return true }; else{ return false } equivalente!
 
-    let symtompsList = ['Fiebre','Malestar','Etc','Dolor de Cabeza','Nauseas','Mareos','Tos','Tos Seca','Insomnio']
     let temperature = ['Celcius', 'Farenheit', 'Kelvin']
     let reasons = ['Consulta','Tratamiento','Emergencia']
 
@@ -44,14 +47,21 @@ export default function MedicalRecord (props)  {
             <Section tittle={'Sintomas'} classes={'azul-Oscuro smallMargin'}/>
 
             <div id='Medical Record 3st' className='row container-fluid smallMargin'>
-                <SimplePicker label={'Sintomas: '} list={symtompsList} />
-                <button className='btn btn-success col-2' 
+                <SimplePicker label={'Sintomas: '} list={symptomList} />
+                <button id='addBtn' className='btn btn-success col-2' 
                 onClick={() => {
-                    dispatch(addSymptom(document.getElementById('Sintomas: id').value))//añadir el valor en el selector
-                }}>Añadir</button>
+                    let target = document.getElementById('Sintomas: id').value;
+                    //si tratas de añadir un elemento vacio, desactiva el boton (se activa al eliminar un elemento de la lista)
+                    if (checkListForEmptyValues(target)){ document.getElementById('addBtn').disabled = true }
+
+                    else{
+                        dispatch(addSymptom(target))//añadir el valor en el selector
+                        dispatch(removeSymptom(target))//quitar el mismo valor de la lista de seleccionables
+                    }
+                }} disabled={listIsEmpty}>Añadir</button>
             </div>
 
-            {symptoms.map((e) => <Symtomps key={e.id} id={e.id} symptom={e.body}  />)}
+            {activeSymptoms.map((e) => <Symtomps key={e.id} id={e.id} symptom={e.body}  />)}
             
             
             
