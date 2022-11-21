@@ -6,16 +6,14 @@ import SimplePicker from './Independientes/SimplePicker';
 import InputFile from './Independientes/InputFile';
 import MedicalRecord from './MedicalRecord';
 
+//axios
+import axios from 'axios';
+
 import { genders, allergies, cronicDiseases, discapacities, bloodTypes } from './Independientes/staticValuesList';
 
 
 function Register () {
-    // const [activeCronicDiseases, setCronic] = useState({
-    //     name:''
-    // })
-    // const handleChangue = (e) => {
-    //     setCronic({...activeCronicDiseases,  [e.target.name]: e.target.value})
-    // }
+
         let medicalRecord = <MedicalRecord />
         return <div id='RegisterMainFrame' className='col'>
             
@@ -52,6 +50,11 @@ function Register () {
 
 
                 <div className='container centrate end smallMargin'>
+                    <button className='centrate btn btn-primary' onClick={async() => {
+                        const x = await axios.get('https://dummyjson.com/users'); 
+                        console.log(x);
+
+                    }}> PROBANDO API</button>
                     <button className='centrate btn btn-primary'>Registrar</button>
                 </div>
         </div>

@@ -1,0 +1,10 @@
+personas
+//estatico
+cedula
+nombre
+apellido
+genero
+nacimiento
+direccion
+tlf
+numeroEmergencia
