@@ -15,7 +15,7 @@ import {appDataSource} from './db'
 async function main(){
     try {
         await appDataSource.initialize()
-        app.listen(3000)
+        app.listen(4000)
         console.log('servidor corriendo en 3000')
     } catch (error) {
         console.log(error)

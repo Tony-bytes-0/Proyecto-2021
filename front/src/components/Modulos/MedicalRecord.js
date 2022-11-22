@@ -15,7 +15,7 @@ export default function MedicalRecord (props)  {
     var listIsEmpty = false
     //redux
     const dispatch = useDispatch()//para usar los metodos declarados del store
-        //estados - SELECTOR DE SINTOMA
+    //estados - SELECTOR DE SINTOMA
     const activeSymptoms = useSelector(state => state.activeSymptoms)//sintomas activos por defecto = [] 
     const symptomList = useSelector(state => state.symptomList)//valor del selector de sintomas
     //Validaciones de Selector mediante estado de la lista
@@ -28,18 +28,18 @@ export default function MedicalRecord (props)  {
         return <>
             <div id='Medical Record 1st' className='row container-fluid smallMargin'>
                     {['Altura: ','Peso: ', 'Presion Arterial: '].map( e => 
-                        <FieldMap type={'input'} fields={e} key={e + 'id'}/>
+                        <FieldMap type={'input'} fields={e} key={e + 'id'} dataType = {'number'}/>
                      )}
                      <div className='col contentFit'>
-                        <FieldMap type={'input'} fields={"Temperatura: "}/>
-                        <SimplePicker label={"Grados: "} list={temperature} />
+                        <FieldMap type={'input'} fields={"Temperatura: "} dataType = {'number'}/>
+                        <SimplePicker label={"Grados: "} list={temperature} dataType = {'number'} />
                      </div>
             </div>
 
             <div id='Medical Record 2st' className='row container-fluid smallMargin'>
                 <SimplePicker label={"Motivo Visita: "} list={reasons} />
                 <div className="col">           
-                    <label className="col"><b>Fecha de Consulta: '</b></label>
+                    <label className="col"><b>Fecha de Consulta: </b></label>
                     <input className="simpleInput" type="date" ></input>
                 </div> 
             </div>

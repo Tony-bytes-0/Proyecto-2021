@@ -12,6 +12,7 @@ state = { buttonId:this.props.id, //asignar id dinamicos a los botones generados
                 <input
                     id={this.props.fields + 'id'}
                     className = 'simpleInput'
+                    type={this.props.dataType}
                     placeholder={this.props.fields} 
                     style={this.props.styles}/>
             </div>
