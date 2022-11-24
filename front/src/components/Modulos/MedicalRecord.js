@@ -47,10 +47,10 @@ export default function MedicalRecord (props)  {
             <Section tittle={'Sintomas'} classes={'azul-Oscuro smallMargin'}/>
 
             <div id='Medical Record 3st' className='row container-fluid smallMargin'>
-                <SimplePicker label={'Sintomas: '} list={symptomList} />
+                <SimplePicker label={'Sintomas'} list={symptomList} />
                 <button id='addBtn' className='btn btn-success col-2' 
                 onClick={() => {
-                    let target = document.getElementById('Sintomas: id').value;
+                    let target = document.getElementById('Sintomas').value;
                     //si tratas de añadir un elemento vacio, desactiva el boton (se activa al eliminar un elemento de la lista)
                     if (checkListForEmptyValues(target)){ document.getElementById('addBtn').disabled = true }
 

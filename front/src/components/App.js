@@ -4,6 +4,7 @@ import Register from './Modulos/Register';
 import Query from './Modulos/Query'
 //React-Router
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import MedicalRecord from './Modulos/MedicalRecord';
 
 export default function Application(){
 
@@ -12,7 +13,11 @@ export default function Application(){
             <Routes>
                 <Route path ='/' element = {<> {/*Ruta de inicio*/}
                     <SideBar />
-                    <Register renderMedicalRecord = {true}/>
+                    <div id='RegisterMainframe' className='col'>
+                        <Register />
+                        <MedicalRecord />
+                    </div>
+                    
                 </>} />
 
                 <Route path='/query' element = {<> 

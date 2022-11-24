@@ -8,9 +8,9 @@ state = { buttonId:this.props.id, //asignar id dinamicos a los botones generados
     {if(this.props.type === 'input'){
         return(<>
             <div className = 'col'>{/*estilos estaticos + estilos ingresados*/}
-                <label><b>{this.props.fields}</b></label>
+                <label><b>{this.props.fields} :</b></label>
                 <input
-                    id={this.props.fields + 'id'}
+                    id={this.props.fields}
                     className = 'simpleInput'
                     type={this.props.dataType}
                     placeholder={this.props.fields} 

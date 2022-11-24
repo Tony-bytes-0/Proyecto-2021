@@ -4,59 +4,37 @@ import Direction from './registerModules/Direction';
 import Date from './registerModules/Date';
 import SimplePicker from './Independientes/SimplePicker';
 import InputFile from './Independientes/InputFile';
-import MedicalRecord from './MedicalRecord';
-
+import MultiCheckbox from './Independientes/MultiCheckbox';
 //axios
 //import axios from 'axios';
-
-import { genders, allergies, cronicDiseases, discapacities, bloodTypes, RegisterTargetIds } from './Independientes/staticValuesList';
-
+import { genders, allergies, cronicDiseases, discapacities, bloodTypes, registerTargetIds } from './Independientes/staticValuesList';//listas de datos estaticos
+import { getUserValues } from './Independientes/globalMethods';
 
 function Register () {
-        let showTargetValues = function(e) {//para buscar los valores
-            class Data{
-                constructor(name,value){
-                    this.name = name
-                    this.value = value
-                }
-            }
-
-            const extractedVales =  e.map((e) => {
-                const nameOf = e.split(': ')[0]//esto le quita los dos puntos
-                const value = document.getElementById(e).value
-                let newObject = new Data(nameOf, value)
-                return newObject
-            })
-
-            return extractedVales
-            
-        }
-        let medicalRecord = <MedicalRecord />
-        return <div id='RegisterMainFrame' className='col'>
-            
-                {medicalRecord}
+        return <>
                 <Section tittle={'Informacion Personal'} classes={'azul-Oscuro smallMargin'}/>
                 <InputFile classes={"centrate"} />
                 
                 <div id='Primera Fila' className='row container-fluid'>
-                    <FieldMap type={'input'} fields={'Cedula: '} key={'Cedula: id'} dataType = {'number'} />
-                    {['Nombre: ','Apellido: '].map( e => 
+                    <FieldMap type={'input'} fields={'Cedula'} key={'Cedula'} dataType = {'number'} />
+                    {['Nombre','Apellido'].map( e => 
                         <FieldMap type={'input'} fields={e} key={e + 'id'}/>
                      )}
-                     <SimplePicker label={"Genero: "} list={genders} />
+                     <SimplePicker label={"Genero"} list={genders} />
                 </div>
 
                 <div id='Tercera Fila' className='row container-fluid'>
                     <Date/>
+                    <SimplePicker label={'Tipo de Sangre'} list={bloodTypes} className={'col-2'} />
                 </div>
 
                 <Section tittle={'Caracteristicas'} classes={'azul-Oscuro smallMargin'} />{/*Separador*/}
                 
                 <div id='Segunda Fila' className='row container-fluid'>
-                    <SimplePicker label={'Alergias: '} list={allergies} />
-                    <SimplePicker label={'Enfermedades Cronicas: '} list={cronicDiseases} />
-                    <SimplePicker label={'Discapacidades: '} list={discapacities} />
-                    <SimplePicker label={'Tipo de Sangre: '} list={bloodTypes} />
+                    {/* <SimplePicker label={'Alergias'} list={allergies} /> asi era antes xd*/}
+                    <MultiCheckbox label = {'Alergias'} values = {allergies} />
+                    <MultiCheckbox label = {'Enfermedades Cronicas'} values = {cronicDiseases} />
+                    <MultiCheckbox label = {'Discapacidades'} values = {discapacities} />
                 </div>
 
                 <Section tittle={'Direccion'} classes={'azul-Oscuro smallMargin'} />{/*Separador*/}
@@ -64,13 +42,12 @@ function Register () {
                 <Direction/>
 
                 <div className='container centrate end smallMargin'>
-                    <button className='centrate btn btn-primary' onClick={async() => {
-                        const values = showTargetValues(RegisterTargetIds) 
-                        console.log(values)
-                    }}>PROBANDO API</button>
-                    <button className='centrate btn btn-primary'>Registrar</button>
+                    <button className='centrate btn btn-primary' 
+                    onClick={async() => {
+                        console.log( getUserValues(registerTargetIds) )
+                    }}>Registrar</button>
                 </div>
-        </div>
+        </>
 }
  
 export default Register;
