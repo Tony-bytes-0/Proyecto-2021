@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import Section from './Independientes/Section';
 import FieldMap from './Independientes/FieldMap';
 import Direction from './registerModules/Direction';
@@ -5,12 +7,19 @@ import Date from './registerModules/Date';
 import SimplePicker from './Independientes/SimplePicker';
 import InputFile from './Independientes/InputFile';
 import MultiCheckbox from './Independientes/MultiCheckbox';
+import { RegisterQueryGrid } from './registerModules/RegisterQueryGrid';
 //axios
 //import axios from 'axios';
 import { genders, allergies, cronicDiseases, discapacities, bloodTypes, registerTargetIds } from './Independientes/staticValuesList';//listas de datos estaticos
 import { getUserValues } from './Independientes/globalMethods';
 
 function Register () {
+    const [renderRegister, toggleRegister] = useState(false)//para mostrar el registrar o buscar personas
+    const [queryUsers] = useState([//arrays con datos de prueba, simula usuarios encontrados
+        ['27080311','tony','Gonzalez','masculino','19-11-1999','O-'],
+        ['22333555','pepe','ramirez','masculino','01-11-1999','A']
+    ])
+    if(renderRegister)
         return <>
                 <Section tittle={'Informacion Personal'} classes={'azul-Oscuro smallMargin'}/>
                 <InputFile classes={"centrate"} />
@@ -46,8 +55,22 @@ function Register () {
                     onClick={async() => {
                         console.log( getUserValues(registerTargetIds) )
                     }}>Registrar</button>
+                    <button className='btn btn-primary' onClick={() => {
+                        toggleRegister(false)
+                    }}>Limpiar los datos</button>
                 </div>
         </>
+        //aqui esta lo que se muestra cuando no hay nada
+        else{
+            return<>
+                <RegisterQueryGrid dataArray = {['Cedula','Nombre','Apellido','Genero','Nacimiento','Tipo de Sangre']} rows = {queryUsers} />
+
+                    <button className='btn btn-primary centrate' style={{"marginBottom":"10%","marginTop":"5%"}} onClick={() => {
+                        toggleRegister(true)
+                    }}> Añadir Nuevo </button>
+                
+            </>
+        }
 }
  
 export default Register;

@@ -8,7 +8,7 @@ import trash from '../QueryModules/trashcan.png'
 
 import Register from '../Register';
 
-
+//recibe una lista con objetos
 export default class ObjectRow extends Component {
 
     render() {
@@ -29,16 +29,14 @@ export default class ObjectRow extends Component {
     }
 }
  
-class Slice extends Component{//genera un cuadradito con info
-    render(){return<span className='square col-1 fitContent'>{this.props.values}</span>} }
+export function Slice(props){//genera un cuadradito con info
+    return<span className='square col-1 fitContent'>{props.values}</span>}
 
-class MultiSlices extends Component{//genera multiples <Slice> a partir de una lista
-    render(){
+export function MultiSlices(props){//genera multiples <Slice> a partir de una lista
         return<div className='col' style={{"display":"flex"}}>{/*fragmento de fila dinamica!*/}
-            {this.props.values.map((value) => <Slice values={value} key={value + 'ids'}/>)}
-            <EditButtons id ={ this.props.listId } /> {/* Aqui tengo el ID del registro en la  BBDD */}
+            {props.values.map((value) => <Slice values={value} key={value + 'ids'}/>)}
+            <EditButtons id ={ props.listId } /> {/* Aqui tengo el ID del registro en la  BBDD */}
         </div>        
-    }
 }
 class EditButtons extends Component{//botonera
     state = {modalOpen:false}

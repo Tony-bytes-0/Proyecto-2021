@@ -1,5 +1,5 @@
-import {allergies, cronicDiseases, discapacities} from '../Independientes/staticValuesList'
-
+import {allergies} from '../Independientes/staticValuesList'
+//IMPORTA ESTO cuando quieras terminar el modulo xd, cronicDiseases, discapacities 
 let getUserValues = function(e) {//para buscar los valores de los primeros campos
     const extractedVales =  e.map((e) => {
         const value = document.getElementById(e).value
@@ -17,7 +17,6 @@ let getUserValues = function(e) {//para buscar los valores de los primeros campo
             return active
         }
         else{//en caso de que no, devolver objetos con todo false numero igual a la cantidad de elemento en lista!
-            console.log('el iterator es: ', iterator, list[-1]);
             const falseList = list.map((e) => {return e === list[-1] ? 'aqui hay un error de logica' : false})
             return falseList
         }
@@ -40,11 +39,12 @@ let getUserValues = function(e) {//para buscar los valores de los primeros campo
         "Polvo":allergiesValues[2], 
         "Lactosa":allergiesValues[3]
     }
-    
-    //const allValues = {...userValues, 'Paracetamol':allergiesValues[0], 'Polen':allergiesValues[1], 'Polvo':allergiesValues[2], 'Lactosa':allergiesValues[3]}
-    //console.log(allValues)
+
     return userValues 
 }
+
+export{getUserValues}
+
 
 // let viewAllTasks = async function (){
 //     fetch(this.state.baseUrl)
@@ -55,5 +55,3 @@ let getUserValues = function(e) {//para buscar los valores de los primeros campo
 //         this.setState({taskList : ALLDATA});
 //     })
 //}
-
-export{getUserValues}

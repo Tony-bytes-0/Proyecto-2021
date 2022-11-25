@@ -7,6 +7,12 @@ const discapacities = ['Miopia', 'Autismo', 'Sordo', 'Mudo']
 const registerTargetIds = [
     'Cedula', 'Nombre', 'Apellido', 'Genero','Nacimiento', 'Tipo de Sangre'
 ]
+const objectExample = {
+    "Cedula":"2020202",
+    "Nombre":"El Pepe",
+    "Apellido":"top 10 memes",
+    
+}
 
 // const RegisterTargetIds = [
 //     'Altura: id' ,'Peso: id', 'Presion Arterial: id','Temperatura: id', 'Grados: id', 'Motivo Visita: id',
@@ -14,4 +20,4 @@ const registerTargetIds = [
 //     'Alergias: id', 'Enfermedades Cronicas: id', 'Discapacidades: id', 'Tipo de Sangre: id','Sector'
 // ]
 
-export {bloodTypes, genders, allergies, cronicDiseases, discapacities, registerTargetIds}
+export {bloodTypes, genders, allergies, cronicDiseases, discapacities, registerTargetIds, objectExample}

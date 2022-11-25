@@ -6,6 +6,7 @@ import Query from './Modulos/Query'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import MedicalRecord from './Modulos/MedicalRecord';
 
+
 export default function Application(){
 
     return<>
@@ -17,7 +18,6 @@ export default function Application(){
                         <Register />
                         <MedicalRecord />
                     </div>
-                    
                 </>} />
 
                 <Route path='/query' element = {<> 
