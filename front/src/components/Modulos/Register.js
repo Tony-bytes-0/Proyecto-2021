@@ -24,7 +24,7 @@ function Register () {
                 <Section tittle={'Informacion Personal'} classes={'azul-Oscuro smallMargin'}/>
                 <InputFile classes={"centrate"} />
                 
-                <div id='Primera Fila' className='row container-fluid'>
+                <div id='1st Row' className='row container-fluid'>
                     <FieldMap type={'input'} fields={'Cedula'} key={'Cedula'} dataType = {'number'} />
                     {['Nombre','Apellido'].map( e => 
                         <FieldMap type={'input'} fields={e} key={e + 'id'}/>
@@ -32,14 +32,21 @@ function Register () {
                      <SimplePicker label={"Genero"} list={genders} />
                 </div>
 
-                <div id='Tercera Fila' className='row container-fluid'>
+
+                <div id='2d Row' className='row container-fluid'>
+                    {['Telefono','Telefono de Emergencia'].map( e =>         <FieldMap type={'input'} fields={e} key={e + 'id'}/>      )}
                     <Date/>
                     <SimplePicker label={'Tipo de Sangre'} list={bloodTypes} className={'col-2'} />
                 </div>
 
+                <Section tittle={'Relacion con el ambulatorio'} classes={'azul-Oscuro smallMargin'} />
+                <div id='3rd Row' className='row container-fluid'>
+                    <SimplePicker label={"Relacion con el ambulatorio"} list={['Paciente','Medico','Enfermera']} />
+                </div>
+
                 <Section tittle={'Caracteristicas'} classes={'azul-Oscuro smallMargin'} />{/*Separador*/}
                 
-                <div id='Segunda Fila' className='row container-fluid'>
+                <div id='Cuarta Fila' className='row container-fluid'>
                     {/* <SimplePicker label={'Alergias'} list={allergies} /> asi era antes xd*/}
                     <MultiCheckbox label = {'Alergias'} values = {allergies} />
                     <MultiCheckbox label = {'Enfermedades Cronicas'} values = {cronicDiseases} />
