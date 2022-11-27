@@ -1,4 +1,4 @@
-.centrate{text-align: center; justify-content: center; align-items: center;}
+.centrate{text-align: center; justify-content: center; align-items: center; display: felx;}
 .autoBorders{margin: auto !important;padding: auto !important;}
 .flexible{display: flex;}
 .fullFlex{height:100vh; display: flex;}

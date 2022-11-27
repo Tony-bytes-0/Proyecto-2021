@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addSymptom } from '../../indexModles/features/Symptoms/ActiveSymptoms';
 import { removeSymptom } from '../../indexModles/features/Symptoms/symptomList';//para mostrar la lista de sintomas
 
+//MUI
+import { Button, Grid } from '@mui/material';
 
 
 export default function MedicalRecord (props)  {
@@ -46,20 +48,20 @@ export default function MedicalRecord (props)  {
 
             <Section tittle={'Sintomas'} classes={'azul-Oscuro smallMargin'}/>
 
-            <div id='Medical Record 3st' className='row container-fluid smallMargin'>
+            <Grid container spacing={2} >
                 <SimplePicker label={'Sintomas'} list={symptomList} />
-                <button id='addBtn' className='btn btn-success col-2' 
-                onClick={() => {
-                    let target = document.getElementById('Sintomas').value;
-                    //si tratas de añadir un elemento vacio, desactiva el boton (se activa al eliminar un elemento de la lista)
-                    if (checkListForEmptyValues(target)){ document.getElementById('addBtn').disabled = true }
+                    <Button id='addBtn' variant = 'contained' className='centrate'
+                    onClick={() => {
+                        let target = document.getElementById('Sintomas').value;
+                        //si tratas de añadir un elemento vacio, desactiva el boton (se activa al eliminar un elemento de la lista)
+                        if (checkListForEmptyValues(target)){ document.getElementById('addBtn').disabled = true }
 
-                    else{
-                        dispatch(addSymptom(target))//añadir el valor en el selector
-                        dispatch(removeSymptom(target))//quitar el mismo valor de la lista de seleccionables
-                    }
-                }} disabled={listIsEmpty}>Añadir</button>
-            </div>
+                        else{
+                            dispatch(addSymptom(target))//añadir el valor en el selector
+                            dispatch(removeSymptom(target))//quitar el mismo valor de la lista de seleccionables
+                        }
+                    }} disabled={listIsEmpty}>Añadir</Button>
+                </Grid>
 
             {activeSymptoms.map((e) => <Symtomps key={e.id} id={e.id} symptom={e.body}  />)}
             

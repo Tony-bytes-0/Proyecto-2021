@@ -2,6 +2,9 @@
 import { removeSymptom } from '../../../indexModles/features/Symptoms/ActiveSymptoms';
 import { addSymptom } from '../../../indexModles/features/Symptoms/symptomList';
 import { useDispatch } from 'react-redux';
+//MUI
+import { Button } from '@mui/material';
+import Grid from '@mui/material/Grid';
 
 export default function Symtomps(props){
     //redux
@@ -35,12 +38,12 @@ export default function Symtomps(props){
                     onClick={() => {autoUnCheck(props.id+'leveCheckbox' , props.id+'moderadoCheckbox' )}}>
                 </input>
             
-            <button className='col-1 btn btn-danger fitContent' style={{"fontSize":"2vh"}} 
+            <Button variant = 'contained'  style={{"fontSize":"2vh"}} 
             onClick={() => {
                 dispatch(removeSymptom(props.id))
                 dispatch(addSymptom(props.symptom))
                 document.getElementById('addBtn').disabled = false
-            }}>Eliminar</button>
+            }}>Eliminar</Button>
         </div>);
 }
  

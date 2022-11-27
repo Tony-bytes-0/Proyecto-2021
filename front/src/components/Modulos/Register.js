@@ -12,6 +12,8 @@ import { RegisterQueryGrid } from './registerModules/RegisterQueryGrid';
 //import axios from 'axios';
 import { genders, allergies, cronicDiseases, discapacities, bloodTypes, registerTargetIds } from './Independientes/staticValuesList';//listas de datos estaticos
 import { getUserValues } from './Independientes/globalMethods';
+//MUI
+import Button from '@mui/material/Button';
 
 function Register () {
     const [renderRegister, toggleRegister] = useState(false)//para mostrar el registrar o buscar personas
@@ -58,13 +60,13 @@ function Register () {
                 <Direction/>
 
                 <div className='container centrate end smallMargin'>
-                    <button className='centrate btn btn-primary' 
+                    <Button variant="contained" 
                     onClick={async() => {
                         console.log( getUserValues(registerTargetIds) )
-                    }}>Registrar</button>
-                    <button className='btn btn-primary' onClick={() => {
+                    }}>Registrar</Button>
+                    <Button variant="contained" onClick={() => {
                         toggleRegister(false)
-                    }}>Limpiar los datos</button>
+                    }}>Limpiar los datos</Button>
                 </div>
         </>
         //aqui esta lo que se muestra cuando no hay nada
@@ -72,9 +74,9 @@ function Register () {
             return<>
                 <RegisterQueryGrid dataArray = {['Cedula','Nombre','Apellido','Genero','Nacimiento','Tipo de Sangre']} rows = {queryUsers} />
 
-                    <button className='btn btn-primary centrate' style={{"marginBottom":"10%","marginTop":"5%"}} onClick={() => {
+                    <Button variant="contained" onClick={() => {
                         toggleRegister(true)
-                    }}> Añadir Nuevo </button>
+                    }}> Añadir Nuevo </Button>
                 
             </>
         }
