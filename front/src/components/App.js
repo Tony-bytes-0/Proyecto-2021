@@ -2,6 +2,7 @@ import SideBar from './Modulos/SideBar';
 
 import Register from './Modulos/Register';
 import Query from './Modulos/Query'
+import { Test } from './Modulos/Independientes/Test';
 //React-Router
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import MedicalRecord from './Modulos/MedicalRecord';
@@ -24,6 +25,11 @@ export default function Application(){
                     <SideBar />
                     <Query />
                 </>} />
+
+                <Route path='/test' element ={<>
+                    <SideBar />
+                    <Test /> 
+                </> } />
                 
                 
             </Routes>
