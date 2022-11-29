@@ -4,36 +4,28 @@ import CronicDiseasesList from "./CronicDiseasesList"
 import DiscapacitiesList from "./DiscapacitiesList"
 import SymptomSelect from "./SymptomSelect"
 //MUI
-import { Grid, TextField, InputLabel, Select, MenuItem, FormControl} from "@mui/material"
+import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, TableContainer,Table, Paper, TableHead, TableBody, TableRow, TableCell, Button} from "@mui/material"
 //arrays
-import { allergies, cronicDiseases, discapacities } from "../Independientes/staticValuesList"
+import { allergies, cronicDiseases, discapacities, symptoms } from "../Independientes/staticValuesList"
 
 function BasicTable(props) {
     return <>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650 }} aria-label="simple table" >
           <TableHead>
             <TableRow>{/* aqui defino la cantidad de filas! */}
-              <TableCell><b>ID</b></TableCell>
-              <TableCell><b>Cedula</b></TableCell>
-              <TableCell align="right"><b>Nombre</b></TableCell>
-              <TableCell align="right"><b>Apellido</b></TableCell>
-              <TableCell align="right"><b>Genero</b></TableCell>
-              <TableCell align="right"><b>Telefono</b></TableCell>
+              <TableCell align="center"><h4><b>Sintoma</b></h4></TableCell>
+              <TableCell align="center"><h4><b>Gravedad</b></h4></TableCell>
+              <TableCell align="center"></TableCell>
             </TableRow>
           </TableHead>
   
           <TableBody>
             {props.rows.map((row) => (
-              <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }} onClick={() => {
-                  alert('Cedula: ' + row.cedula + ' Seleccionada!')}
-                  }>
-                <TableCell component="th" scope="row">{row.id}</TableCell>
-                <TableCell align="right">{row.cedula}</TableCell>
-                <TableCell align="right">{row.nombre}</TableCell>
-                <TableCell align="right">{row.apellido}</TableCell>
-                <TableCell align="right">{row.genero}</TableCell>
-                <TableCell align="right">{row.telefono}</TableCell>
+              <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableCell align="center">ejemplo de weas</TableCell>
+                <TableCell align="center">otroejemplo</TableCell>
+                <TableCell align="center"><Button variant="contained">botoncito</Button></TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -79,7 +71,9 @@ export default function TestMedical(props){
 
         <SymptomSelect />
 
-
+        <Grid container>
+            <BasicTable rows={symptoms} />
+        </Grid>
     </Grid>
     </>
 }
