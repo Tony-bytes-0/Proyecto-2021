@@ -1,6 +1,6 @@
 const bloodTypes = ['A+','B+','AB+','O+','A-','B-','AB-','O-', 'Desconocido'];
 const genders = ['Masculino','Femenino','Otro'];
-const allergies = ['Paracetamol', 'Polen', 'Polvo', 'Lactosa']
+const allergies = ['Paracetamol', 'Polen', 'Polvo', 'Lactosa','Antibioticos']
 const cronicDiseases = ['Epilepsia','Cancer', 'Diabetes', 'Artritis', 'Asma']
 const discapacities = ['Miopia', 'Autismo', 'Sordo', 'Mudo']
 

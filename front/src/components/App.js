@@ -1,11 +1,13 @@
-import SideBar from './Modulos/SideBar';
-
+//modulos
 import Register from './Modulos/Register';
 import Query from './Modulos/Query'
 import { Test } from './Modulos/Independientes/Test';
+import SideBar from './Modulos/SideBar';
 //React-Router
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import MedicalRecord from './Modulos/MedicalRecord';
+//MUI Components
+import { Grid } from '@mui/material';
 
 
 export default function Application(){
@@ -14,7 +16,7 @@ export default function Application(){
         <BrowserRouter>
             <Routes>
                 <Route path ='/' element = {<> {/*Ruta de inicio*/}
-                    <SideBar />
+                    
                     <div id='RegisterMainframe' className='col'>
                         <Register />
                         <MedicalRecord />
@@ -27,8 +29,12 @@ export default function Application(){
                 </>} />
 
                 <Route path='/test' element ={<>
-                    <SideBar />
-                    <Test /> 
+                    <Grid container>
+                        <Grid item xs={2} > <SideBar /> </Grid> 
+                        <Grid item xs={10}> <Test /> </Grid>
+                    </Grid>
+                    
+                     
                 </> } />
                 
                 
