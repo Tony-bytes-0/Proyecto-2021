@@ -67,7 +67,10 @@ export default function FilterUsers(props){
                 <TextField fullWidth label="Cedula" type={'number'} variant="filled" />
             </Grid>
             <Grid item xs={2} >
-                <Button variant='contained' fullWidth >Buscar!</Button>
+            <div className="centrate" style={{"position":"relative","top":"10%"}}>
+              <Button variant='contained' fullWidth >Buscar!</Button>
+            </div>
+                
             </Grid>
 
             <Grid item xs={12}>

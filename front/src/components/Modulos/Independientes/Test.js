@@ -13,13 +13,23 @@ const smallWidth = { width: '25%', maxWidth: '25%' }
 //sx={{ width: '25%' }}
 export function Test (props){
     const [renderRegister, toggleRegister] = useState(true)//para mostrar el registrar o buscar personas
+    //Estado de variables de datos
+    const [bloodType, setBloodType] = useState('')//tipo de sangre
+    const handleBloodType = (event) => { setBloodType(event.target.value) }
 
+    const [gender, setGender] = useState('')//genero
+    const handleGender = (event) => { setGender(event.target.value) }
+
+    //
     if(renderRegister){
         return<>
             <Grid container>
                 <Grid item xs={12}> <FilterUsers /> </Grid> 
             </Grid>
-            <Button variant="contained" style={{"padding":"2%"}} onClick={() => {toggleRegister(false)}} >Usuario Nuevo</Button>
+            <div className="centrate">
+                <Button variant="contained" style={{"padding":"2%"}} onClick={() => {toggleRegister(false)}} >Usuario Nuevo</Button>
+            </div>
+            
             <TestMedical />
         </>
     }
@@ -31,37 +41,39 @@ export function Test (props){
     
     <Grid container sx={{"padding":"2%"}} spacing={1}>
         <Grid item xs={12} >{/*esto es un row basicamente*/}
-            <TextField sx={smallWidth} label="Cedula" variant="filled" />
+            <TextField sx={smallWidth} label="Cedula" variant="filled" type={'number'}/>
             <TextField sx={smallWidth} label="Nombre" variant="filled"/>
             <TextField sx={smallWidth} label="Apellido" variant="filled" />
 
             <FormControl sx = {smallWidth}>
                 <InputLabel>Genero</InputLabel>
-                <Select label="Genero" variant="filled">
-                    <MenuItem >Masculino</MenuItem>
-                    <MenuItem >Femenino</MenuItem>
+                <Select label="Genero" variant="filled" value = {gender} onChange={handleGender}>
+                    <MenuItem value={'Masculino'}>Masculino</MenuItem>
+                    <MenuItem value={'Femenino'}>Femenino</MenuItem>
                 </Select>
             </FormControl>
         </Grid>  
         
 
         <Grid item xs = {12}>
-            <TextField label="Telefono"  sx={smallWidth}  variant="filled" />
-            <TextField label="Telefono de Emergencia" sx={smallWidth} variant="filled" />
-            <TextField label="Naciemiento" id="date"  type="date" defaultValue="2017-05-24" InputLabelProps={{shrink: true}} variant="filled" />
+            <TextField label="Telefono"  sx={smallWidth}  variant="filled" type={'number'}/>
+            <TextField label="Telefono de Emergencia" sx={smallWidth} variant="filled" type={'number'}/>
+            <TextField label="Nacimiento" id="date"  type="date" defaultValue="2000-01-01" InputLabelProps={{shrink: true}} variant="filled" />
             <FormControl sx = {smallWidth}>
                 <InputLabel>Tipo de Sangre</InputLabel>
-                <Select variant="filled" id="genderValue" label="Genero">
-                    <MenuItem >A +</MenuItem> <MenuItem >A -</MenuItem>
-                    <MenuItem >B +</MenuItem> <MenuItem >B -</MenuItem>
-                    <MenuItem >O +</MenuItem> <MenuItem >O -</MenuItem>
-                    <MenuItem >AB +</MenuItem> <MenuItem >AB -</MenuItem>
+                <Select variant="filled" id="BloodType" label="Genero" value={bloodType} onChange={handleBloodType}>
+                    <MenuItem value={'A+'} >A +</MenuItem> <MenuItem value={'A-'}>A -</MenuItem>
+                    <MenuItem value={'B+'}>B +</MenuItem> <MenuItem value={'B-'}>B -</MenuItem>
+                    <MenuItem value={'O+'}>O +</MenuItem> <MenuItem value={'O-'}>O -</MenuItem>
+                    <MenuItem value={'AB+'}>AB +</MenuItem> <MenuItem value={'AB-'}>AB -</MenuItem>
                 </Select>
             </FormControl>   
         </Grid>
         {/* Esto debe quedar al final */}
         <Grid item xs={2}>
-            <Button variant="contained" style={{"margin":"2%"}} onClick={() => {toggleRegister(true)}}>Borrar Datos</Button>
+            <div className="centrate">
+                <Button variant="contained" style={{"margin":"2%"}} onClick={() => {toggleRegister(true)}}>Borrar Datos</Button>
+            </div>
         </Grid>
 
         <TestMedical />

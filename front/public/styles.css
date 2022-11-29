@@ -1,38 +1,28 @@
 .centrate{text-align: center; justify-content: center; align-items: center; display: felx;}
-.autoBorders{margin: auto !important;padding: auto !important;}
-.flexible{display: flex;}
-.fullFlex{height:100vh; display: flex;}
-.fitContent{word-break: break-all;font-size: large; flex-wrap: wrap;}
-.end{position: relative; bottom: 0%; margin: auto;}
-.basicBorders{padding:4px;margin: 4px;}
-.qtBox{border-radius: 5%; padding: 20px;}
+.basicBorders{padding:10px;margin: 10px;}
+
 .verticalFlex{display: flex;flex-direction: column;}
 .horizontalFlex{display: flex;flex-direction:row;flex-wrap: wrap;}
+
+.flexible{display: flex;}
+
+.fitContent{word-break: break-all;font-size: large; flex-wrap: wrap;}
+
+
+
+
 .azul-Oscuro{background-color: rgb(53, 127, 212);}
 .smallMargin{margin-top: 1em; margin-bottom: 1em; padding: 2px; }
-.fullW{width: 100%; background-color: red;}
 
 
 /*reciclarn't*/
 .STATUSBAR{background-color: rgb(53, 127, 212);display: flex;padding: 10px;margin: 0%;
     border-color:rgb(43, 44, 129); border-style: solid; border-width: 2px; border-bottom-width: 1.4px;}
-.SIDEBAR{background-color: rgb(154, 77, 226); border-color:rgb(104, 52, 153); border-style: solid; 
-    border-width: 2px; border-top-width: 0.5px; height: 100%;}
+.SIDEBAR{border-color:rgb(104, 52, 153); border-style: solid; 
+    border-width: 2px; border-top-width: 0.5px; height: 100%; opacity: 90%;}
 .modalScreen{background-color: blueviolet; position: absolute; height: auto; width: auto; top: 10%;}
 .symtomsContainer{display: flex; height: 8vh;}
 .invisible{opacity: 0%;}
 /*reciclarn't*/
 
-/* Fragmentos de registro*/
 
-.square{border-style: solid; border-width: 1px;border-color: rgb(21, 21, 70);padding: 10px; flex-wrap: wrap;font-size: 15px;}
-
-/* I C O N O S */
-.micro{width:3vh;height:3vh}
-
-/* SIMPLE */
-.simpleInput{ height: 60%; width: 100%; max-width: 100%;}
-.simpleModalBackground{display: flex; position: absolute;z-index:-1;height:100vh; 
-    background-color: black; opacity: 40%; width: 100%; height:100vh; position: absolute;margin:0px !important}
-.simpleModal{flex-wrap: wrap;
-    border-color:rgb(50, 36, 62); border-style: solid; border-width: 5px; border-top-width: 0.5px;}
