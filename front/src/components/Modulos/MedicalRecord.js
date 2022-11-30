@@ -20,7 +20,8 @@ export default function MedicalRecord (props)  {
     //estados - SELECTOR DE SINTOMA
     const activeSymptoms = useSelector(state => state.activeSymptoms)//sintomas activos por defecto = [] 
     const symptomList = useSelector(state => state.symptomList)//valor del selector de sintomas
-    //Validaciones de Selector mediante estado de la lista
+    //Estados React
+    
 
     let checkListForEmptyValues = function(target){ return target === '' ? true : false } // if(target === ''){ return true }; else{ return false } equivalente!
 
