@@ -2,8 +2,9 @@
 import { useState } from "react"
 //Redux
  import { useDispatch, useSelector } from 'react-redux';
- import { addSymptom } from "../../../indexModles/features/Symptoms/ActiveSymptoms";//lista por defecto
+ import { addActiveSymptom, removeActiveSymptom } from "../../../indexModles/features/Symptoms/ActiveSymptoms";//lista por defecto
  import { removeSymptom } from "../../../indexModles/features/Symptoms/symptomList";
+
 //MUI
 import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, TableContainer,Table, Paper, TableHead, TableBody, TableRow, TableCell, Button} from "@mui/material"
 //arrays
@@ -18,7 +19,11 @@ import DiscapacitiesList from "./DiscapacitiesList"
 function SymptomSelect(){//selector
   //React States
   const[symptom, setSymptom] = useState("")
-  const handleSymptom = async(event) => { setSymptom(await event.target.value) }
+  const handleSymptom = (event) => {
+    let aux = event.target.value
+    setSymptom( aux );
+  }
+
   const [disableBtn, setBtn] = useState(false)//controlar el boton
 
   //Redux
@@ -39,14 +44,11 @@ function SymptomSelect(){//selector
           <Grid item xs={2} >
               <div className="centrate" style={{"position":"relative","top":"30%"}}>
                   <Button variant='contained' disabled={disableBtn} fullWidth onClick={() => {
-                    
-                    dispatch(addSymptom(symptom))//añadir estado activo
-                    dispatch(removeSymptom(symptom))//remover el mismo estado del selector
-
-                    // console.log('primero elemento: ', symptomList[0],' valor select: ', symptom)
-                    // if(symptom === ""){console.log('el symptom quedo vacio')}
-                    // setSymptom(symptomList[0])
-                    //if(symptomList.length > 0){setSymptom(symptomList[0]); console.log('segunda condicion!??!?!?!?!')}
+                    console.log('antes de los dispatch: ', symptom, symptomList)
+                    const aux = symptom
+                    setSymptom('')
+                    dispatch(addActiveSymptom(aux))//añadir estado activo
+                    dispatch(removeSymptom(aux))//remover el mismo estado del selector
 
                   }}>Agregar</Button>
 
@@ -59,6 +61,7 @@ function SymptomSelect(){//selector
 
 function BasicTable() {//tabla donde se reflejan los sintomas
   const activeSymptoms = useSelector(state => state.activeSymptoms)//sintomas activos por defecto = [] 
+  const dispatch = useDispatch() 
   
     return <>
       <TableContainer component={Paper}>
@@ -76,7 +79,9 @@ function BasicTable() {//tabla donde se reflejan los sintomas
               <TableRow key={e.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell align="center">{e.body}</TableCell>
                 <TableCell align="center">aqui va la severidad</TableCell>
-                <TableCell align="center"><Button variant="contained">botoncito</Button></TableCell>
+                <TableCell align="center"><Button variant="contained" onClick={() => {
+                  dispatch(removeActiveSymptom(e.body))//quita el simtoma de la lista de activos, filtra por nombre
+                }}>Eliminar</Button></TableCell>
               </TableRow>
             ))}
           </TableBody>

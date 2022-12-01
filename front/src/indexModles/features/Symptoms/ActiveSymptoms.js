@@ -11,12 +11,12 @@ export const activeSymptoms = createSlice({
   initialState:exampleObjects,
   reducers: {
     
-    addSymptom: (state, action) => {
+    addActiveSymptom: (state, action) => {
       state.push({id:uuid(), body: action.payload})
     },
 
-    removeSymptom: (state, action) => {
-      const found = state.find( symptom =>  symptom.id === action.payload)
+    removeActiveSymptom: (state, action) => {
+      const found = state.find( symptom =>  symptom.body === action.payload)
       if (found){//si conseguiste el id en la lista, eleminar uno de ellos usando splice *
         state.splice(state.indexOf(found), 1)
       }
@@ -25,6 +25,6 @@ export const activeSymptoms = createSlice({
   }
 })
 
-export const { addSymptom, removeSymptom} = activeSymptoms.actions
+export const { addActiveSymptom, removeActiveSymptom } = activeSymptoms.actions
 export default activeSymptoms.reducer
 

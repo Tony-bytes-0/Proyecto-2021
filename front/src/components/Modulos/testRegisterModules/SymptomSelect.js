@@ -38,6 +38,9 @@ export default function SymptomSelect(){
                     <Button variant='contained' fullWidth onClick={() => {
                         dispatch(addSymptom(symptom))
                         dispatch(removeSymptom(symptom))
+
+                        setSymptom(symptomList[0])
+                        
                     }}>Agregar</Button>
                 </div>
             </Grid>

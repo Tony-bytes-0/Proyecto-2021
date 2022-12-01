@@ -5,7 +5,7 @@ import { Test } from './Modulos/Independientes/Test';
 import SideBar from './Modulos/SideBar';
 //React-Router
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import MedicalRecord from './Modulos/MedicalRecord';
+//import MedicalRecord from './Modulos/MedicalRecord';
 //MUI Components
 import { Grid } from '@mui/material';
 
@@ -19,7 +19,7 @@ export default function Application(){
                     
                     <div id='RegisterMainframe' className='col'>
                         <Register />
-                        <MedicalRecord />
+                        
                     </div>
                 </>} />
 
