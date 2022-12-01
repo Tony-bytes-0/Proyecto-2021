@@ -3,7 +3,7 @@ import { useState } from "react"
 //Redux
  import { useDispatch, useSelector } from 'react-redux';
  import { addActiveSymptom, removeActiveSymptom } from "../../../indexModles/features/Symptoms/ActiveSymptoms";//lista por defecto
- import { removeSymptom } from "../../../indexModles/features/Symptoms/symptomList";
+ import { addSymptom, removeSymptom } from "../../../indexModles/features/Symptoms/symptomList";
 
 //MUI
 import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, TableContainer,Table, Paper, TableHead, TableBody, TableRow, TableCell, Button} from "@mui/material"
@@ -21,10 +21,11 @@ function SymptomSelect(){//selector
   const[symptom, setSymptom] = useState("")
   const handleSymptom = (event) => {
     let aux = event.target.value
+    setBtn(false)//al tocar el selector, activar el boton
     setSymptom( aux );
   }
 
-  const [disableBtn, setBtn] = useState(false)//controlar el boton
+  const [disableBtn, setBtn] = useState(true)//controlar el boton
 
   //Redux
   const dispatch = useDispatch() 
@@ -46,7 +47,8 @@ function SymptomSelect(){//selector
                   <Button variant='contained' disabled={disableBtn} fullWidth onClick={() => {
                     console.log('antes de los dispatch: ', symptom, symptomList)
                     const aux = symptom
-                    setSymptom('')
+                    setSymptom('')//devolver select a valor nulo
+                    setBtn(true)//desactivar añadir
                     dispatch(addActiveSymptom(aux))//añadir estado activo
                     dispatch(removeSymptom(aux))//remover el mismo estado del selector
 
@@ -80,6 +82,7 @@ function BasicTable() {//tabla donde se reflejan los sintomas
                 <TableCell align="center">{e.body}</TableCell>
                 <TableCell align="center">aqui va la severidad</TableCell>
                 <TableCell align="center"><Button variant="contained" onClick={() => {
+                  dispatch(addSymptom(e.body))//devuelve el valor a la lista usada por el selector
                   dispatch(removeActiveSymptom(e.body))//quita el simtoma de la lista de activos, filtra por nombre
                 }}>Eliminar</Button></TableCell>
               </TableRow>
