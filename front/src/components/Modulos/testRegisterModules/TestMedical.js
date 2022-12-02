@@ -7,8 +7,7 @@ import { useState } from "react"
 
 //MUI
 import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, TableContainer,Table, Paper, TableHead, TableBody, TableRow, TableCell, Button} from "@mui/material"
-//arrays
-import { allergies, cronicDiseases, discapacities } from "../Independientes/staticValuesList"
+
 
 //Modulos
 import AllergiesList from "./AllergiesList"
@@ -127,9 +126,9 @@ export default function TestMedical(){//MAIN
         <Grid item xs = {12}><div className="centrate SIDEBAR basicBorders">Padecimientos</div> </Grid>{/* SEPARADOR */}
 
         <Grid container spacing={2} sx={{"padding":"2%"}}>
-            <Grid item xs = {4}> <AllergiesList data={allergies} /> </Grid>
-            <Grid item xs = {4}> <CronicDiseasesList data={cronicDiseases} /> </Grid>
-            <Grid item xs = {4}> <DiscapacitiesList data={discapacities} /> </Grid>
+            <Grid item xs = {4}> <AllergiesList  /> </Grid>
+            <Grid item xs = {4}> <CronicDiseasesList  /> </Grid>
+            <Grid item xs = {4}> <DiscapacitiesList  /> </Grid>
         </Grid>
 
         <Grid item xs = {12}><div className="centrate SIDEBAR basicBorders" >Sintomas</div> </Grid>{/* SEPARADOR */}

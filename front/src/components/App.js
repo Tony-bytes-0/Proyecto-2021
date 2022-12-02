@@ -1,7 +1,6 @@
 //modulos
-import Register from './Modulos/Register';
-import Query from './Modulos/Query'
-import { Test } from './Modulos/Independientes/Test';
+
+import { Test } from './Modulos/Test';
 import SideBar from './Modulos/SideBar';
 //React-Router
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
@@ -15,20 +14,9 @@ export default function Application(){
     return<>
         <BrowserRouter>
             <Routes>
-                <Route path ='/' element = {<> {/*Ruta de inicio*/}
-                    
-                    <div id='RegisterMainframe' className='col'>
-                        <Register />
-                        
-                    </div>
-                </>} />
 
-                <Route path='/query' element = {<> 
-                    <SideBar />
-                    <Query />
-                </>} />
 
-                <Route path='/test' element ={<>
+                <Route path='/' element ={<>
                     <Grid container>
                         <Grid item xs={2} > <SideBar /> </Grid> 
                         <Grid item xs={10}> <Test /> </Grid>

@@ -1,11 +1,11 @@
 //React
 import { useState } from "react"
 //modulos
-import FilterUsers from "../registerModules/FilterUsers"
-import TestMedical from "../testRegisterModules/TestMedical"
+import FilterUsers from "./registerModules/FilterUsers"
+import TestMedical from "./testRegisterModules/TestMedical"
 //MUI
 import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar, Button   } from "@mui/material"
-import blueLobster from './blue-Lobster.jpg'
+import blueLobster from './Independientes/blue-Lobster.jpg'
 
 
 const smallWidth = { width: '25%', maxWidth: '25%' }
