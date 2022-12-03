@@ -10,7 +10,7 @@ export default function CronicDiseasesList(props){
     return<>
         <FormGroup orientation="horizontal">
             <FormControlLabel control={<Switch />} onChange={handleChange} label='Enfermedades Cronicas' />
-            <FormControlLabel disabled={hideCronic}  control={<Switch />} onChangue={handleEpilepsia} label={'Epilepsia'} />
+            <FormControlLabel disabled={hideCronic}  control={<Switch />} onChange={handleEpilepsia} label={'Epilepsia'} />
             <FormControlLabel disabled={hideCronic}  control={<Switch />} label={'Cancer'} />
             <FormControlLabel disabled={hideCronic} control={<Switch />} label={'Diabetes'} />
             <FormControlLabel disabled={hideCronic} control={<Switch />} label={'Artritis'} />

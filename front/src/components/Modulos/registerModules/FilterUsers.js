@@ -10,19 +10,27 @@ import Paper from '@mui/material/Paper';
 const testObjects = [
     {
         "id":"01",
-        "cedula":"505050",
-        "nombre":"el pepe",
-        "apellido":"memes 2020",
-        "genero":"masculino",
+        "cedula":"27080311",
+        "nombre":"Tony",
+        "apellido":"Gonzalez",
+        "genero":"Masculino",
         "telefono":"04248754443"
     },
     {
         "id":"02",
-        "cedula":"123123",
-        "nombre":"chin chon han CHIN",
-        "apellido":"memes 2022",
-        "genero":"TOM",
+        "cedula":"30303030",
+        "nombre":"Jose",
+        "apellido":"Ramirez",
+        "genero":"Masculino",
         "telefono":"04248754443"
+    },
+    {
+      "id":"",
+      "cedula":"",
+      "nombre":"",
+      "apellido":"",
+      "genero":"",
+      "telefono":""
     }
 
 ]

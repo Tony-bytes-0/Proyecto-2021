@@ -1,10 +1,10 @@
-import { Switch, FormGroup, FormControlLabel, Button } from "@mui/material"
+import { Switch, FormGroup, FormControlLabel /*Button*/ } from "@mui/material"
 import { useState } from "react";
 
 
 
 export default function AllergiesList(props){
-const showStates = () => {console.log(paracetamol, polen, polvo, lactosa, Antibioticos)}
+// const showStates = () => {console.log(paracetamol, polen, polvo, lactosa, Antibioticos)}
 const [hideAllergies, toggleAllergies] = useState(true)//habilitar selectores
 
 const [paracetamol, setParacetamol] = useState(false)//valor de las alegias
@@ -39,7 +39,8 @@ const handleChange = (event) => {if(event.target.checked){ toggleAllergies(false
             <FormControlLabel  control={<Switch />} disabled={hideAllergies} label={'Lactosa'} onChange={handleLactosa} />
 
             <FormControlLabel  control={<Switch />} disabled={hideAllergies} label={'Antibioticos'} onChange={handleAntibioticos} />
-            <Button onClick={showStates}>dame los estados</Button>
+
+            {/* <Button onClick={showStates}>dame los estados de alergias</Button> */}
         </FormGroup>
     </>
 }

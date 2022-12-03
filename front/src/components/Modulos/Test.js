@@ -19,6 +19,16 @@ export function Test (props){
 
     const [gender, setGender] = useState('')//genero
     const handleGender = (event) => { setGender(event.target.value) }
+    //direccion
+    const [municipio, setMunicipio] = useState('')
+    const handleMunicipio = (event) => { setMunicipio(event.target.value) }
+
+    const [Parroquia, setParroquia] = useState('')
+    const handleParroquia = (event) => {setParroquia(event.target.value)}
+
+    const [sector, setSector] = useState('')
+    const handleSector = (event) => {setSector(event.target.value)}
+
 
     //
     if(renderRegister){
@@ -35,7 +45,7 @@ export function Test (props){
     }
     else {return <>
     <div className="flexible centrate verticalFlex" >
-        <InputLabel>Ingresar Foto de Perfil</InputLabel>
+        <InputLabel><h5><b>Ingresar Foto de Perfil</b></h5></InputLabel>
         <Avatar sx={{ width: 100, height: 100 }} alt="blueLobster" src={blueLobster} onClick={()=>{alert('desplegar pestaña para ingresar joto')}} />
     </div>
     
@@ -69,6 +79,45 @@ export function Test (props){
                 </Select>
             </FormControl>   
         </Grid>
+
+{/* SEPARADOR */}        <Grid item xs = {12}><div className="centrate separator basicBorders tittle"><h4><b>Direccion</b></h4></div> </Grid>                      {/* SEPARADOR */}
+
+        <Grid item xs = {4}>
+            <FormControl fullWidth>
+                <InputLabel>Municipio</InputLabel>
+                <Select variant="filled" id="BloodType" label="Genero" value={municipio} onChange={handleMunicipio}>
+                    <MenuItem value={'Andrés Eloy Blanco'} >Andrés Eloy Blanco</MenuItem> <MenuItem value={'Andrés Mata'}>Andrés Mata</MenuItem>
+                    <MenuItem value={'Arismendi'}>Arismendi</MenuItem> <MenuItem value={'Benítez'}>Benítez</MenuItem>
+                    <MenuItem value={'Bermúdez'}>Bermúdez</MenuItem> <MenuItem value={'Bolívar'}>Bolívar</MenuItem>
+                    <MenuItem value={'Cajigal'}>Sucre</MenuItem> <MenuItem value={'AB-'}>Cruz Salmerón Acosta</MenuItem>
+                </Select>
+            </FormControl>  
+        </Grid>
+
+        <Grid item xs = {4}>
+            <FormControl fullWidth>
+                <InputLabel>Parroquia</InputLabel>
+                <Select variant="filled" id="BloodType" label="Genero" value={Parroquia} onChange={handleParroquia}>
+                    <MenuItem value={'Altagracia'} >Altagracia</MenuItem> <MenuItem value={'Ayacucho'}>Ayacucho</MenuItem>
+                    <MenuItem value={'Santa Ines'}>Santa Ines</MenuItem> <MenuItem value={'Raul Leoni'}>Raul Leoni</MenuItem>
+                    <MenuItem value={'San Juan'}>San Juan</MenuItem> <MenuItem value={'Santa Fe'}>Santa Fe</MenuItem>
+                    <MenuItem value={'Valentin Valiente'}>Valentin Valiente</MenuItem>
+                </Select>
+            </FormControl>  
+        </Grid>
+
+        <Grid item xs = {4}>
+            <FormControl fullWidth >
+                <InputLabel>Sector</InputLabel>
+                <Select variant="filled" id="BloodType" label="Genero" value={sector} onChange={handleSector}>
+                    <MenuItem value={'Los Chaimas'} >Los Chaimas</MenuItem> <MenuItem value={'Cantarrana'}>Cantarrana</MenuItem>
+                    <MenuItem value={'El Peñon'}>El Peñon</MenuItem> <MenuItem value={'El Bosque'}>Perimetral</MenuItem>
+                    <MenuItem value={'Caiguire'}>Caiguire</MenuItem> <MenuItem value={'Brasil'}>Brasil</MenuItem>
+                    <MenuItem value={'Centro'}>Centro</MenuItem> <MenuItem value={'Llanada'}>Llanada</MenuItem>
+                </Select>
+            </FormControl>  
+        </Grid>
+
         {/* Esto debe quedar al final */}
         <Grid item xs={2}>
             <div className="centrate">
@@ -77,6 +126,12 @@ export function Test (props){
         </Grid>
 
         <TestMedical />
+
+        <Grid item xs = {12}>
+            <div className="centrate">
+                <Button variant="contained" style={{"margin":"2%"}}>Registar</Button>
+            </div>
+        </Grid>
         
     </Grid>
     </>}

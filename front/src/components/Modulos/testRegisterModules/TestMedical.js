@@ -70,7 +70,6 @@ function BasicTable() {//tabla donde se reflejan los sintomas
           <TableHead>
             <TableRow>{/* aqui defino la cantidad de filas! */}
               <TableCell align="center"><h4><b>Sintoma</b></h4></TableCell>
-              <TableCell align="center"><h4><b>Gravedad</b></h4></TableCell>
               <TableCell align="center"></TableCell>
             </TableRow>
           </TableHead>
@@ -79,7 +78,6 @@ function BasicTable() {//tabla donde se reflejan los sintomas
             {activeSymptoms.map((e) => (
               <TableRow key={e.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell align="center">{e.body}</TableCell>
-                <TableCell align="center">aqui va la severidad</TableCell>
                 <TableCell align="center"><Button variant="contained" onClick={() => {
                   dispatch(addSymptom(e.body))//devuelve el valor a la lista usada por el selector
                   dispatch(removeActiveSymptom(e.body))//quita el simtoma de la lista de activos, filtra por nombre
@@ -101,7 +99,7 @@ export default function TestMedical(){//MAIN
     return<>
     <Grid container>
         {/* <Grid item xs = {12}> </Grid> */}
-        <Grid item xs = {12}><div className="centrate SIDEBAR basicBorders">Datos de la Historia Medica</div> </Grid>{/* SEPARADOR */}
+        <Grid item xs = {12}><div className="centrate separator tittle basicBorders"><h4><b>Datos de la Historia Medica</b></h4></div> </Grid>{/* SEPARADOR */}
 
         <Grid item xs = {6}>
         <FormControl fullWidth sx={{"padding":"3%"}}>
@@ -123,7 +121,7 @@ export default function TestMedical(){//MAIN
             </FormControl>
         </Grid>
 
-        <Grid item xs = {12}><div className="centrate SIDEBAR basicBorders">Padecimientos</div> </Grid>{/* SEPARADOR */}
+        <Grid item xs = {12}><div className="centrate separator tittle basicBorders"><h4><b>Padecimientos</b></h4></div> </Grid>{/* SEPARADOR */}
 
         <Grid container spacing={2} sx={{"padding":"2%"}}>
             <Grid item xs = {4}> <AllergiesList  /> </Grid>
@@ -131,7 +129,7 @@ export default function TestMedical(){//MAIN
             <Grid item xs = {4}> <DiscapacitiesList  /> </Grid>
         </Grid>
 
-        <Grid item xs = {12}><div className="centrate SIDEBAR basicBorders" >Sintomas</div> </Grid>{/* SEPARADOR */}
+        <Grid item xs = {12}><div className="centrate separator tittle basicBorders" ><h4><b>Sintomas</b></h4></div> </Grid>{/* SEPARADOR */}
 
         <SymptomSelect />
 

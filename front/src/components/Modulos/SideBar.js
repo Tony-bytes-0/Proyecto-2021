@@ -2,6 +2,11 @@ import {useNavigate} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { ButtonGroup } from '@mui/material';
 
+import { createStoreHook } from 'react-redux';
+
+//Redux
+
+
 export default function SideBar(props) {
 //sx={{ width: '25%' }} 
     const navigate = useNavigate()
@@ -15,17 +20,22 @@ export default function SideBar(props) {
 
                     <Button  variant='contained' onClick={() => {navigate('/')}} 
                         sx = {{"padding":"15px","marginTop":"20px"}}>
-                        Registro
+                        Registro de Historia Medica
                     </Button>
 
-                    <Button variant='contained' onClick={() => {navigate('/query')}}
+                    <Button variant='contained' onClick={() => {navigate('/')}}
                         sx = {{"padding":"15px","marginTop":"20px"}}>
                         Consulta
                     </Button>
 
-                    <Button variant='contained' onClick={() => {navigate('/test')}} 
+                    <Button variant='contained' onClick={() => {navigate('/')}} 
                         sx = {{"padding":"15px","marginTop":"20px"}}>
-                        Test
+                        Registrar personas
+                    </Button>
+
+                    <Button variant='contained' onClick={() => {alert('debo mostrar el estate de redux aqui')}} 
+                        sx = {{"padding":"15px","marginTop":"20px"}}>
+                        Boton de prueba -Redux getState-
                     </Button>
             </ButtonGroup>
         </div>
