@@ -120,10 +120,16 @@ export function Test (props){
 
         {/* Esto debe quedar al final */}
         <Grid item xs={2}>
-            <div className="centrate">
+            <div className="centrate horizontalFlex">
                 <Button variant="contained" style={{"margin":"2%"}} onClick={() => {toggleRegister(true)}}>Borrar Datos</Button>
             </div>
         </Grid>
+        <Grid item xs={2}>
+            <div className="centrate horizontalFlex">
+                <Button variant="contained" style={{ "margin": "2%" }} onClick={() => { toggleRegister(true) }}>Listo</Button>
+            </div>
+        </Grid>
+        {/* Esto debe quedar al final */}
 
         <TestMedical />
 

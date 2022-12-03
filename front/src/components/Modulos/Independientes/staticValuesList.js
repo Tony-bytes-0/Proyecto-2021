@@ -2,7 +2,7 @@ const bloodTypes = ['A+','B+','AB+','O+','A-','B-','AB-','O-', 'Desconocido'];
 const genders = ['Masculino','Femenino','Otro'];
 
 
-const discapacities = ['Miopia', 'Autismo', 'Sordo', 'Mudo']
+
 const symptoms = ['Fiebre', 'Dolor de Cabeza', 'Tos', 'Tos Seca', 'Mareos', 'Nauseas',' Vomitos','Dolores Estomacales','Dolores Abdominales']
 
 const registerTargetIds = [
@@ -20,4 +20,4 @@ const objectExample = {
 //     'Alergias: id', 'Enfermedades Cronicas: id', 'Discapacidades: id', 'Tipo de Sangre: id','Sector'
 // ]
 
-export {bloodTypes, genders , discapacities, registerTargetIds, objectExample, symptoms}
+export {bloodTypes, genders, registerTargetIds, objectExample, symptoms}
