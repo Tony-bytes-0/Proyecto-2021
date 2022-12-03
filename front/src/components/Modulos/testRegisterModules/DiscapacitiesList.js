@@ -1,6 +1,5 @@
 import { Switch, FormGroup, FormControlLabel } from "@mui/material";
 import { useState } from "react";
-const discapacities = ['Miopia', 'Autismo', 'Sordo', 'Mudo']
 
 export default function DiscapacitiesList(props){
 
