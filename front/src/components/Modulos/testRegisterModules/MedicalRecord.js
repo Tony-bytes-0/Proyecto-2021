@@ -59,6 +59,16 @@ function SymptomSelect(){//selector
   </>
 }
 
+function ToggleSpeecs (){//Padecimientos Cronicos
+  const [showSpeecs, setSpeecs] = useState('')
+  return <>
+    <Grid container spacing={2} sx={{ "padding": "2%" }}>
+      <Grid item xs={4}> <AllergiesList /> </Grid>
+      <Grid item xs={4}> <CronicDiseasesList /> </Grid>
+      <Grid item xs={4}> <DiscapacitiesList /> </Grid>
+    </Grid>
+  </>
+}
 
 function BasicTable() {//tabla donde se reflejan los sintomas
   const activeSymptoms = useSelector(state => state.activeSymptoms)//sintomas activos por defecto = [] 
@@ -123,11 +133,7 @@ export default function MedicalRecord(){//MAIN
 
         <Grid item xs = {12}><div className="centrate separator tittle basicBorders"><h4><b>Padecimientos</b></h4></div> </Grid>{/* SEPARADOR */}
 
-        <Grid container spacing={2} sx={{"padding":"2%"}}>
-            <Grid item xs = {4}> <AllergiesList  /> </Grid>
-            <Grid item xs = {4}> <CronicDiseasesList  /> </Grid>
-            <Grid item xs = {4}> <DiscapacitiesList  /> </Grid>
-        </Grid>
+        <ToggleSpeecs />
 
         <Grid item xs = {12}><div className="centrate separator tittle basicBorders" ><h4><b>Sintomas</b></h4></div> </Grid>{/* SEPARADOR */}
 
