@@ -91,7 +91,7 @@ function BasicTable() {//tabla donde se reflejan los sintomas
   }
 
 
-export default function TestMedical(){//MAIN
+export default function MedicalRecord(){//MAIN
   //Estados React
   const [relation, setRelation] = useState('')
   const handleRelation = (event) => { setRelation(event.target.value);} 
