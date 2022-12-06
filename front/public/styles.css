@@ -11,6 +11,8 @@
 .separator{border-color:rgb(59, 53, 64); border-style: solid; border-width: 10px; border-left: 0; border-right: 0; border-top: 0;}
 .tittle{font-size: large;}
 
+.modalDil{overflow-y: scroll; overflow-x: hidden; width: 100%; height:50%}
+
 
 .azul-Oscuro{background-color: rgb(53, 127, 212);}
 .smallMargin{margin-top: 1em; margin-bottom: 1em; padding: 2px; }

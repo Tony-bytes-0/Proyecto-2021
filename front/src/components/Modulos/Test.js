@@ -4,14 +4,11 @@ import { useState } from "react"
 import FilterUsers from "./registerModules/FilterUsers"
 import UserData from "./testRegisterModules/UserData"
 import MedicalRecord from "./testRegisterModules/MedicalRecord"
+import ModalTests from "./testRegisterModules/modals/ModalTests"
 //MUI
 import { Button } from "@mui/material"
-import MedicalTests from "./testRegisterModules/MedicalTests"
 
 
-
-
-//sx={{ width: '25%' }}
 export function Test (props){
     const [renderRegister, toggleRegister] = useState(true)//para mostrar el registrar o buscar personas
 
@@ -24,11 +21,14 @@ export function Test (props){
             </div>
             
             <MedicalRecord />{/* Registro de Historia Medica */}
-            <MedicalTests/>
+            <ModalTests/>
             
             <div className="centrate">   <Button variant="contained" style={{"margin":"2%"}}>Registar</Button>   </div>
         </>
     }
+
+
+    
     else {return <>
         <UserData />{/* Ingresar los Datos */}
 
@@ -38,7 +38,8 @@ export function Test (props){
             </div>
 
         <MedicalRecord /> {/* Registro de Historia Medica */}
-        <MedicalTests/>
+
+        <ModalTests/> {/*  */}
         <div className="centrate">   <Button variant="contained" style={{"margin":"2%"}}>Registar</Button>   </div>
         
     </>}

@@ -1,14 +1,22 @@
+//React
 import {useNavigate} from 'react-router-dom';
+
+//MUI
 import Button from '@mui/material/Button';
 import { ButtonGroup } from '@mui/material';
 
-
-
 //Redux
+import { useSelector } from 'react-redux'; 
 
 
 export default function SideBar(props) {
-//sx={{ width: '25%' }} 
+//sx={{ width: '25%' }}
+    const activeSymptoms = useSelector(store => store.activeSymptoms);
+
+    const printStoreData = () =>{
+        console.log('Sintomas activos en Store.activeSymptoms: ', activeSymptoms)
+    }
+
     const navigate = useNavigate()
 
         return <div className='SIDEBAR'>
@@ -33,7 +41,7 @@ export default function SideBar(props) {
                         Registrar personas
                     </Button>
 
-                    <Button variant='contained' onClick={() => {alert('debo mostrar el estate de redux aqui')}} 
+                    <Button variant='contained' onClick={ printStoreData }
                         sx = {{"padding":"15px","marginTop":"20px"}}>
                         Boton de prueba -Redux getState-
                     </Button>

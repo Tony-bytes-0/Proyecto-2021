@@ -12,7 +12,7 @@ import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, TableContai
 //Modulos
 import AllergiesList from "./AllergiesList"
 import CronicDiseasesList from "./CronicDiseasesList"
-import DiscapacitiesList from "./DiscapacitiesList"
+
 
 
 function SymptomSelect(){//selector
@@ -59,16 +59,6 @@ function SymptomSelect(){//selector
   </>
 }
 
-function ToggleSpeecs (){//Padecimientos Cronicos
-  const [showSpeecs, setSpeecs] = useState('')
-  return <>
-    <Grid container spacing={2} sx={{ "padding": "2%" }}>
-      <Grid item xs={4}> <AllergiesList /> </Grid>
-      <Grid item xs={4}> <CronicDiseasesList /> </Grid>
-      <Grid item xs={4}> <DiscapacitiesList /> </Grid>
-    </Grid>
-  </>
-}
 
 function BasicTable() {//tabla donde se reflejan los sintomas
   const activeSymptoms = useSelector(state => state.activeSymptoms)//sintomas activos por defecto = [] 
@@ -100,6 +90,28 @@ function BasicTable() {//tabla donde se reflejan los sintomas
       </>
   }
 
+  function ToggleSpeecs (){//Padecimientos Cronicos
+    const [showSpeecs, setSpeecs] = useState(false)
+    if(showSpeecs){
+      return<>
+        <Grid container spacing={2} sx={{ "padding": "2%" }}>
+          <Grid item xs={6}> <AllergiesList /> </Grid>
+          <Grid item xs={6}> <CronicDiseasesList /> </Grid>
+        </Grid>
+        
+        <Grid container direction="column" alignItems="center" justifyContent="center">
+          <Grid item xs={12}> <Button variant="contained" style={{"padding":"2%"}} className='centrate' onClick={() => {setSpeecs(false)}} >limpiar Seleccion</Button></Grid>  
+        </Grid>
+      </>
+    }
+    else{
+      return<>
+        <Grid container direction="column" alignItems="center" justifyContent="center">
+          <Grid item xs={12}> <Button variant="contained" style={{"padding":"2%"}} className='centrate' onClick={() => {setSpeecs(true)}} >Añadir alergia / Enfermedad Cronica</Button></Grid>  
+        </Grid>
+      </>
+    }
+  }
 
 export default function MedicalRecord(){//MAIN
   //Estados React
@@ -112,7 +124,7 @@ export default function MedicalRecord(){//MAIN
         <Grid item xs = {12}><div className="centrate separator tittle basicBorders"><h4><b>Datos de la Historia Medica</b></h4></div> </Grid>{/* SEPARADOR */}
 
         <Grid item xs = {6}>
-        <FormControl fullWidth sx={{"padding":"3%"}}>
+            <FormControl fullWidth sx={{"padding":"3%"}}>
                 <InputLabel>Relacion con el Ambulatorio</InputLabel>
                 <Select label="Genero" variant="filled" value={relation} onChange={handleRelation}>
                     <MenuItem value={'Paciente'} >Paciente</MenuItem>
@@ -121,7 +133,6 @@ export default function MedicalRecord(){//MAIN
                     <MenuItem value={'Personal del Ambulatorio'}>Personal del Ambulatorio</MenuItem>
                 </Select>
             </FormControl>
-            
         </Grid>
 
         <Grid item xs = {6}> 
@@ -131,7 +142,7 @@ export default function MedicalRecord(){//MAIN
             </FormControl>
         </Grid>
 
-        <Grid item xs = {12}><div className="centrate separator tittle basicBorders"><h4><b>Padecimientos</b></h4></div> </Grid>{/* SEPARADOR */}
+        
 
         <ToggleSpeecs />
 
