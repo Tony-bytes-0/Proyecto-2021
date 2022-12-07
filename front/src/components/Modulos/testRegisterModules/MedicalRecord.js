@@ -146,7 +146,7 @@ export default function MedicalRecord(){//MAIN
 
         <ToggleSpeecs />
 
-        <Grid item xs = {12}><div className="centrate separator tittle basicBorders" ><h4><b>Sintomas</b></h4></div> </Grid>{/* SEPARADOR */}
+        <Grid item xs = {12}><div className="centrate separator tittle basicBorders" ><h4><b>Sintomas Detectados</b></h4></div> </Grid>{/* SEPARADOR */}
 
         <SymptomSelect />
 
