@@ -2,7 +2,7 @@
 import { useState } from 'react'
 
 //MUI Components
-import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar   } from "@mui/material"
+import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar, Button   } from "@mui/material"
 
 //Modulos
 import blueLobster from '../Independientes/blue-Lobster.jpg'
@@ -10,6 +10,25 @@ import blueLobster from '../Independientes/blue-Lobster.jpg'
 
 export default function UserData(){//MAIN
         //Estado de variables de datos
+    const [dni, setDni] = useState('')
+    const handleDni = (event) => { setDni(event.target.value) }
+
+    const [name, setName] = useState('')
+    const handleName = (event) => { setName(event.target.value)}
+
+    const [lastName, setLastName] = useState('')
+    const handleLastName = (event) => {setLastName(event.target.value)}
+    
+    const [cellphone, setCellphone] = useState('')
+    const handleCellphone = (event) => {setCellphone(event.target.value)}
+
+    const [emergency, setEmergency] = useState('')
+    const handleEmergency = (event) => {setEmergency(event.target.value)}
+
+    const [birthdate, setBirthdate] = useState('')
+    const handleBirthdate = (event) => {setBirthdate(event.target.value)}
+        //fin de los datos primarios
+
     const [bloodType, setBloodType] = useState('')//tipo de sangre
     const handleBloodType = (event) => { setBloodType(event.target.value) }
     
@@ -20,12 +39,13 @@ export default function UserData(){//MAIN
     const handleMunicipio = (event) => { setMunicipio(event.target.value) }
     
     const [Parroquia, setParroquia] = useState('')
-    const handleParroquia = (event) => {setParroquia(event.target.value)}
+    const handleParroquia = (event) => { setParroquia(event.target.value) }
     
     const [sector, setSector] = useState('')
-    const handleSector = (event) => {setSector(event.target.value)}
+    const handleSector = (event) => { setSector(event.target.value) }
 
     const smallWidth = { width: '25%', maxWidth: '25%' }
+
 return<>
     <div className="flexible centrate verticalFlex" >
             <InputLabel><h5><b>Ingresar Foto de Perfil</b></h5></InputLabel>
@@ -34,9 +54,9 @@ return<>
         
         <Grid container sx={{"padding":"2%"}} spacing={1}>
             <Grid item xs={12} >{/*esto es un row basicamente*/}
-                <TextField sx={smallWidth} label="Cedula" variant="filled" type={'number'}/>
-                <TextField sx={smallWidth} label="Nombre" variant="filled"/>
-                <TextField sx={smallWidth} label="Apellido" variant="filled" />
+                <TextField sx={smallWidth} label="Cedula" variant="filled" type={'number'} onChange={handleDni}/>
+                <TextField sx={smallWidth} label="Nombre" variant="filled" onChange={handleName}/>
+                <TextField sx={smallWidth} label="Apellido" variant="filled" onChange={handleLastName} />
 
                 <FormControl sx = {smallWidth}>
                     <InputLabel>Genero</InputLabel>
@@ -49,9 +69,9 @@ return<>
             
 
             <Grid item xs = {12}>
-                <TextField label="Telefono"  sx={smallWidth}  variant="filled" type={'number'}/>
-                <TextField label="Telefono de Emergencia" sx={smallWidth} variant="filled" type={'number'}/>
-                <TextField label="Nacimiento" id="date"  type="date" defaultValue="2000-01-01" InputLabelProps={{shrink: true}} variant="filled" />
+                <TextField label="Telefono" sx={smallWidth} variant="filled" type={'number'} onChange={handleCellphone}/>
+                <TextField label="Telefono de Emergencia" sx={smallWidth} variant="filled" onChange={handleEmergency} type={'number'}/>
+                <TextField label="Nacimiento" id="date"  type="date" defaultValue="2000-01-01" InputLabelProps={{shrink: true}} variant="filled" onChange={handleBirthdate} />
                 <FormControl sx = {smallWidth}>
                     <InputLabel>Tipo de Sangre</InputLabel>
                     <Select variant="filled" id="BloodType" label="Genero" value={bloodType} onChange={handleBloodType}>
@@ -100,6 +120,9 @@ return<>
                     </Select>
                 </FormControl>  
             </Grid>
+            <Button variant="contained" onClick={() => {
+                console.log(dni, name, lastName, gender, cellphone, emergency, birthdate, bloodType, municipio, Parroquia, sector)}}
+            >Dev get me UserData Values</Button>
         </Grid>
     </>
 }
