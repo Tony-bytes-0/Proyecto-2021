@@ -5,6 +5,9 @@ import { useState } from "react"
  import { addActiveSymptom, removeActiveSymptom } from "../../../indexModles/features/Symptoms/ActiveSymptoms";//lista por defecto
  import { addSymptom, removeSymptom } from "../../../indexModles/features/Symptoms/symptomList";
 
+//Modules
+import ModalTests from "./modals/ModalTests"
+
 //MUI
 import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, TableContainer,Table, Paper, TableHead, TableBody, TableRow, TableCell, Button} from "@mui/material"
 
@@ -12,6 +15,7 @@ import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, TableContai
 //Modulos
 import AllergiesList from "./AllergiesList"
 import CronicDiseasesList from "./CronicDiseasesList"
+import Obsevations from "./Observations";
 
 
 
@@ -153,6 +157,12 @@ export default function MedicalRecord(){//MAIN
         <Grid container>
             <BasicTable />
         </Grid>
+
     </Grid>
+
+    <ModalTests/>
+
+    <Obsevations />
+
     </>
 }

@@ -4,7 +4,7 @@ import { useState } from "react"
 import FilterUsers from "./registerModules/FilterUsers"
 import UserData from "./testRegisterModules/UserData"
 import MedicalRecord from "./testRegisterModules/MedicalRecord"
-import ModalTests from "./testRegisterModules/modals/ModalTests"
+
 //MUI
 import { Button } from "@mui/material"
 
@@ -21,7 +21,6 @@ export function Test (props){
             </div>
             
             <MedicalRecord />{/* Registro de Historia Medica */}
-            <ModalTests/>
             
             <div className="centrate">   <Button variant="contained" style={{"margin":"2%"}}>Registar</Button>   </div>
         </>
@@ -39,7 +38,6 @@ export function Test (props){
 
         <MedicalRecord /> {/* Registro de Historia Medica */}
 
-        <ModalTests/> {/*  */}
         <div className="centrate">   <Button variant="contained" style={{"margin":"2%"}}>Registar</Button>   </div>
         
     </>}
