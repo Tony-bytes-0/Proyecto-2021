@@ -30,8 +30,6 @@ export default function ModalTests() {
 	const activeHematologyState = useSelector(state => state.activeEmatology)
 	const activeLabTestsState = useSelector(state => state.activeLabTests)
 	const activeRadiographyState = useSelector(state => state.activeRadiography)
-
-	console.log(activeRadiographyState)
 	
 	return <>
 		<Grid container className='basicBorders'>

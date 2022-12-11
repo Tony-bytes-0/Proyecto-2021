@@ -11,10 +11,10 @@ import { useSelector } from 'react-redux';
 
 export default function SideBar(props) {
 //sx={{ width: '25%' }}
-    const activeSymptoms = useSelector(store => store.activeSymptoms);
+    const storeData = useSelector(store => store);
 
     const printStoreData = () =>{
-        console.log('Sintomas activos en Store.activeSymptoms: ', activeSymptoms)
+        console.log('Arbol de objetos Redux Store', storeData )
     }
 
     const navigate = useNavigate()

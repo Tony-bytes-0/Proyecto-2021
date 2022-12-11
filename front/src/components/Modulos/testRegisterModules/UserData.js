@@ -4,45 +4,68 @@ import { useState } from 'react'
 //MUI Components
 import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar, Button   } from "@mui/material"
 
+//Redux
+import { useDispatch, useSelector } from 'react-redux'
+import { addUserData } from '../../../indexModles/features/userData/userData'
+
 //Modulos
 import blueLobster from '../Independientes/blue-Lobster.jpg'
 
 
 export default function UserData(){//MAIN
-        //Estado de variables de datos
+    const dispatch = useDispatch()
+    const initialState = useSelector(state => state.userData)
+    
+    //Estado de variables de datos
     const [dni, setDni] = useState('')
-    const handleDni = (event) => { setDni(event.target.value) }
+    const handleDni = (event) => { setDni(event.target.value) }//DNI
 
     const [name, setName] = useState('')
-    const handleName = (event) => { setName(event.target.value)}
+    const handleName = (event) => { setName(event.target.value)}//NAME
 
     const [lastName, setLastName] = useState('')
-    const handleLastName = (event) => {setLastName(event.target.value)}
+    const handleLastName = (event) => {setLastName(event.target.value)}//LASTNAME
+        
+    const [gender, setGender] = useState('')
+    const handleGender = (event) => { setGender(event.target.value) }//GENDER
     
     const [cellphone, setCellphone] = useState('')
-    const handleCellphone = (event) => {setCellphone(event.target.value)}
+    const handleCellphone = (event) => {setCellphone(event.target.value)}//CELLPHONE
 
     const [emergency, setEmergency] = useState('')
-    const handleEmergency = (event) => {setEmergency(event.target.value)}
+    const handleEmergency = (event) => {setEmergency(event.target.value)}//EMERGENCY
 
     const [birthdate, setBirthdate] = useState('')
-    const handleBirthdate = (event) => {setBirthdate(event.target.value)}
-        //fin de los datos primarios
+    const handleBirthdate = (event) => {setBirthdate(event.target.value)}//BIRTHDATE
 
-    const [bloodType, setBloodType] = useState('')//tipo de sangre
-    const handleBloodType = (event) => { setBloodType(event.target.value) }
-    
-    const [gender, setGender] = useState('')//genero
-    const handleGender = (event) => { setGender(event.target.value) }
-        //direccion
+    const [bloodType, setBloodType] = useState('')
+    const handleBloodType = (event) => { setBloodType(event.target.value) }//BLOODTYPE
+
+    //direccion
     const [municipio, setMunicipio] = useState('')
-    const handleMunicipio = (event) => { setMunicipio(event.target.value) }
+    const handleMunicipio = (event) => { setMunicipio(event.target.value) }//MUNICIPIO
     
-    const [Parroquia, setParroquia] = useState('')
-    const handleParroquia = (event) => { setParroquia(event.target.value) }
+    const [parroquia, setParroquia] = useState('')
+    const handleParroquia = (event) => { setParroquia(event.target.value) }//PARROQUIA
     
     const [sector, setSector] = useState('')
-    const handleSector = (event) => { setSector(event.target.value) }
+    const handleSector = (event) => { setSector(event.target.value) }//SECTOR
+
+    function createDataObject (){
+        return {
+            "cedula":dni,
+            "name":name,
+            "lastName":lastName,
+            "gender":gender,
+            "cellphone":cellphone,
+            "emergencyNumber":emergency,
+            "birthdate":birthdate,
+            "bloodType": bloodType,
+            "municipio":municipio,
+            "parroquia":parroquia,
+            "sector":sector
+        }
+    }
 
     const smallWidth = { width: '25%', maxWidth: '25%' }
 
@@ -99,8 +122,8 @@ return<>
 
             <Grid item xs = {4}>
                 <FormControl fullWidth>
-                    <InputLabel>Parroquia</InputLabel>
-                    <Select variant="filled" id="BloodType" label="Genero" value={Parroquia} onChange={handleParroquia}>
+                    <InputLabel>parroquia</InputLabel>
+                    <Select variant="filled" id="BloodType" label="Genero" value={parroquia} onChange={handleParroquia}>
                         <MenuItem value={'Altagracia'} >Altagracia</MenuItem> <MenuItem value={'Ayacucho'}>Ayacucho</MenuItem>
                         <MenuItem value={'Santa Ines'}>Santa Ines</MenuItem> <MenuItem value={'Raul Leoni'}>Raul Leoni</MenuItem>
                         <MenuItem value={'San Juan'}>San Juan</MenuItem> <MenuItem value={'Santa Fe'}>Santa Fe</MenuItem>
@@ -121,8 +144,10 @@ return<>
                 </FormControl>  
             </Grid>
             <Button variant="contained" onClick={() => {
-                console.log(dni, name, lastName, gender, cellphone, emergency, birthdate, bloodType, municipio, Parroquia, sector)}}
+                console.log(dni, name, lastName, gender, cellphone, emergency, birthdate, bloodType, municipio, parroquia, sector)}}
             >Dev get me UserData Values</Button>
+            <Button onClick={() => {console.log('estado del selector: ', initialState)}}>show me state</Button>
+            <Button onClick={() => {dispatch(addUserData(createDataObject()))}}>changue State!</Button>
         </Grid>
     </>
 }
