@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import { v4 as uuid}  from 'uuid'
 
 const exampleObjects = [
-  {id: "01", body: "fiebreEstatica"},
-  {id: "02", body: "tosEstatica"},
+  // {id: "01", body: "fiebreEstatica"},
+  // {id: "02", body: "tosEstatica"},
 ]
 
 export const activeSymptoms = createSlice({

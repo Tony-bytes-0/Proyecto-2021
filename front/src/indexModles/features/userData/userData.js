@@ -11,11 +11,23 @@ export const userData = createSlice({
       return state = action.payload
     },
 
-    returnUserData:(state, action ) => {
-      return state
+    clearData:(state, action ) => {
+      return {
+        "cedula":"",
+        "name":"",
+        "lastName":"",
+        "gender":"",
+        "cellphone":"",
+        "emergencyNumber":"",
+        "birthdate":"",
+        "bloodType": "",
+        "municipio":"",
+        "parroquia":"",
+        "sector":""
+    }
     }
   }
 })
 
-export const { addUserData, returnUserData } = userData.actions
+export const { addUserData, clearData } = userData.actions
 export default userData.reducer

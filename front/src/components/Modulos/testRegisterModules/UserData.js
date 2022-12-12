@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar, Button   } from "@mui/material"
 
 //Redux
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addUserData } from '../../../indexModles/features/userData/userData'
 
 //Modulos
@@ -14,7 +14,6 @@ import blueLobster from '../Independientes/blue-Lobster.jpg'
 
 export default function UserData(){//MAIN
     const dispatch = useDispatch()
-    const initialState = useSelector(state => state.userData)
     
     //Estado de variables de datos
     const [dni, setDni] = useState('')
@@ -72,7 +71,7 @@ export default function UserData(){//MAIN
 return<>
     <div className="flexible centrate verticalFlex" >
             <InputLabel><h5><b>Ingresar Foto de Perfil</b></h5></InputLabel>
-            <Avatar sx={{ width: 100, height: 100 }} alt="blueLobster" src={blueLobster} onClick={()=>{alert('desplegar pestaña para ingresar joto')}} />
+            <Avatar sx={{ width: 100, height: 100 }} alt="blueLobster" src={blueLobster} onClick={()=>{alert('desplegar pestaña para ingresar foto')}} />
         </div>
         
         <Grid container sx={{"padding":"2%"}} spacing={1}>
@@ -143,11 +142,13 @@ return<>
                     </Select>
                 </FormControl>  
             </Grid>
-            <Button variant="contained" onClick={() => {
-                console.log(dni, name, lastName, gender, cellphone, emergency, birthdate, bloodType, municipio, parroquia, sector)}}
-            >Dev get me UserData Values</Button>
-            <Button onClick={() => {console.log('estado del selector: ', initialState)}}>show me state</Button>
-            <Button onClick={() => {dispatch(addUserData(createDataObject()))}}>changue State!</Button>
         </Grid>
+
+        <div className='centrate'>
+            <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
+                dispatch(addUserData(createDataObject()))
+            }}>Listo</Button>
+        </div>
+        
     </>
 }

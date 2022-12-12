@@ -16,6 +16,10 @@ export default function SideBar(props) {
     const printStoreData = () =>{
         console.log('Arbol de objetos Redux Store', storeData )
     }
+    
+    const printUserData = () => {
+        console.log(storeData.userData)
+    }
 
     const navigate = useNavigate()
 
@@ -31,7 +35,7 @@ export default function SideBar(props) {
                         Registro de Historia Medica
                     </Button>
 
-                    <Button variant='contained' onClick={() => {navigate('/')}}
+                    {/* <Button variant='contained' onClick={() => {navigate('/')}}
                         sx = {{"padding":"15px","marginTop":"20px"}}>
                         Consulta
                     </Button>
@@ -39,11 +43,16 @@ export default function SideBar(props) {
                     <Button variant='contained' onClick={() => {navigate('/')}} 
                         sx = {{"padding":"15px","marginTop":"20px"}}>
                         Registrar personas
-                    </Button>
+                    </Button> */}
 
                     <Button variant='contained' onClick={ printStoreData }
                         sx = {{"padding":"15px","marginTop":"20px"}}>
-                        Boton de prueba -Redux getState-
+                        Ver Redux Storage
+                    </Button>
+
+                    <Button variant='contained' onClick={ printUserData }
+                        sx = {{"padding":"15px","marginTop":"20px"}}>
+                        UserData
                     </Button>
             </ButtonGroup>
         </div>

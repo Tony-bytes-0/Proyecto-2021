@@ -1,16 +1,21 @@
 //React
 import { useState } from "react"
+//MUI
+import { Button } from "@mui/material"
+
+//Redux
+import { useDispatch } from "react-redux"
+import { clearData } from "../../indexModles/features/userData/userData"
+
 //modulos
 import FilterUsers from "./registerModules/FilterUsers"
 import UserData from "./testRegisterModules/UserData"
 import MedicalRecord from "./testRegisterModules/MedicalRecord"
 
-//MUI
-import { Button } from "@mui/material"
-
 
 export function Test (props){
-    const [renderRegister, toggleRegister] = useState(true)//para mostrar el registrar o buscar personas
+    const dispatch = useDispatch()
+    const [renderRegister, toggleRegister] = useState(false)//para mostrar el registrar o buscar personas
 
     if(renderRegister){
         return<>
@@ -32,8 +37,10 @@ export function Test (props){
         <UserData />{/* Ingresar los Datos */}
 
             <div className="centrate horizontalFlex">
-                <Button variant="contained" style={{"margin":"2%"}} onClick={() => {toggleRegister(true)}}>Borrar Datos</Button>
-                <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {alert('sin funciones') }}>Listo</Button>
+                <Button variant="contained" style={{"margin":"2%"}} onClick={() => {
+                    dispatch(clearData())
+                    toggleRegister(true)
+                }}>Borrar Datos</Button>
             </div>
 
         <MedicalRecord /> {/* Registro de Historia Medica */}
