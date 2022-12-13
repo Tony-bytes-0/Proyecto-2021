@@ -31,7 +31,7 @@ export default function Application(){
                 <Route path='/users' element ={<>
                     <Grid container>
                         <Grid item xs={2} > <SideBar /> </Grid> 
-                        <Grid item xs={10}> <UserData /> </Grid>
+                        <Grid item xs={10}> <UserData togglePost={true} /> </Grid>
                     </Grid>                     
                 </> } />
 

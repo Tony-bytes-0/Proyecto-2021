@@ -2,7 +2,7 @@
 import { useState } from 'react'
 
 //MUI Components
-import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar, Button, Modal   } from "@mui/material"
+import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar, Button  } from "@mui/material"
 
 //Redux
 import { useDispatch} from 'react-redux'
@@ -15,15 +15,10 @@ import axios from "axios"
 import blueLobster from '../Independientes/blue-Lobster.jpg'
 
 
-export default function UserData(){//MAIN
-    //modal
-    const [capsuleData, setCapsuleData] = useState(false);
-    const handleCapsuleData = () => setCapsuleData(true)
-    const [open, setOpen] = useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+export default function UserData(props){//MAIN
 
     const dispatch = useDispatch()
+
     //Estado de variables de datos
     const [dni, setDni] = useState('')
     const handleDni = (event) => { setDni(event.target.value) }//DNI
@@ -86,13 +81,29 @@ export default function UserData(){//MAIN
         })
     }
 
-    const smallWidth = { width: '25%', maxWidth: '25%' }
-    if(capsuleData){
-        return<>
-            aqui van los datos encapsulados
-        </>
+    function RenderedButton(props){
+        console.log(props)
+        if(props.togglePost){
+        return<><div className='centrate'>
+        <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
+            const allData = createDataObject()
+            dispatch(addUserData(allData))
+            postPerson(allData)
+        }}>Crear Usuario</Button>
+        </div></>
+        }
+        else{
+        return<><div className='centrate'>
+            <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
+            const allData = createDataObject()
+            dispatch(addUserData(allData))
+            postPerson(allData)
+        }}>Listo</Button>
+        </div></>
+        }
+        
     }
-    else{
+    const smallWidth = { width: '25%', maxWidth: '25%' }
     return<>
         <div className="flexible centrate verticalFlex" >
                 <InputLabel><h5><b>Ingresar Foto de Perfil</b></h5></InputLabel>
@@ -169,25 +180,10 @@ export default function UserData(){//MAIN
                 </Grid>
             </Grid>
 
-            <div className='centrate'>
-                <Button variant="contained" style={{ "margin": "2%" }} onClick={
-                    handleOpen
-                }>Listo</Button>
-            </div>
+            {<RenderedButton togglePost = {props.togglePost} />/*este es el boton de listo que envia los datos*/}
+            {/*al llamar UserData desde Crear usuario, me permite hacer un POST, del resto me permite encapsular los datos unicamente*/}
 
-            <Modal open={open} disableScrollLock={false} onClose={handleClose} >{/* modal con Examenes de sangre*/}
-                <div className='modalDiv basicBorders'>
-                    aqui van los datos del usuario
-                    <Grid container direction="column" alignItems="center" justifyContent="center" style={{"backgroundColor":"white", "padding":"5%"}}>
-                        <Grid item xs= {3}>
-                            <Button variant='contained' onClick={handleClose}>Limpiar Seleccion</Button>
-                            <Button variant='contained' onClick={handleClose}>Aceptar</Button>    
-                        </Grid>
-                    </Grid>
-                </div>
-            </Modal>
         </>
-    }
 }
 
 /* <div className='centrate'>
