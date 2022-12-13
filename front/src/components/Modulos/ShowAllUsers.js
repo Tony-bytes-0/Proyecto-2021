@@ -1,4 +1,4 @@
-import { TextField, Grid, Button } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import {Table} from "@mui/material";
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,34 +6,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+//React
+import { useState } from "react";
+//Axios
+import axios from "axios"
 
-const testObjects = [
-    {
-        "id":"01",
-        "cedula":"27080311",
-        "nombre":"Tony",
-        "apellido":"Gonzalez",
-        "genero":"Masculino",
-        "telefono":"04248754443"
-    },
-    {
-        "id":"02",
-        "cedula":"30303030",
-        "nombre":"Jose",
-        "apellido":"Ramirez",
-        "genero":"Masculino",
-        "telefono":"04248754443"
-    },
-    {
-      "id":"",
-      "cedula":"",
-      "nombre":"",
-      "apellido":"",
-      "genero":"",
-      "telefono":""
-    }
 
-]
 
 function BasicTable(props) {
   return <>
@@ -56,11 +34,11 @@ function BasicTable(props) {
                 alert('Cedula: ' + row.cedula + ' Seleccionada!')}
                 }>
               <TableCell component="th" scope="row">{row.id}</TableCell>
-              <TableCell align="right">{row.cedula}</TableCell>
+              <TableCell align="right">{row.identificacion}</TableCell>
               <TableCell align="right">{row.nombre}</TableCell>
               <TableCell align="right">{row.apellido}</TableCell>
-              <TableCell align="right">{row.genero}</TableCell>
-              <TableCell align="right">{row.telefono}</TableCell>
+              <TableCell align="right">{row.sexo}</TableCell>
+              <TableCell align="right">aqui deberia ir el telefono </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -69,20 +47,29 @@ function BasicTable(props) {
     </>
 }
 export default function FilterUsers(props){
+  const [usersArray, setUsers] = useState([])
+  const getUsers = () =>{
+    axios.get('http://localhost:300/person')
+    .then(response => {
+      setUsers(response.data)
+      console.log(response.data)
+    })
+    .catch(e => {
+      alert('ocurrio algun error al intentar buscar usuarios')
+    })
+  }
+
     return<>
         <Grid container style={{"padding":"2%"}}>
-            <Grid item xs={10}>
-                <TextField fullWidth label="Cedula" type={'number'} variant="filled" />
-            </Grid>
-            <Grid item xs={2} >
-            <div className="centrate" style={{"position":"relative","top":"10%"}}>
-              <Button variant='contained' fullWidth >Buscar!</Button>
-            </div>
-                
+          <Grid item xs = {12}><div className="centrate separator basicBorders tittle"><h4><b>Buscar Usuarios</b></h4></div> </Grid>
+            <Grid item xs={12} >
+                <div className="centrate" style={{"position":"relative","top":"10%"}}>
+                    <Button variant='contained' fullWidth onClick={getUsers}>Mostrar todos los usuarios</Button>
+                </div>    
             </Grid>
 
             <Grid item xs={12}>
-                <BasicTable rows = {testObjects} />
+                <BasicTable rows = {usersArray} />
             </Grid>
         </Grid>
     </>

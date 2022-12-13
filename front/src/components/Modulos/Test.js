@@ -8,14 +8,14 @@ import { useDispatch } from "react-redux"
 import { clearData } from "../../indexModles/features/userData/userData"
 
 //modulos
-import FilterUsers from "./registerModules/FilterUsers"
+import FilterUsers from "./testRegisterModules/FilterUsers"
 import UserData from "./testRegisterModules/UserData"
 import MedicalRecord from "./testRegisterModules/MedicalRecord"
 
 
 export function Test (props){
     const dispatch = useDispatch()
-    const [renderRegister, toggleRegister] = useState(false)//para mostrar el registrar o buscar personas
+    const [renderRegister, toggleRegister] = useState(true)//para mostrar el registrar o buscar personas
 
     if(renderRegister){
         return<>
@@ -61,4 +61,3 @@ export function Test (props){
 // <TextField sx={smallWidth} label="Apellido" variant="outlined" spacing={20}/>
 
 // <Select label="Tipo de Sangre" sx={smallWidth}>
-

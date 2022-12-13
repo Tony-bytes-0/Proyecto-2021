@@ -5,8 +5,11 @@ import { useState } from 'react'
 import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar, Button   } from "@mui/material"
 
 //Redux
-import { useDispatch } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import { addUserData } from '../../../indexModles/features/userData/userData'
+
+//Axios
+import axios from "axios"
 
 //Modulos
 import blueLobster from '../Independientes/blue-Lobster.jpg'
@@ -51,19 +54,30 @@ export default function UserData(){//MAIN
     const handleSector = (event) => { setSector(event.target.value) }//SECTOR
 
     function createDataObject (){
+        const unusedData = cellphone + emergency + municipio + parroquia;console.log('datos que aun no uso ', unusedData);
         return {
-            "cedula":dni,
-            "name":name,
-            "lastName":lastName,
-            "gender":gender,
-            "cellphone":cellphone,
-            "emergencyNumber":emergency,
-            "birthdate":birthdate,
-            "bloodType": bloodType,
-            "municipio":municipio,
-            "parroquia":parroquia,
-            "sector":sector
+            nombre:name,
+            apellido:lastName,
+            "identificacion":dni,
+            "fecha_de_nacimiento":birthdate,
+            "direccion":sector,
+            "tipo_sangre": bloodType,
+            "sexo":gender,
+            // "cellphone":cellphone,
+            // "emergencyNumber":emergency,
+            // "municipio":municipio,
+            // "parroquia":parroquia,
         }
+    }
+
+    function postPerson(object){
+        axios.post('http://localhost:300/person', object)
+        .then((response) =>{
+            console.log('respuesta exitosa!')
+        })
+        .catch((response) => {
+            console.log('se supone que paso algo malo al tratar de hacer post', response)
+        })
     }
 
     const smallWidth = { width: '25%', maxWidth: '25%' }
@@ -146,8 +160,12 @@ return<>
 
         <div className='centrate'>
             <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
-                dispatch(addUserData(createDataObject()))
+                const allData = createDataObject()
+                dispatch(addUserData(allData))
+                postPerson(allData)
+                console.log('datos del objeto enviado: ', allData)
             }}>Listo</Button>
+            
         </div>
         
     </>

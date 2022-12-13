@@ -1,12 +1,17 @@
 //modulos
-
 import { Test } from './Modulos/Test';
 import SideBar from './Modulos/SideBar';
+import UserData from './Modulos/testRegisterModules/UserData';
+import ShowAllUsers from  './Modulos/ShowAllUsers';
+
 //React-Router
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
+
 //import MedicalRecord from './Modulos/MedicalRecord';
 //MUI Components
 import { Grid } from '@mui/material';
+
+
 
 
 export default function Application(){
@@ -22,6 +27,24 @@ export default function Application(){
                         <Grid item xs={10}> <Test /> </Grid>
                     </Grid>                     
                 </> } />
+
+                <Route path='/users' element ={<>
+                    <Grid container>
+                        <Grid item xs={2} > <SideBar /> </Grid> 
+                        <Grid item xs={10}> <UserData /> </Grid>
+                    </Grid>                     
+                </> } />
+
+                <Route path='/showAllUsers' element ={<>
+                    <Grid container>
+                        <Grid item xs={2} > <SideBar /> </Grid> 
+                        <Grid item xs={10}> <ShowAllUsers/> </Grid>
+                    </Grid>                     
+                </> } />
+
+                
+
+
                 
                 
             </Routes>
