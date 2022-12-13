@@ -2,7 +2,7 @@
 import { useState } from 'react'
 
 //MUI Components
-import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar, Button   } from "@mui/material"
+import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar, Button, Modal   } from "@mui/material"
 
 //Redux
 import { useDispatch} from 'react-redux'
@@ -16,8 +16,14 @@ import blueLobster from '../Independientes/blue-Lobster.jpg'
 
 
 export default function UserData(){//MAIN
+    //modal
+    const [capsuleData, setCapsuleData] = useState(false);
+    const handleCapsuleData = () => setCapsuleData(true)
+    const [open, setOpen] = useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+
     const dispatch = useDispatch()
-    
     //Estado de variables de datos
     const [dni, setDni] = useState('')
     const handleDni = (event) => { setDni(event.target.value) }//DNI
@@ -81,92 +87,115 @@ export default function UserData(){//MAIN
     }
 
     const smallWidth = { width: '25%', maxWidth: '25%' }
-
-return<>
-    <div className="flexible centrate verticalFlex" >
-            <InputLabel><h5><b>Ingresar Foto de Perfil</b></h5></InputLabel>
-            <Avatar sx={{ width: 100, height: 100 }} alt="blueLobster" src={blueLobster} onClick={()=>{alert('desplegar pestaña para ingresar foto')}} />
-        </div>
-        
-        <Grid container sx={{"padding":"2%"}} spacing={1}>
-            <Grid item xs={12} >{/*esto es un row basicamente*/}
-                <TextField sx={smallWidth} label="Cedula" variant="filled" type={'number'} onChange={handleDni}/>
-                <TextField sx={smallWidth} label="Nombre" variant="filled" onChange={handleName}/>
-                <TextField sx={smallWidth} label="Apellido" variant="filled" onChange={handleLastName} />
-
-                <FormControl sx = {smallWidth}>
-                    <InputLabel>Genero</InputLabel>
-                    <Select label="Genero" variant="filled" value = {gender} onChange={handleGender}>
-                        <MenuItem value={'Masculino'}>Masculino</MenuItem>
-                        <MenuItem value={'Femenino'}>Femenino</MenuItem>
-                    </Select>
-                </FormControl>
-            </Grid>  
+    if(capsuleData){
+        return<>
+            aqui van los datos encapsulados
+        </>
+    }
+    else{
+    return<>
+        <div className="flexible centrate verticalFlex" >
+                <InputLabel><h5><b>Ingresar Foto de Perfil</b></h5></InputLabel>
+                <Avatar sx={{ width: 100, height: 100 }} alt="blueLobster" src={blueLobster} onClick={()=>{alert('desplegar pestaña para ingresar foto')}} />
+            </div>
             
+            <Grid container sx={{"padding":"2%"}} spacing={1}>
+                <Grid item xs={12} >{/*esto es un row basicamente*/}
+                    <TextField sx={smallWidth} label="Cedula" variant="filled" type={'number'} onChange={handleDni}/>
+                    <TextField sx={smallWidth} label="Nombre" variant="filled" onChange={handleName}/>
+                    <TextField sx={smallWidth} label="Apellido" variant="filled" onChange={handleLastName} />
 
-            <Grid item xs = {12}>
-                <TextField label="Telefono" sx={smallWidth} variant="filled" type={'number'} onChange={handleCellphone}/>
-                <TextField label="Telefono de Emergencia" sx={smallWidth} variant="filled" onChange={handleEmergency} type={'number'}/>
-                <TextField label="Nacimiento" id="date"  type="date" defaultValue="2000-01-01" InputLabelProps={{shrink: true}} variant="filled" onChange={handleBirthdate} />
-                <FormControl sx = {smallWidth}>
-                    <InputLabel>Tipo de Sangre</InputLabel>
-                    <Select variant="filled" id="BloodType" label="Genero" value={bloodType} onChange={handleBloodType}>
-                        <MenuItem value={'A+'} >A +</MenuItem> <MenuItem value={'A-'}>A -</MenuItem>
-                        <MenuItem value={'B+'}>B +</MenuItem> <MenuItem value={'B-'}>B -</MenuItem>
-                        <MenuItem value={'O+'}>O +</MenuItem> <MenuItem value={'O-'}>O -</MenuItem>
-                        <MenuItem value={'AB+'}>AB +</MenuItem> <MenuItem value={'AB-'}>AB -</MenuItem>
-                    </Select>
-                </FormControl>   
+                    <FormControl sx = {smallWidth}>
+                        <InputLabel>Genero</InputLabel>
+                        <Select label="Genero" variant="filled" value = {gender} onChange={handleGender}>
+                            <MenuItem value={'Masculino'}>Masculino</MenuItem>
+                            <MenuItem value={'Femenino'}>Femenino</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>  
+                
+
+                <Grid item xs = {12}>
+                    <TextField label="Telefono" sx={smallWidth} variant="filled" type={'number'} onChange={handleCellphone}/>
+                    <TextField label="Telefono de Emergencia" sx={smallWidth} variant="filled" onChange={handleEmergency} type={'number'}/>
+                    <TextField label="Nacimiento" id="date"  type="date" defaultValue="2000-01-01" InputLabelProps={{shrink: true}} variant="filled" onChange={handleBirthdate} />
+                    <FormControl sx = {smallWidth}>
+                        <InputLabel>Tipo de Sangre</InputLabel>
+                        <Select variant="filled" id="BloodType" label="Genero" value={bloodType} onChange={handleBloodType}>
+                            <MenuItem value={'A+'} >A +</MenuItem> <MenuItem value={'A-'}>A -</MenuItem>
+                            <MenuItem value={'B+'}>B +</MenuItem> <MenuItem value={'B-'}>B -</MenuItem>
+                            <MenuItem value={'O+'}>O +</MenuItem> <MenuItem value={'O-'}>O -</MenuItem>
+                            <MenuItem value={'AB+'}>AB +</MenuItem> <MenuItem value={'AB-'}>AB -</MenuItem>
+                        </Select>
+                    </FormControl>   
+                </Grid>
+
+        {/* SEPARADOR */}        <Grid item xs = {12}><div className="centrate separator basicBorders tittle"><h4><b>Direccion</b></h4></div> </Grid>                      {/* SEPARADOR */}
+
+                <Grid item xs = {4}>
+                    <FormControl fullWidth>
+                        <InputLabel>Municipio</InputLabel>
+                        <Select variant="filled" id="BloodType" label="Genero" value={municipio} onChange={handleMunicipio}>
+                            <MenuItem value={'Andrés Eloy Blanco'} >Andrés Eloy Blanco</MenuItem> <MenuItem value={'Andrés Mata'}>Andrés Mata</MenuItem>
+                            <MenuItem value={'Arismendi'}>Arismendi</MenuItem> <MenuItem value={'Benítez'}>Benítez</MenuItem>
+                            <MenuItem value={'Bermúdez'}>Bermúdez</MenuItem> <MenuItem value={'Bolívar'}>Bolívar</MenuItem>
+                            <MenuItem value={'Cajigal'}>Sucre</MenuItem> <MenuItem value={'AB-'}>Cruz Salmerón Acosta</MenuItem>
+                        </Select>
+                    </FormControl>  
+                </Grid>
+
+                <Grid item xs = {4}>
+                    <FormControl fullWidth>
+                        <InputLabel>parroquia</InputLabel>
+                        <Select variant="filled" id="BloodType" label="Genero" value={parroquia} onChange={handleParroquia}>
+                            <MenuItem value={'Altagracia'} >Altagracia</MenuItem> <MenuItem value={'Ayacucho'}>Ayacucho</MenuItem>
+                            <MenuItem value={'Santa Ines'}>Santa Ines</MenuItem> <MenuItem value={'Raul Leoni'}>Raul Leoni</MenuItem>
+                            <MenuItem value={'San Juan'}>San Juan</MenuItem> <MenuItem value={'Santa Fe'}>Santa Fe</MenuItem>
+                            <MenuItem value={'Valentin Valiente'}>Valentin Valiente</MenuItem>
+                        </Select>
+                    </FormControl>  
+                </Grid>
+
+                <Grid item xs = {4}>
+                    <FormControl fullWidth >
+                        <InputLabel>Sector</InputLabel>
+                        <Select variant="filled" id="BloodType" label="Genero" value={sector} onChange={handleSector}>
+                            <MenuItem value={'Los Chaimas'} >Los Chaimas</MenuItem> <MenuItem value={'Cantarrana'}>Cantarrana</MenuItem>
+                            <MenuItem value={'El Peñon'}>El Peñon</MenuItem> <MenuItem value={'El Bosque'}>Perimetral</MenuItem>
+                            <MenuItem value={'Caiguire'}>Caiguire</MenuItem> <MenuItem value={'Brasil'}>Brasil</MenuItem>
+                            <MenuItem value={'Centro'}>Centro</MenuItem> <MenuItem value={'Llanada'}>Llanada</MenuItem>
+                        </Select>
+                    </FormControl>  
+                </Grid>
             </Grid>
 
-    {/* SEPARADOR */}        <Grid item xs = {12}><div className="centrate separator basicBorders tittle"><h4><b>Direccion</b></h4></div> </Grid>                      {/* SEPARADOR */}
+            <div className='centrate'>
+                <Button variant="contained" style={{ "margin": "2%" }} onClick={
+                    handleOpen
+                }>Listo</Button>
+            </div>
 
-            <Grid item xs = {4}>
-                <FormControl fullWidth>
-                    <InputLabel>Municipio</InputLabel>
-                    <Select variant="filled" id="BloodType" label="Genero" value={municipio} onChange={handleMunicipio}>
-                        <MenuItem value={'Andrés Eloy Blanco'} >Andrés Eloy Blanco</MenuItem> <MenuItem value={'Andrés Mata'}>Andrés Mata</MenuItem>
-                        <MenuItem value={'Arismendi'}>Arismendi</MenuItem> <MenuItem value={'Benítez'}>Benítez</MenuItem>
-                        <MenuItem value={'Bermúdez'}>Bermúdez</MenuItem> <MenuItem value={'Bolívar'}>Bolívar</MenuItem>
-                        <MenuItem value={'Cajigal'}>Sucre</MenuItem> <MenuItem value={'AB-'}>Cruz Salmerón Acosta</MenuItem>
-                    </Select>
-                </FormControl>  
-            </Grid>
-
-            <Grid item xs = {4}>
-                <FormControl fullWidth>
-                    <InputLabel>parroquia</InputLabel>
-                    <Select variant="filled" id="BloodType" label="Genero" value={parroquia} onChange={handleParroquia}>
-                        <MenuItem value={'Altagracia'} >Altagracia</MenuItem> <MenuItem value={'Ayacucho'}>Ayacucho</MenuItem>
-                        <MenuItem value={'Santa Ines'}>Santa Ines</MenuItem> <MenuItem value={'Raul Leoni'}>Raul Leoni</MenuItem>
-                        <MenuItem value={'San Juan'}>San Juan</MenuItem> <MenuItem value={'Santa Fe'}>Santa Fe</MenuItem>
-                        <MenuItem value={'Valentin Valiente'}>Valentin Valiente</MenuItem>
-                    </Select>
-                </FormControl>  
-            </Grid>
-
-            <Grid item xs = {4}>
-                <FormControl fullWidth >
-                    <InputLabel>Sector</InputLabel>
-                    <Select variant="filled" id="BloodType" label="Genero" value={sector} onChange={handleSector}>
-                        <MenuItem value={'Los Chaimas'} >Los Chaimas</MenuItem> <MenuItem value={'Cantarrana'}>Cantarrana</MenuItem>
-                        <MenuItem value={'El Peñon'}>El Peñon</MenuItem> <MenuItem value={'El Bosque'}>Perimetral</MenuItem>
-                        <MenuItem value={'Caiguire'}>Caiguire</MenuItem> <MenuItem value={'Brasil'}>Brasil</MenuItem>
-                        <MenuItem value={'Centro'}>Centro</MenuItem> <MenuItem value={'Llanada'}>Llanada</MenuItem>
-                    </Select>
-                </FormControl>  
-            </Grid>
-        </Grid>
-
-        <div className='centrate'>
-            <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
-                const allData = createDataObject()
-                dispatch(addUserData(allData))
-                postPerson(allData)
-                console.log('datos del objeto enviado: ', allData)
-            }}>Listo</Button>
-            
-        </div>
-        
-    </>
+            <Modal open={open} disableScrollLock={false} onClose={handleClose} >{/* modal con Examenes de sangre*/}
+                <div className='modalDiv basicBorders'>
+                    aqui van los datos del usuario
+                    <Grid container direction="column" alignItems="center" justifyContent="center" style={{"backgroundColor":"white", "padding":"5%"}}>
+                        <Grid item xs= {3}>
+                            <Button variant='contained' onClick={handleClose}>Limpiar Seleccion</Button>
+                            <Button variant='contained' onClick={handleClose}>Aceptar</Button>    
+                        </Grid>
+                    </Grid>
+                </div>
+            </Modal>
+        </>
+    }
 }
+
+/* <div className='centrate'>
+<Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
+    const allData = createDataObject()
+    dispatch(addUserData(allData))
+    postPerson(allData)
+    console.log('datos del objeto enviado: ', allData)
+}}>Listo</Button>
+
+</div> */
