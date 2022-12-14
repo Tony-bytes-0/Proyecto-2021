@@ -1,5 +1,6 @@
 .centrate{text-align: center; justify-content: center; align-items: center; display: felx;}
 .basicBorders{padding:10px;margin: 10px;}
+.topped{top: 0%; justify-content: start;}
 
 .verticalFlex{display: flex;flex-direction: column;}
 .horizontalFlex{display: flex;flex-direction:row;flex-wrap: wrap;}
@@ -12,7 +13,9 @@
 .tittle{font-size: large;}
 
 .modalDiv{overflow-y: scroll; overflow-x: hidden; height:500px}
-
+.modalCentratedSmall{height: 40%; padding: 5%;
+    margin-left:10%; margin-right: 10%; margin-top: 10%;
+    background-color: white;}
 
 .azul-Oscuro{background-color: rgb(53, 127, 212);}
 .smallMargin{margin-top: 1em; margin-bottom: 1em; padding: 2px; }
@@ -21,11 +24,8 @@
 /*reciclarn't*/
 .STATUSBAR{background-color: rgb(53, 127, 212);display: flex;padding: 10px;margin: 0%;
     border-color:rgb(43, 44, 129); border-style: solid; border-width: 2px; border-bottom-width: 1.4px;}
-.SIDEBAR{border-color:rgb(104, 52, 153); border-style: solid; 
+.SIDEBAR{border-color:rgb(80, 71, 88); border-style: solid; 
     border-width: 2px; border-top-width: 0.5px; height: 100%; opacity: 90%;}
-.modalScreen{background-color: blueviolet; position: absolute; height: auto; width: auto; top: 10%;}
-.symtomsContainer{display: flex; height: 8vh;}
-.invisible{opacity: 0%;}
 /*reciclarn't*/
 
 

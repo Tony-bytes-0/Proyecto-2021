@@ -1,5 +1,6 @@
 //React
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 //MUI Components
 import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar, Button  } from "@mui/material"
@@ -16,7 +17,7 @@ import blueLobster from '../Independientes/blue-Lobster.jpg'
 
 
 export default function UserData(props){//MAIN
-
+    const navigate = useNavigate
     const dispatch = useDispatch()
 
     //Estado de variables de datos
@@ -54,6 +55,11 @@ export default function UserData(props){//MAIN
     const [sector, setSector] = useState('')
     const handleSector = (event) => { setSector(event.target.value) }//SECTOR
 
+    function clearInputs(){
+        setName('');setLastName('');setDni('');setGender('');setCellphone('');setEmergency('');
+        setBirthdate('');setBloodType('');setMunicipio('');setParroquia('');setSector('');
+    }
+
     function createDataObject (){
         const unusedData = cellphone + emergency + municipio + parroquia;console.log('datos que aun no uso ', unusedData);
         return {
@@ -74,7 +80,8 @@ export default function UserData(props){//MAIN
     function postPerson(object){
         axios.post('http://localhost:300/person', object)
         .then((response) =>{
-            console.log('respuesta exitosa!')
+            alert('usuario creado con exito');
+            clearInputs()
         })
         .catch((response) => {
             console.log('se supone que paso algo malo al tratar de hacer post', response)
@@ -82,7 +89,6 @@ export default function UserData(props){//MAIN
     }
 
     function RenderedButton(props){
-        console.log(props)
         if(props.togglePost){
         return<><div className='centrate'>
         <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
