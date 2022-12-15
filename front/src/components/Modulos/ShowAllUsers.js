@@ -4,19 +4,65 @@ import { useState } from "react";
 import { Grid, Button,Table,TableBody,TableCell, TableContainer, TableHead, TableRow, Paper, Modal, ButtonGroup } from "@mui/material";
 //Axios
 import axios from "axios"
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { updateUsers } from "../../indexModles/features/userData/userList";
+
+
+
+
+//tengo que cerrar las modeles al eliminar un archivo!!!!!!!!!!!!!!!!!
+
+
+
 
 const emptyObject = {id:"",  identificacion:"", nombre:"", apellido:"", sexo:""}//estado inicial del estado del usuario seleccionado
 
-function BasicTable(props) {
-  const [modalState, setModal] = useState(false)
-  function openModal(rowId){//al abrir la modal, se llenan los datos del usuario seleccionado: "selected"
-    setModal(true); setSelected(props.rows[rowId-1])//aqui selecciono el usuario en base a su posicion en lista de props
-  } 
-  const closeModal = () => {setModal(false)}
 
-  const [selected, setSelected] = useState(emptyObject)
+function BasicTable(props) { const [selected, setSelected] = useState(emptyObject)
+
+  const [modalState, setModal] = useState(false)
+    function openModal(rowId){//al abrir la modal, se llenan los datos del usuario seleccionado: "selected"
+        setModal(true); 
+        //buscar en la lista de objetos, por ID
+        const found = userList.find( x =>  x.id === rowId)
+        if (found){ setSelected(found) }
+        else{ console.log('ocurrio algun error al buscar el id: ', rowId) }
+    } 
+  const closeModal = () => {setModal(false)}
+    //Modal de confirmacion
+    const [confirm, setConfirm] = useState(false)
+    const openConfirm = () => {setConfirm(true)}
+    const closeConfirm = () => {setConfirm(false)}
+
+    //Redux
+    const dispatch = useDispatch()
+    const userList = useSelector(state => state.userList)
+
+    async function getUsers() {
+        axios.get('http://localhost:300/person')
+            .then(response => {
+                dispatch(updateUsers(response.data));
+            })
+            .catch(e => {
+                return e;
+            });
+    }
+
+    function deleteUser(id){
+        axios.delete('http://localhost:300/person/' + id)
+            .then(response => {
+                console.log('se ha borrado con exito el usuario: ', response)
+            })
+            .catch(e => {
+                console.log('ocurrio algun tipo de error')
+            })
+            getUsers()
+            console.log('asjdhlaskjd')
+    }
 
   return <>
+
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -31,7 +77,7 @@ function BasicTable(props) {
         </TableHead>
 
         <TableBody>
-          {props.rows.map((row) => (
+          {userList.map((row) => (
             <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">{row.id}</TableCell>
               <TableCell align="right">{row.nombre}</TableCell>
@@ -45,6 +91,7 @@ function BasicTable(props) {
       </Table>
     </TableContainer>
 
+    {/* Modal de Vista de datos del usuario*/}
     <Modal open={modalState} disableScrollLock={false} onClose={closeModal}>
       <Grid container direction="column" alignItems="center" justifyContent="center">
         <div className='modalCentratedSmall'>
@@ -54,44 +101,55 @@ function BasicTable(props) {
             <Grid item xs={12} className='centrate'> Nombre: {selected.nombre} </Grid>
             <Grid item xs={12} className='centrate'>Apellido: {selected.apellido}</Grid>
             <Grid item xs={12} className='centrate'>Cedula: {selected.identificacion}</Grid>
-            <Grid item xs={12} className='centrate'>Genero:  {selected.sexo} </Grid>
-            
+            <Grid item xs={12} className='centrate'>Genero:  {selected.sexo} </Grid>  
 
             <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons" className="basicBorders">
             <Button variant="contained" onClick={closeModal} className='basicBorders'>Volver</Button>
-            <Button variant="contained" onClick={closeModal}>Eliminar Usuario</Button>
+            <Button variant="contained" onClick={openConfirm}>Eliminar Usuario</Button>
             </ButtonGroup>
 
         </div>
       </Grid>
     </Modal>
+    {/* modal de confirmacion */}
+    <Modal open={confirm} onClose={closeConfirm}>
+        <Grid container direction="column" alignItems="center" justifyContent="center">
+            <div className='modalCentratedSmall'>Borrar este Usuario?</div>
+
+            <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons" className="basicBorders">
+            <Button variant="contained" onClick={closeConfirm} className='basicBorders'>Volver</Button>
+            <Button variant="contained" onClick={() => {deleteUser(selected.id)}}>Confirmar</Button>
+            </ButtonGroup>
+        </Grid>
+    </Modal>
     </>
 }
 export default function FilterUsers(props){//Main
-  const [usersArray, setUsers] = useState([])
-  const getUsers = () =>{
-    axios.get('http://localhost:300/person')
-    .then(response => {
-      setUsers(response.data)
-      console.log(response.data)
-    })
-    .catch(e => {
-      alert('ocurrio algun error al intentar buscar usuarios')
-    })
-  }
+  //const [personState, setUsers] = useState([])
+    const dispatch = useDispatch()
+
+    async function getUsers() {
+        axios.get('http://localhost:300/person')
+            .then(response => {
+                dispatch(updateUsers(response.data));
+            })
+            .catch(e => {
+                return e;
+            });
+    }
 
     return<>
         <Grid container style={{"padding":"2%"}}>
           <Grid item xs = {12}><div className="centrate separator basicBorders tittle"><h4><b>Buscar Usuarios</b></h4></div> </Grid>
           
             <Grid item xs={12} >
-                <div className="centrate" style={{"position":"relative","top":"10%"}}>
-                    <Button variant='contained' fullWidth onClick={getUsers}>Mostrar todos los usuarios</Button>
+                <div className="centrate" style={{"position":"relative","top":"10%"}} >
+                    <Button variant='contained' fullWidth onClick={() => {getUsers()}}>Mostrar todos los usuarios</Button>
                 </div>    
             </Grid>
 
             <Grid item xs={12}>
-                <BasicTable rows = {usersArray} />
+                <BasicTable />
             </Grid>
         </Grid>
     </>

@@ -15,6 +15,9 @@ import radiographyList from './features/radiography/radiographyList'
 //Datos del usuario - entidad person
 import userData from './features/userData/userData'
 
+//Datos retornados por Get a person
+import userList from './features/userData/userList'
+
 export default configureStore({
   reducer: {
     activeSymptoms, symptomList,
@@ -22,6 +25,6 @@ export default configureStore({
     activeLabTests, labTestList,
     activeRadiography, radiographyList,
     
-    userData
+    userData, userList
   }
 })

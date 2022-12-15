@@ -1,6 +1,5 @@
 //React
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 //MUI Components
 import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar, Button  } from "@mui/material"
@@ -17,7 +16,6 @@ import blueLobster from '../Independientes/blue-Lobster.jpg'
 
 
 export default function UserData(props){//MAIN
-    const navigate = useNavigate
     const dispatch = useDispatch()
 
     //Estado de variables de datos
@@ -56,7 +54,9 @@ export default function UserData(props){//MAIN
     const handleSector = (event) => { setSector(event.target.value) }//SECTOR
 
     function clearInputs(){
-        setName('');setLastName('');setDni('');setGender('');setCellphone('');setEmergency('');
+        ['dni','name','lastName','cellphone','emergency'].map ((e) => {
+            return document.getElementById(e).value = ''
+        })
         setBirthdate('');setBloodType('');setMunicipio('');setParroquia('');setSector('');
     }
 
@@ -118,9 +118,9 @@ export default function UserData(props){//MAIN
             
             <Grid container sx={{"padding":"2%"}} spacing={1}>
                 <Grid item xs={12} >{/*esto es un row basicamente*/}
-                    <TextField sx={smallWidth} label="Cedula" variant="filled" type={'number'} onChange={handleDni}/>
-                    <TextField sx={smallWidth} label="Nombre" variant="filled" onChange={handleName}/>
-                    <TextField sx={smallWidth} label="Apellido" variant="filled" onChange={handleLastName} />
+                    <TextField sx={smallWidth} label="Cedula" variant="filled" type={'number'} id='dni' onChange={handleDni}  />
+                    <TextField sx={smallWidth} label="Nombre" variant="filled" id= 'name' onChange={handleName} />
+                    <TextField sx={smallWidth} label="Apellido" variant="filled" id = 'lastName' onChange={handleLastName}  />
 
                     <FormControl sx = {smallWidth}>
                         <InputLabel>Genero</InputLabel>
@@ -133,9 +133,9 @@ export default function UserData(props){//MAIN
                 
 
                 <Grid item xs = {12}>
-                    <TextField label="Telefono" sx={smallWidth} variant="filled" type={'number'} onChange={handleCellphone}/>
-                    <TextField label="Telefono de Emergencia" sx={smallWidth} variant="filled" onChange={handleEmergency} type={'number'}/>
-                    <TextField label="Nacimiento" id="date"  type="date" defaultValue="2000-01-01" InputLabelProps={{shrink: true}} variant="filled" onChange={handleBirthdate} />
+                    <TextField label="Telefono" sx={smallWidth} variant="filled" type={'number'} id='cellphone' onChange={handleCellphone}  />
+                    <TextField label="Telefono de Emergencia" sx={smallWidth} variant="filled" id='emergency' onChange={handleEmergency} type={'number'}/>
+                    <TextField label="Nacimiento" type="date" defaultValue="2000-01-01" InputLabelProps={{shrink: true}} variant="filled" onChange={handleBirthdate} />
                     <FormControl sx = {smallWidth}>
                         <InputLabel>Tipo de Sangre</InputLabel>
                         <Select variant="filled" id="BloodType" label="Genero" value={bloodType} onChange={handleBloodType}>
@@ -187,6 +187,7 @@ export default function UserData(props){//MAIN
             </Grid>
 
             {<RenderedButton togglePost = {props.togglePost} />/*este es el boton de listo que envia los datos*/}
+            <div className='centrate'><Button variant={'contained'} onClick={clearInputs}>Limpiar Datos</Button></div>
             {/*al llamar UserData desde Crear usuario, me permite hacer un POST, del resto me permite encapsular los datos unicamente*/}
 
         </>
