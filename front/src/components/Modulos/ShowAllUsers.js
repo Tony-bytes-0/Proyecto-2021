@@ -1,5 +1,6 @@
 //React
 import { useState } from "react";
+import ClipLoader from 'react-spinners/ClipLoader';
 //Mui
 import { Grid, Button,Table,TableBody,TableCell, TableContainer, TableHead, TableRow, Paper, Modal, ButtonGroup } from "@mui/material";
 //Axios
@@ -35,11 +36,18 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
     const openConfirm = () => {setConfirm(true)}
     const closeConfirm = () => {setConfirm(false)}
 
+    function normalize(){//al finalizar, vuelve al estado inicial
+      const doGet = () => {getUsers();console.log('estoy en doGet')}//vuelve a consultar
+      doGet()
+      setConfirm(false)
+      setModal(false)
+    }
+
     //Redux
     const dispatch = useDispatch()
     const userList = useSelector(state => state.userList)
 
-    async function getUsers() {
+    async function getUsers() {//Get de usuarios y actualizar Store de Redux
         axios.get('http://localhost:300/person')
             .then(response => {
                 dispatch(updateUsers(response.data));
@@ -57,13 +65,15 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
             .catch(e => {
                 console.log('ocurrio algun tipo de error')
             })
-            getUsers()
-            console.log('asjdhlaskjd')
+            normalize()//cierra modales, reinicia la interfaz
     }
+
+    //Spinner
+    //const [loadingTable, setLoading] = useState(false);
 
   return <>
 
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} >
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>{/* aqui defino la cantidad de filas! */}
@@ -77,6 +87,7 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
         </TableHead>
 
         <TableBody>
+
           {userList.map((row) => (
             <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">{row.id}</TableCell>
@@ -124,16 +135,39 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
     </Modal>
     </>
 }
+
+function StaticTableData (){
+  <TableContainer component={Paper} >
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>{/* aqui defino la cantidad de filas! */}
+            <TableCell><b>ID</b></TableCell>
+            <TableCell align="right"><b>Nombre</b></TableCell>
+            <TableCell align="right"><b>Apellido</b></TableCell>
+            <TableCell align="right"><b>Cedula</b></TableCell>
+            <TableCell align="right"><b>Genero</b></TableCell>
+            <TableCell align="right"><b></b></TableCell>
+          </TableRow>
+        </TableHead>
+        </Table>
+        </TableContainer>
+}
+
+
+
 export default function FilterUsers(props){//Main
-  //const [personState, setUsers] = useState([])
+  const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
 
     async function getUsers() {
+        setLoading(true)
         axios.get('http://localhost:300/person')
             .then(response => {
                 dispatch(updateUsers(response.data));
+                setLoading(false)
             })
             .catch(e => {
+                setLoading(false)
                 return e;
             });
     }
@@ -148,9 +182,17 @@ export default function FilterUsers(props){//Main
                 </div>    
             </Grid>
 
-            <Grid item xs={12}>
+            
+            {loading ? (
+              <div className="spinnerContainer">
+                <ClipLoader color={'#52C5BC'} size={500} />
+                <StaticTableData />
+              </div>
+              ) : (
                 <BasicTable />
-            </Grid>
+              )
+            }
+            
         </Grid>
     </>
 }

@@ -57,7 +57,7 @@ export default function UserData(props){//MAIN
         ['dni','name','lastName','cellphone','emergency'].map ((e) => {
             return document.getElementById(e).value = ''
         })
-        setBirthdate('');setBloodType('');setMunicipio('');setParroquia('');setSector('');
+        setBirthdate('');setBloodType('');setMunicipio('');setParroquia('');setSector('');setGender('')
     }
 
     function createDataObject (){
@@ -78,32 +78,40 @@ export default function UserData(props){//MAIN
     }
 
     function postPerson(object){
-        axios.post('http://localhost:300/person', object)
+        const check = Object.values(object).map((e) => {//validacion de campos vacios
+            if(e === undefined || e === ''){return false}
+            else{return true} })
+
+        if(check.includes(true)){//si todos los campos contienen datos:
+
+            axios.post('http://localhost:300/person', object)
         .then((response) =>{
             alert('usuario creado con exito');
             clearInputs()
         })
         .catch((response) => {
-            console.log('se supone que paso algo malo al tratar de hacer post', response)
+            alert('ocurrio un error, recargue la paguina :(')
         })
+        console.log('postPerson end')
+        }
+        
     }
 
     function RenderedButton(props){
-        if(props.togglePost){
+        if(props.togglePost){//boton que post
         return<><div className='centrate'>
         <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
             const allData = createDataObject()
-            dispatch(addUserData(allData))
+            //dispatch(addUserData(allData)) no se si te necesito por ahora xd
             postPerson(allData)
         }}>Crear Usuario</Button>
         </div></>
         }
-        else{
+        else{//boton que guarda en state
         return<><div className='centrate'>
             <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
             const allData = createDataObject()
             dispatch(addUserData(allData))
-            postPerson(allData)
         }}>Listo</Button>
         </div></>
         }

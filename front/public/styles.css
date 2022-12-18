@@ -28,4 +28,13 @@
     border-width: 2px; border-top-width: 0.5px; height: 100%; opacity: 90%;}
 /*reciclarn't*/
 
+.spinnerContainer{
+    position: absolute;
+    margin: auto;
+    height: 80%;
+    width: 120%;
+    top: 40%;
+    left: 40%;
+}
+
 
