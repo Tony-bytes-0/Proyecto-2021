@@ -37,25 +37,19 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
     const closeConfirm = () => {setConfirm(false)}
 
     function normalize(){//al finalizar, vuelve al estado inicial
-      const doGet = () => {getUsers();console.log('estoy en doGet')}//vuelve a consultar
-      doGet()
+      setLoading(true)
+      //document.getElementById('getUsersBtn').click() //boton feo
+      console.log('Dentro del normalize')
+      // axios.get('http://localhost:300/person')
+      //   .then(response => { dispatch(updateUsers(response.data)); })
+      //   .catch(e => { return e });
       setConfirm(false)
       setModal(false)
+      setLoading(false)
     }
 
     //Redux
-    const dispatch = useDispatch()
     const userList = useSelector(state => state.userList)
-
-    async function getUsers() {//Get de usuarios y actualizar Store de Redux
-        axios.get('http://localhost:300/person')
-            .then(response => {
-                dispatch(updateUsers(response.data));
-            })
-            .catch(e => {
-                return e;
-            });
-    }
 
     function deleteUser(id){
         axios.delete('http://localhost:300/person/' + id)
@@ -65,13 +59,21 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
             .catch(e => {
                 console.log('ocurrio algun tipo de error')
             })
-            normalize()//cierra modales, reinicia la interfaz
+        console.log('antes del normalize')    
+        normalize()//cierra modales, reinicia la interfaz
+            
     }
 
     //Spinner
-    //const [loadingTable, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
   return <>
+    {loading ? (
+      <div className="spinnerContainer">
+        <ClipLoader color={'#52C5BC'} size={500} />
+        <StaticTableData />
+      </div>
+    ) : (<Grid container><Grid item xs={12}><div className="centrate">Pantalla de carga</div></Grid></Grid>) }
 
     <TableContainer component={Paper} >
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -174,11 +176,11 @@ export default function FilterUsers(props){//Main
 
     return<>
         <Grid container style={{"padding":"2%"}}>
-          <Grid item xs = {12}><div className="centrate separator basicBorders tittle"><h4><b>Buscar Usuarios</b></h4></div> </Grid>
+          <Grid item xs = {12} ><div className="centrate separator basicBorders tittle"><h4><b>Buscar Usuarios</b></h4></div> </Grid>
           
             <Grid item xs={12} >
                 <div className="centrate" style={{"position":"relative","top":"10%"}} >
-                    <Button variant='contained' fullWidth onClick={() => {getUsers()}}>Mostrar todos los usuarios</Button>
+                <Button id='getUsersBtn' variant='contained' fullWidth onClick={() => {getUsers()}}>Mostrar todos los usuarios</Button>
                 </div>    
             </Grid>
 
