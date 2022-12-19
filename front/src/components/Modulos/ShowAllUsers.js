@@ -21,7 +21,7 @@ const emptyObject = {id:"",  identificacion:"", nombre:"", apellido:"", sexo:""}
 
 
 function BasicTable(props) { const [selected, setSelected] = useState(emptyObject)
-
+  //WEAS DE LA MODAL
   const [modalState, setModal] = useState(false)
     function openModal(rowId){//al abrir la modal, se llenan los datos del usuario seleccionado: "selected"
         setModal(true); 
@@ -37,25 +37,15 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
     const closeConfirm = () => {setConfirm(false)}
 
     function normalize(){//al finalizar, vuelve al estado inicial
-      const doGet = () => {getUsers();console.log('estoy en doGet')}//vuelve a consultar
-      doGet()
+      console.log('estoy en normalize')
+      document.getElementById('getBtn').click()
       setConfirm(false)
       setModal(false)
     }
 
-    //Redux
-    const dispatch = useDispatch()
+    //CRUD
     const userList = useSelector(state => state.userList)
 
-    async function getUsers() {//Get de usuarios y actualizar Store de Redux
-        axios.get('http://localhost:300/person')
-            .then(response => {
-                dispatch(updateUsers(response.data));
-            })
-            .catch(e => {
-                return e;
-            });
-    }
 
     function deleteUser(id){
         axios.delete('http://localhost:300/person/' + id)
@@ -65,11 +55,13 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
             .catch(e => {
                 console.log('ocurrio algun tipo de error')
             })
-            normalize()//cierra modales, reinicia la interfaz
+            .finally(() => {
+                console.log('finally!')
+                normalize()
+            })
+            
     }
 
-    //Spinner
-    //const [loadingTable, setLoading] = useState(false);
 
   return <>
 
@@ -178,7 +170,7 @@ export default function FilterUsers(props){//Main
           
             <Grid item xs={12} >
                 <div className="centrate" style={{"position":"relative","top":"10%"}} >
-                    <Button variant='contained' fullWidth onClick={() => {getUsers()}}>Mostrar todos los usuarios</Button>
+                    <Button id='getBtn' variant='contained' fullWidth onClick={() => {getUsers()}}>Mostrar todos los usuarios</Button>
                 </div>    
             </Grid>
 

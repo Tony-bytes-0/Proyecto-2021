@@ -2,7 +2,7 @@
 import { useState } from 'react'
 
 //MUI Components
-import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar, Button  } from "@mui/material"
+import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar, Button, Modal  } from "@mui/material"
 
 //Redux
 import { useDispatch} from 'react-redux'
@@ -13,6 +13,7 @@ import axios from "axios"
 
 //Modulos
 import blueLobster from '../Independientes/blue-Lobster.jpg'
+import { oc } from '../Independientes/staticValuesList'//objeto con personas estatico
 
 
 export default function UserData(props){//MAIN
@@ -78,6 +79,7 @@ export default function UserData(props){//MAIN
     }
 
     function postPerson(object){
+        
         const check = Object.values(object).map((e) => {//validacion de campos vacios
             if(e === undefined || e === ''){return false}
             else{return true} })
@@ -115,8 +117,11 @@ export default function UserData(props){//MAIN
         }}>Listo</Button>
         </div></>
         }
-        
     }
+    //Static Values
+    const [modal, setModal] = useState(false)
+    const handleOpen = () => {setModal(true)}
+    const handleClose = () => {setModal(false)}    
     const smallWidth = { width: '25%', maxWidth: '25%' }
     return<>
         <div className="flexible centrate verticalFlex" >
@@ -196,7 +201,21 @@ export default function UserData(props){//MAIN
 
             {<RenderedButton togglePost = {props.togglePost} />/*este es el boton de listo que envia los datos*/}
             <div className='centrate'><Button variant={'contained'} onClick={clearInputs}>Limpiar Datos</Button></div>
+            <div className='centrate'><Button variant={'contained'} onClick={ handleOpen } >Insertar Datos estaticos</Button></div>
             {/*al llamar UserData desde Crear usuario, me permite hacer un POST, del resto me permite encapsular los datos unicamente*/}
+            <Modal open={modal} onClose={handleClose}>
+                <div className='centrate verticalFlex modalStaticValues'>
+                    <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.irumi)} }>Insertar Irumi!</Button>
+                    <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.monica)} }>Insertar Monica!</Button>
+                    <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.poison)} }>Insertar Poison!</Button>
+                    <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.tomate)} }>Insertar Tomate!</Button>
+                    <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.omega)} }>Insertar Omega!</Button>
+                    <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.karen)} }>Insertar Karen!</Button>
+                    <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.rebecca)} }>Insertar Rebecca!</Button>
+
+                    <Button variant='contained' className='basicBorders' style={{"margin":"40px"}} onClick={handleClose}>Cerrar modal alv</Button>
+                </div>
+            </Modal>
 
         </>
 }

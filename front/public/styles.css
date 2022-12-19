@@ -16,6 +16,11 @@
 .modalCentratedSmall{height: 40%; padding: 5%;
     margin-left:10%; margin-right: 10%; margin-top: 10%;
     background-color: white;}
+.modalStaticValues{
+    height: 60%; padding: 5%;
+    margin-left:10%; margin-right: 10%; margin-top: 10%;
+    background-color: white;
+}
 
 .azul-Oscuro{background-color: rgb(53, 127, 212);}
 .smallMargin{margin-top: 1em; margin-bottom: 1em; padding: 2px; }
