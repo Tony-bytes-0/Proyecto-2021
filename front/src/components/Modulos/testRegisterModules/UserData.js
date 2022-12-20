@@ -18,50 +18,32 @@ import { oc } from '../Independientes/staticValuesList'//objeto con personas est
 
 export default function UserData(props){//MAIN
     const dispatch = useDispatch()
-
     //Estado de variables de datos
-    const [dni, setDni] = useState('')
-    const handleDni = (event) => { setDni(event.target.value) }//DNI
+    const [dni, setDni] = useState(''); const handleDni = (event) => { setDni(event.target.value) }//DNI
+    const [name, setName] = useState(''); const handleName = (event) => { setName(event.target.value)}//NAME
+    const [lastName, setLastName] = useState(''); const handleLastName = (event) => {setLastName(event.target.value)}//LASTNAME   
+    const [gender, setGender] = useState(''); const handleGender = (event) => { setGender(event.target.value) }//GENDER   
+    const [cellphone, setCellphone] = useState(''); const handleCellphone = (event) => {setCellphone(event.target.value)}//CELLPHONE
+    const [emergency, setEmergency] = useState(''); const handleEmergency = (event) => {setEmergency(event.target.value)}//EMERGENCY
+    const [birthdate, setBirthdate] = useState(''); const handleBirthdate = (event) => {setBirthdate(event.target.value)}//BIRTHDATE
+    const [bloodType, setBloodType] = useState(''); const handleBloodType = (event) => { setBloodType(event.target.value) }//BLOODTYPE
+    const [municipio, setMunicipio] = useState(''); const handleMunicipio = (event) => { setMunicipio(event.target.value) }//MUNICIPIO
+    const [parroquia, setParroquia] = useState(''); const handleParroquia = (event) => { setParroquia(event.target.value) }//PARROQUIA
+    const [sector, setSector] = useState(''); const handleSector = (event) => { setSector(event.target.value) }//SECTOR
 
-    const [name, setName] = useState('')
-    const handleName = (event) => { setName(event.target.value)}//NAME
 
-    const [lastName, setLastName] = useState('')
-    const handleLastName = (event) => {setLastName(event.target.value)}//LASTNAME
-        
-    const [gender, setGender] = useState('')
-    const handleGender = (event) => { setGender(event.target.value) }//GENDER
-    
-    const [cellphone, setCellphone] = useState('')
-    const handleCellphone = (event) => {setCellphone(event.target.value)}//CELLPHONE
-
-    const [emergency, setEmergency] = useState('')
-    const handleEmergency = (event) => {setEmergency(event.target.value)}//EMERGENCY
-
-    const [birthdate, setBirthdate] = useState('')
-    const handleBirthdate = (event) => {setBirthdate(event.target.value)}//BIRTHDATE
-
-    const [bloodType, setBloodType] = useState('')
-    const handleBloodType = (event) => { setBloodType(event.target.value) }//BLOODTYPE
-
-    //direccion
-    const [municipio, setMunicipio] = useState('')
-    const handleMunicipio = (event) => { setMunicipio(event.target.value) }//MUNICIPIO
-    
-    const [parroquia, setParroquia] = useState('')
-    const handleParroquia = (event) => { setParroquia(event.target.value) }//PARROQUIA
-    
-    const [sector, setSector] = useState('')
-    const handleSector = (event) => { setSector(event.target.value) }//SECTOR
-
-    function clearInputs(){
-        ['dni','name','lastName','cellphone','emergency'].map ((e) => {
-            return document.getElementById(e).value = ''
-        })
-        setBirthdate('');setBloodType('');setMunicipio('');setParroquia('');setSector('');setGender('')
+    const [welcome, setWelcome] = useState(true)//para hacer acciones solamente al cargar la pagina :)
+    if(welcome){//esto trigerea al abrir la modal de edicion
+        setWelcome(false)
+        setUpdateValues()
     }
 
-    function createDataObject (){
+    function clearInputs(){
+        setName('');setDni('');setLastName('');setGender('');setCellphone('');setEmergency('');
+        setBloodType('');setMunicipio('');setParroquia('');setSector('');setBirthdate('2000-01-01');
+    }
+
+    function createDataObject (){//extends
         const unusedData = cellphone + emergency + municipio + parroquia;console.log('datos que aun no uso ', unusedData);
         return {
             nombre:name,
@@ -77,14 +59,14 @@ export default function UserData(props){//MAIN
             // "parroquia":parroquia,
         }
     }
-
-    function postPerson(object){
+    //Post
+    function postPerson(object){//extends
         
         const check = Object.values(object).map((e) => {//validacion de campos vacios
             if(e === undefined || e === ''){return false}
             else{return true} })
 
-        if(check.includes(true)){//si todos los campos contienen datos:
+        if(check.includes(true)){//si alguno de los campos contienen datos:
 
             axios.post('http://localhost:300/person', object)
         .then((response) =>{
@@ -98,6 +80,11 @@ export default function UserData(props){//MAIN
         }
         
     }
+    //Update
+    function setUpdateValues(){//extends
+        setDni(props.target.identificacion);setName(props.target.nombre);setLastName(props.target.apellido);setGender(props.target.sexo);
+        //setSector(props.target.direccion);
+    }    
 
     function RenderedButton(){
         if(props.togglePost){//boton que post
@@ -108,11 +95,14 @@ export default function UserData(props){//MAIN
         }}>Crear Usuario</Button>
         </div></>
         }
+
         else if(props.toggleUpdate){
             return <><div className='centrate'>
             <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
-        }}>actualizar</Button>
+                console.log(props.target)
+            }}>Actualizar</Button>
         </div></>}
+        
         else{//boton que guarda en state
         return<><div className='centrate'>
             <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
@@ -123,17 +113,12 @@ export default function UserData(props){//MAIN
         </div></>
         }
     }
-    //Update
-    function setUpdateValues(){
-        document.getElementById('name').click()
-        document.getElementById('name').value = (props.target.nombre)
-        document.getElementById('name').click()
-    }
-    //Static Values
+
+    //Dev
     const [modal, setModal] = useState(false)
     const handleOpen = () => {setModal(true)}
     const handleClose = () => {setModal(false)}    
-    const smallWidth = { width: '25%', maxWidth: '25%' }
+    const sm = { width: '25%', maxWidth: '25%' }
     return<>
         <div className="flexible centrate verticalFlex" >
                 <InputLabel><h5><b>Ingresar Foto de Perfil</b></h5></InputLabel>
@@ -142,27 +127,27 @@ export default function UserData(props){//MAIN
             
             <Grid container sx={{"padding":"2%"}} spacing={1}>
                 <Grid item xs={12} >{/*esto es un row basicamente*/}
-                    <TextField sx={smallWidth} label="Cedula" variant="filled" type={'number'} id='dni' onChange={handleDni}  />
-                    <TextField sx={smallWidth} label="Nombre" variant="filled" id= 'name' onChange={handleName} />
-                    <TextField sx={smallWidth} label="Apellido" variant="filled" id = 'lastName' onChange={handleLastName}  />
+                    <TextField sx={sm} label="Cedula" variant="filled" type= {'number'} value={dni} onChange = {handleDni}  />
+                    <TextField sx={sm} label="Nombre" variant="filled" value = {name} onChange = {handleName} />
+                    <TextField sx={sm} label="Apellido" variant="filled" value = {lastName} onChange = {handleLastName}  />
 
-                    <FormControl sx = {smallWidth}>
+                    <FormControl sx = {sm}>
                         <InputLabel>Genero</InputLabel>
                         <Select label="Genero" variant="filled" value = {gender} onChange={handleGender}>
-                            <MenuItem value={'Masculino'}>Masculino</MenuItem>
-                            <MenuItem value={'Femenino'}>Femenino</MenuItem>
+                            <MenuItem value={'masculino'}>Masculino</MenuItem>
+                            <MenuItem value={'femenino'}>Femenino</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>  
                 
 
                 <Grid item xs = {12}>
-                    <TextField label="Telefono" sx={smallWidth} variant="filled" type={'number'} id='cellphone' onChange={handleCellphone}  />
-                    <TextField label="Telefono de Emergencia" sx={smallWidth} variant="filled" id='emergency' onChange={handleEmergency} type={'number'}/>
-                    <TextField label="Nacimiento" type="date" defaultValue="2000-01-01" InputLabelProps={{shrink: true}} variant="filled" onChange={handleBirthdate} />
-                    <FormControl sx = {smallWidth}>
+                    <TextField label="Telefono" sx={sm} variant="filled" type={'number'} value = {cellphone}  onChange={handleCellphone}  />
+                    <TextField label="Telefono de Emergencia" sx={sm} variant="filled" type={'number'} value = {emergency} onChange={handleEmergency} />
+                    <TextField label="Nacimiento" type="date" value={birthdate} InputLabelProps={{shrink: true}} variant="filled" onChange={handleBirthdate} />
+                    <FormControl sx = {sm}>
                         <InputLabel>Tipo de Sangre</InputLabel>
-                        <Select variant="filled" id="BloodType" label="Genero" value={bloodType} onChange={handleBloodType}>
+                        <Select label="Tipo de Sangre" variant="filled" id="BloodType" value={bloodType} onChange={handleBloodType}>
                             <MenuItem value={'A+'} >A +</MenuItem> <MenuItem value={'A-'}>A -</MenuItem>
                             <MenuItem value={'B+'}>B +</MenuItem> <MenuItem value={'B-'}>B -</MenuItem>
                             <MenuItem value={'O+'}>O +</MenuItem> <MenuItem value={'O-'}>O -</MenuItem>
@@ -210,11 +195,14 @@ export default function UserData(props){//MAIN
                 </Grid>
             </Grid>
 
-            {<RenderedButton togglePost = {props.togglePost} />/*este es el boton de listo que envia los datos*/}
+            {<RenderedButton togglePost = {props.togglePost} />/*Listo / Crear Usuario / Actualizar */}
+
             <div className='centrate'><Button variant={'contained'} onClick={clearInputs}>Limpiar Datos</Button></div>
-            <div className='centrate'><Button variant={'contained'} onClick={ handleOpen } >Insertar Datos estaticos</Button></div>
-            <div className='centrate'><Button variant={'contained'} onClick={ () => {setUpdateValues()} } >Muestrame tus props</Button></div>
-            {/*al llamar UserData desde Crear usuario, me permite hacer un POST, del resto me permite encapsular los datos unicamente*/}
+
+            {/* dev */}
+                <div className='centrate'><Button variant={'contained'} onClick={ handleOpen } >Insertar Datos estaticos</Button></div>
+            {/* dev */}
+
             <Modal open={modal} onClose={handleClose}>
                 <div className='centrate verticalFlex modalMedium'>
                     <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.irumi)} }>Insertar Irumi!</Button>
