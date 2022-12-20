@@ -64,7 +64,7 @@ export default function ModalTests() {
 
 					{/*AQUI VAN LAS PANTALLAS MODALES, una por cada boton */}
 			<Modal open={open} disableScrollLock={false} onClose={handleClose} >{/* modal con Examenes de sangre*/}
-				<div className='modalDiv basicBorders'>
+				<div className='modalDiv basicBorders h500'>
 					<Hematology />
 					<Grid container direction="column" alignItems="center" justifyContent="center" style={{"backgroundColor":"white", "padding":"5%"}}>
 						<Grid item xs= {3}><Button variant='contained' onClick={handleClose}>Terminar Seleccion</Button></Grid>
@@ -73,7 +73,7 @@ export default function ModalTests() {
 			</Modal>
 
 			<Modal open={openLab} disableScrollLock={false} onClose={handleCloseLab} >{/* modal con Examenes de sangre*/}
-				<div className='modalDiv basicBorders'>
+				<div className='modalDiv basicBorders h500'>
 					<LabTests />
 					<Grid container direction="column" alignItems="center" justifyContent="center" style={{"backgroundColor":"white", "padding":"5%"}}>
 						<Grid item xs= {3}><Button variant='contained' onClick={handleCloseLab}>Terminar Seleccion</Button></Grid>
@@ -82,7 +82,7 @@ export default function ModalTests() {
 			</Modal>
 
 			<Modal open={openRadio} disableScrollLock={false} onClose={handleCloseRadio} >{/* modal con Examenes de sangre*/}
-				<div className='modalDiv basicBorders'>
+				<div className='modalDiv basicBorders h500'>
 					<Radiographys />
 					<Grid container direction="column" alignItems="center" justifyContent="center" style={{"backgroundColor":"white", "padding":"5%"}}>
 						<Grid item xs= {3}><Button variant='contained' onClick={handleCloseRadio}>Terminar Seleccion</Button></Grid>

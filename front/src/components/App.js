@@ -7,7 +7,6 @@ import ShowAllUsers from  './Modulos/ShowAllUsers';
 //React-Router
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
-//import MedicalRecord from './Modulos/MedicalRecord';
 //MUI Components
 import { Grid } from '@mui/material';
 

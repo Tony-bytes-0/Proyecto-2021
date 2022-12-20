@@ -8,11 +8,7 @@ import axios from "axios"
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { updateUsers } from "../../indexModles/features/userData/userList";
-
-
-
-
-//tengo que cerrar las modeles al eliminar un archivo!!!!!!!!!!!!!!!!!
+import UserData from "./testRegisterModules/UserData";
 
 
 
@@ -20,9 +16,9 @@ import { updateUsers } from "../../indexModles/features/userData/userList";
 const emptyObject = {id:"",  identificacion:"", nombre:"", apellido:"", sexo:""}//estado inicial del estado del usuario seleccionado
 
 
-function BasicTable(props) { const [selected, setSelected] = useState(emptyObject)
-  //WEAS DE LA MODAL
-  const [modalState, setModal] = useState(false)
+function BasicTable(props) { const [selected, setSelected] = useState(emptyObject)	
+  	//WEAS DE LA MODAL
+  	const [modalState, setModal] = useState(false)
     function openModal(rowId){//al abrir la modal, se llenan los datos del usuario seleccionado: "selected"
         setModal(true); 
         //buscar en la lista de objetos, por ID
@@ -30,14 +26,17 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
         if (found){ setSelected(found) }
         else{ console.log('ocurrio algun error al buscar el id: ', rowId) }
     } 
-  const closeModal = () => {setModal(false)}
+  	const closeModal = () => {setModal(false)}
     //Modal de confirmacion
     const [confirm, setConfirm] = useState(false)
     const openConfirm = () => {setConfirm(true)}
     const closeConfirm = () => {setConfirm(false)}
 
+	const [update, setUpdate ] = useState(false)
+	const openUpdate = () => {setUpdate(true)}
+	const closeUpdate = () => {setUpdate(false)}
+
     function normalize(){//al finalizar, vuelve al estado inicial
-      console.log('estoy en normalize')
       document.getElementById('getBtn').click()
       setConfirm(false)
       setModal(false)
@@ -107,21 +106,31 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
             <Grid item xs={12} className='centrate'>Genero:  {selected.sexo} </Grid>  
 
             <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons" className="basicBorders">
-            <Button variant="contained" onClick={closeModal} className='basicBorders'>Volver</Button>
-            <Button variant="contained" onClick={openConfirm}>Eliminar Usuario</Button>
+				<Button variant="contained" onClick={closeModal} className='basicBorders'>Volver</Button>
+				<Button variant="contained" onClick={openUpdate}>Editar Datos</Button>
+				<Button variant="contained" onClick={openConfirm}>Eliminar Usuario</Button>
             </ButtonGroup>
 
         </div>
       </Grid>
     </Modal>
-    {/* modal de confirmacion */}
+	{/* Modal para actualizar */}
+	<Modal open={update} onClose={closeUpdate} disableScrollLock={false}>
+		<Grid container direction="column" alignItems="center" justifyContent="center">
+			<div className="updateModal modalDiv modalColor">
+				<UserData toggleUpdate={true} target={selected} />
+				<Button variant='contained' onClick={closeUpdate}>Terminar Edicion</Button>
+			</div>
+		</Grid>
+	</Modal>
+
+    {/* modal de confirmacion para eliminar */}
     <Modal open={confirm} onClose={closeConfirm}>
         <Grid container direction="column" alignItems="center" justifyContent="center">
             <div className='modalCentratedSmall'>Borrar este Usuario?</div>
-
             <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons" className="basicBorders">
-            <Button variant="contained" onClick={closeConfirm} className='basicBorders'>Volver</Button>
-            <Button variant="contained" onClick={() => {deleteUser(selected.id)}}>Confirmar</Button>
+            	<Button variant="contained" onClick={closeConfirm} className='basicBorders'>Volver</Button>
+            	<Button variant="contained" onClick={() => {deleteUser(selected.id)}}>Confirmar</Button>
             </ButtonGroup>
         </Grid>
     </Modal>

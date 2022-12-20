@@ -99,24 +99,35 @@ export default function UserData(props){//MAIN
         
     }
 
-    function RenderedButton(props){
+    function RenderedButton(){
         if(props.togglePost){//boton que post
         return<><div className='centrate'>
         <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
             const allData = createDataObject()
-            //dispatch(addUserData(allData)) no se si te necesito por ahora xd
             postPerson(allData)
         }}>Crear Usuario</Button>
         </div></>
         }
+        else if(props.toggleUpdate){
+            return <><div className='centrate'>
+            <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
+        }}>actualizar</Button>
+        </div></>}
         else{//boton que guarda en state
         return<><div className='centrate'>
             <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
             const allData = createDataObject()
             dispatch(addUserData(allData))
+            console.log(props)
         }}>Listo</Button>
         </div></>
         }
+    }
+    //Update
+    function setUpdateValues(){
+        document.getElementById('name').click()
+        document.getElementById('name').value = (props.target.nombre)
+        document.getElementById('name').click()
     }
     //Static Values
     const [modal, setModal] = useState(false)
@@ -202,9 +213,10 @@ export default function UserData(props){//MAIN
             {<RenderedButton togglePost = {props.togglePost} />/*este es el boton de listo que envia los datos*/}
             <div className='centrate'><Button variant={'contained'} onClick={clearInputs}>Limpiar Datos</Button></div>
             <div className='centrate'><Button variant={'contained'} onClick={ handleOpen } >Insertar Datos estaticos</Button></div>
+            <div className='centrate'><Button variant={'contained'} onClick={ () => {setUpdateValues()} } >Muestrame tus props</Button></div>
             {/*al llamar UserData desde Crear usuario, me permite hacer un POST, del resto me permite encapsular los datos unicamente*/}
             <Modal open={modal} onClose={handleClose}>
-                <div className='centrate verticalFlex modalStaticValues'>
+                <div className='centrate verticalFlex modalMedium'>
                     <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.irumi)} }>Insertar Irumi!</Button>
                     <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.monica)} }>Insertar Monica!</Button>
                     <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.poison)} }>Insertar Poison!</Button>
