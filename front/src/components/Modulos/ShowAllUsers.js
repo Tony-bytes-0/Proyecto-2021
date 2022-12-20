@@ -37,9 +37,9 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
 	const closeUpdate = () => {setUpdate(false)}
 
     function normalize(){//al finalizar, vuelve al estado inicial
-      document.getElementById('getBtn').click()
-      setConfirm(false)
-      setModal(false)
+        document.getElementById('getBtn').click()
+        setConfirm(false)
+        setModal(false)
     }
 
     //CRUD
@@ -54,16 +54,15 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
             .catch(e => {
                 console.log('ocurrio algun tipo de error')
             })
-            .finally(() => {
-                console.log('finally!')
-                normalize()
-            })
+            .finally( () => normalize() )
             
     }
 
 
   return <>
-
+    {/* este boton lo uso para cerrar las modeles y hacer un get a la bd, actuallizando todo */}
+    <Button id='normalize' onClick={() => {normalize()}}></Button>
+    
     <TableContainer component={Paper} >
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -119,7 +118,7 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
 		<Grid container direction="column" alignItems="center" justifyContent="center">
 			<div className="updateModal modalDiv modalColor">
 				<UserData toggleUpdate={true} target={selected} />
-				<Button variant='contained' onClick={closeUpdate}>Terminar Edicion</Button>
+				<div className="centrate"><Button variant='contained' onClick={closeUpdate}>Terminar Edicion</Button></div>
 			</div>
 		</Grid>
 	</Modal>

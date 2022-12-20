@@ -13,7 +13,7 @@ import axios from "axios"
 
 //Modulos
 import blueLobster from '../Independientes/blue-Lobster.jpg'
-import { oc } from '../Independientes/staticValuesList'//objeto con personas estatico
+import { oc, sectorList, parroquiaList, municipioList, bloodList } from '../Independientes/staticValuesList'//objeto con personas estatico
 
 
 export default function UserData(props){//MAIN
@@ -33,7 +33,7 @@ export default function UserData(props){//MAIN
 
 
     const [welcome, setWelcome] = useState(true)//para hacer acciones solamente al cargar la pagina :)
-    if(welcome){//esto trigerea al abrir la modal de edicion
+    if(welcome && props.toggleUpdate){//esto trigerea al abrir la modal de edicion
         setWelcome(false)
         setUpdateValues()
     }
@@ -83,9 +83,23 @@ export default function UserData(props){//MAIN
     //Update
     function setUpdateValues(){//extends
         setDni(props.target.identificacion);setName(props.target.nombre);setLastName(props.target.apellido);setGender(props.target.sexo);
-        //setSector(props.target.direccion);
-    }    
+        setBirthdate(props.target.fecha_de_nacimiento)
+        setSector(props.target.direccion);
+    }
+    function updatePerson(object, id){//extends
+        console.log('este es el objeto parametro y el id', id)
 
+        axios.put('http://localhost:300/person/' + id, object)
+        .then((response) =>{
+            clearInputs()   
+            document.getElementById('normalize').click()
+            alert('Usuario Actualizado con exito');
+        })
+        .catch((response) => {
+            alert('ocurrio un error, recargue la paguina :(')
+        })
+    } 
+    //Renderizado Dinamico
     function RenderedButton(){
         if(props.togglePost){//boton que post
         return<><div className='centrate'>
@@ -99,7 +113,8 @@ export default function UserData(props){//MAIN
         else if(props.toggleUpdate){
             return <><div className='centrate'>
             <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
-                console.log(props.target)
+                const allData = createDataObject()
+                updatePerson(allData, props.target.id)
             }}>Actualizar</Button>
         </div></>}
         
@@ -119,6 +134,15 @@ export default function UserData(props){//MAIN
     const handleOpen = () => {setModal(true)}
     const handleClose = () => {setModal(false)}    
     const sm = { width: '25%', maxWidth: '25%' }
+
+    function RenderDevBtn(){
+        if(props.togglePost){
+            return <div className='centrate'><Button variant={'contained'} onClick={ handleOpen } >Insertar Datos estaticos</Button></div>
+        }
+        
+        else{ return <></>}
+    }
+    
     return<>
         <div className="flexible centrate verticalFlex" >
                 <InputLabel><h5><b>Ingresar Foto de Perfil</b></h5></InputLabel>
@@ -148,24 +172,18 @@ export default function UserData(props){//MAIN
                     <FormControl sx = {sm}>
                         <InputLabel>Tipo de Sangre</InputLabel>
                         <Select label="Tipo de Sangre" variant="filled" id="BloodType" value={bloodType} onChange={handleBloodType}>
-                            <MenuItem value={'A+'} >A +</MenuItem> <MenuItem value={'A-'}>A -</MenuItem>
-                            <MenuItem value={'B+'}>B +</MenuItem> <MenuItem value={'B-'}>B -</MenuItem>
-                            <MenuItem value={'O+'}>O +</MenuItem> <MenuItem value={'O-'}>O -</MenuItem>
-                            <MenuItem value={'AB+'}>AB +</MenuItem> <MenuItem value={'AB-'}>AB -</MenuItem>
+                            {bloodList.map((e) => <MenuItem key={e+'blood'} value={e}>{e}</MenuItem>)}
                         </Select>
                     </FormControl>   
                 </Grid>
 
-        {/* SEPARADOR */}        <Grid item xs = {12}><div className="centrate separator basicBorders tittle"><h4><b>Direccion</b></h4></div> </Grid>                      {/* SEPARADOR */}
+                {/* SEPARADOR */}<Grid item xs = {12}><div className="centrate separator basicBorders tittle"><h4><b>Direccion</b></h4></div> </Grid>{/* SEPARADOR */}
 
                 <Grid item xs = {4}>
                     <FormControl fullWidth>
                         <InputLabel>Municipio</InputLabel>
                         <Select variant="filled" id="BloodType" label="Genero" value={municipio} onChange={handleMunicipio}>
-                            <MenuItem value={'Andrés Eloy Blanco'} >Andrés Eloy Blanco</MenuItem> <MenuItem value={'Andrés Mata'}>Andrés Mata</MenuItem>
-                            <MenuItem value={'Arismendi'}>Arismendi</MenuItem> <MenuItem value={'Benítez'}>Benítez</MenuItem>
-                            <MenuItem value={'Bermúdez'}>Bermúdez</MenuItem> <MenuItem value={'Bolívar'}>Bolívar</MenuItem>
-                            <MenuItem value={'Cajigal'}>Sucre</MenuItem> <MenuItem value={'AB-'}>Cruz Salmerón Acosta</MenuItem>
+                            {municipioList.map((e) => <MenuItem value={e} key={e+'mun'}>{e}</MenuItem> )}
                         </Select>
                     </FormControl>  
                 </Grid>
@@ -174,10 +192,7 @@ export default function UserData(props){//MAIN
                     <FormControl fullWidth>
                         <InputLabel>parroquia</InputLabel>
                         <Select variant="filled" id="BloodType" label="Genero" value={parroquia} onChange={handleParroquia}>
-                            <MenuItem value={'Altagracia'} >Altagracia</MenuItem> <MenuItem value={'Ayacucho'}>Ayacucho</MenuItem>
-                            <MenuItem value={'Santa Ines'}>Santa Ines</MenuItem> <MenuItem value={'Raul Leoni'}>Raul Leoni</MenuItem>
-                            <MenuItem value={'San Juan'}>San Juan</MenuItem> <MenuItem value={'Santa Fe'}>Santa Fe</MenuItem>
-                            <MenuItem value={'Valentin Valiente'}>Valentin Valiente</MenuItem>
+                            {parroquiaList.map((e) => <MenuItem value={e} key={e+'parr'}>{e}</MenuItem> )}
                         </Select>
                     </FormControl>  
                 </Grid>
@@ -186,10 +201,7 @@ export default function UserData(props){//MAIN
                     <FormControl fullWidth >
                         <InputLabel>Sector</InputLabel>
                         <Select variant="filled" id="BloodType" label="Genero" value={sector} onChange={handleSector}>
-                            <MenuItem value={'Los Chaimas'} >Los Chaimas</MenuItem> <MenuItem value={'Cantarrana'}>Cantarrana</MenuItem>
-                            <MenuItem value={'El Peñon'}>El Peñon</MenuItem> <MenuItem value={'El Bosque'}>Perimetral</MenuItem>
-                            <MenuItem value={'Caiguire'}>Caiguire</MenuItem> <MenuItem value={'Brasil'}>Brasil</MenuItem>
-                            <MenuItem value={'Centro'}>Centro</MenuItem> <MenuItem value={'Llanada'}>Llanada</MenuItem>
+                            {sectorList.map((e) => <MenuItem value={e} key={e+'sec'}>{e}</MenuItem> )}
                         </Select>
                     </FormControl>  
                 </Grid>
@@ -200,7 +212,7 @@ export default function UserData(props){//MAIN
             <div className='centrate'><Button variant={'contained'} onClick={clearInputs}>Limpiar Datos</Button></div>
 
             {/* dev */}
-                <div className='centrate'><Button variant={'contained'} onClick={ handleOpen } >Insertar Datos estaticos</Button></div>
+                <RenderDevBtn />
             {/* dev */}
 
             <Modal open={modal} onClose={handleClose}>
