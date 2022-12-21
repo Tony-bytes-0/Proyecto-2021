@@ -12,11 +12,14 @@ import labTestList from './features/laboratory/labTests'
 import activeRadiography from './features/radiography/activeRadiography'
 import radiographyList from './features/radiography/radiographyList'
 
+//controlador del estado Register/Test
+import registerController from  './features/registerController/registerController' 
+
 //Datos del usuario - entidad person
 import userData from './features/userData/userData'
 
 //Datos retornados por Get a person
-import userList from './features/userData/userList'
+//import userList from './features/userData/userList'
 
 export default configureStore({
   reducer: {
@@ -25,6 +28,7 @@ export default configureStore({
     activeLabTests, labTestList,
     activeRadiography, radiographyList,
     
-    userData, userList
+    userData,
+    registerController
   }
 })

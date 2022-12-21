@@ -16,6 +16,22 @@ const oc ={
     rebecca:{nombre:"Rebecca", apellido:"Knows", identificacion:"27060322", fecha_de_nacimiento:'20-11-1999', direccion: 'Ciudad Jardin', tipo_sangre:'O+', sexo: 'femenino'} , 
 }
 
+export function createDataObject (name, lastName, dni, birthdate, sector, bloodType, gender ){//extends
+    return {
+        nombre:name,
+        apellido:lastName,
+        "identificacion":dni,
+        "fecha_de_nacimiento":birthdate,
+        "direccion":sector,
+        "tipo_sangre": bloodType,
+        "sexo":gender,
+        // "cellphone":cellphone,
+        // "emergencyNumber":emergency,
+        // "municipio":municipio,
+        // "parroquia":parroquia,
+    }
+}
+
 export {bloodList, genders, sectorList, parroquiaList, municipioList,  oc}
 
 

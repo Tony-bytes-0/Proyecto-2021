@@ -4,8 +4,15 @@ import { TextField, Grid, Button, Table, TableBody, TableCell, TableContainer, T
 import { useState } from "react";
 //Axios
 import axios from "axios"
+//Redux
+import { useDispatch } from "react-redux";
+    //reducers
+    import { addUserData } from "../../../indexModles/features/userData/userData";
+
 
 function BasicTable(props) {
+    //Redux
+    const dispatch = useDispatch()
   if(props.rows != null){
     return <Grid container>
     <TableContainer component={Paper}>
@@ -23,8 +30,10 @@ function BasicTable(props) {
 
         <TableBody>
             <TableRow key={props.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }} onClick={() => {
-                alert('Cedula: ' + props.cedula + ' Seleccionada!')}
-                }>
+                dispatch(addUserData(
+                    props.rows
+                ))
+            }}>
               <TableCell align="left">{props.rows.id}</TableCell>
               <TableCell align="left">{props.rows.identificacion}</TableCell>
               <TableCell align="right">{props.rows.nombre}</TableCell>
@@ -41,29 +50,31 @@ function BasicTable(props) {
       <Grid item xs={12} className="centrate">No se Encontraron Resultados</Grid>
     </Grid>
   }
-  
 }
-export default function FilterUsers(props){
+
+export default function FilterUsers(){//MAIN
   const [userFind, setUsers] = useState({})//aqui se almacenan los resultados
+
   const getUsers = () =>{
-    axios.get('http://localhost:300/person/' + dni)
+    axios.get('http://localhost:300/person/' + id)
     .then(response => {
       setUsers(response.data)
     })
     .catch(e => {
       alert('ocurrio algun error al intentar buscar usuarios')
     })
+    .finally(() => {console.log('se termino la busqueda!')})
   }
   //React - Variables de Estado
-  const [dni, setDni] = useState('')
-  const handleDni = (event) => { setDni(event.target.value) }//DNI
+  const [id, setID] = useState('')
+  const handleid = (event) => { setID(event.target.value) }//id
 
     return<>
         <Grid container style={{"padding":"2%"}}>
-          <Grid item xs = {12}><div className="centrate separator basicBorders tittle"><h4><b>Buscar Usuarios por ID</b></h4></div> </Grid>
+          <Grid item xs = {12}><div className="centrate separator basicBorders tittle"><h4><b> Buscar Usuarios por ID </b></h4></div> </Grid>
 
             <Grid item xs={10}>
-                <TextField fullWidth label="Id de Usuario" type={'number'} variant="filled" onChange={handleDni}/>
+                <TextField fullWidth label="ID del Usuario" variant="filled" onChange={handleid}/>
             </Grid>
 
             <Grid item xs={2} >
@@ -71,7 +82,6 @@ export default function FilterUsers(props){
                 <Button variant='contained' fullWidth onClick={getUsers}>Buscar!</Button>
               </div>
             </Grid>
-
                 <BasicTable rows = {userFind} />
         </Grid>
     </>
