@@ -7,6 +7,7 @@ import { Grid, TextField, InputLabel, Select, MenuItem, FormControl, Avatar, But
 //Redux
 import { useDispatch} from 'react-redux'
 import { addUserData } from '../../../indexModles/features/userData/userData'
+import { togglefilterUser, toggleUserData } from '../../../indexModles/features/registerController/registerController'
 
 //Axios
 import axios from "axios"
@@ -14,6 +15,7 @@ import axios from "axios"
 //Modulos
 import blueLobster from '../Independientes/blue-Lobster.jpg'
 import { oc, sectorList, parroquiaList, municipioList, bloodList } from '../Independientes/staticValuesList'//objeto con personas estatico
+
 
 
 export default function UserData(props){//MAIN
@@ -122,9 +124,15 @@ export default function UserData(props){//MAIN
         return<><div className='centrate'>
             <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
             const allData = createDataObject()
-            dispatch(addUserData(allData))
-            console.log(props)
-        }}>Listo</Button>
+            dispatch(addUserData(allData))//añadir datos al state
+            dispatch(toggleUserData(false))//cerrar modulo de ingresar datos
+        }}>Listo</Button></div>
+
+        <div className='centrate'>
+            <Button variant="contained" style={{ "margin": "2%" }} onClick={() => {
+            dispatch(toggleUserData(false))
+            dispatch(togglefilterUser(true))
+        }}>Buscar Usuarios</Button>
         </div></>
         }
     }

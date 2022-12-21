@@ -8,6 +8,7 @@ import axios from "axios"
 import { useDispatch } from "react-redux";
     //reducers
     import { addUserData } from "../../../indexModles/features/userData/userData";
+    import { toggleUserData, togglefilterUser } from "../../../indexModles/features/registerController/registerController";
 
 
 function BasicTable(props) {
@@ -24,22 +25,20 @@ function BasicTable(props) {
             <TableCell align="right"><b>Nombre</b></TableCell>
             <TableCell align="right"><b>Apellido</b></TableCell>
             <TableCell align="right"><b>Genero</b></TableCell>
-            <TableCell align="right"><b>Telefono</b></TableCell>
           </TableRow>
         </TableHead>
 
-        <TableBody>
-            <TableRow key={props.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }} onClick={() => {
-                dispatch(addUserData(
-                    props.rows
-                ))
+        <TableBody>{/* esta es la fila que muestra los datos */}
+            <TableRow className="hoverDown"
+                key={props.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }} onClick={() => {
+                dispatch(addUserData(props.rows))
+                dispatch(togglefilterUser(false))
             }}>
               <TableCell align="left">{props.rows.id}</TableCell>
               <TableCell align="left">{props.rows.identificacion}</TableCell>
               <TableCell align="right">{props.rows.nombre}</TableCell>
               <TableCell align="right">{props.rows.apellido}</TableCell>
               <TableCell align="right">{props.rows.sexo}</TableCell>
-              <TableCell align="right">aqui deberia ir el telefono</TableCell>
             </TableRow>
         </TableBody>
       </Table>
@@ -54,6 +53,7 @@ function BasicTable(props) {
 
 export default function FilterUsers(){//MAIN
   const [userFind, setUsers] = useState({})//aqui se almacenan los resultados
+  const dispatch = useDispatch()
 
   const getUsers = () =>{
     axios.get('http://localhost:300/person/' + id)
@@ -82,7 +82,14 @@ export default function FilterUsers(){//MAIN
                 <Button variant='contained' fullWidth onClick={getUsers}>Buscar!</Button>
               </div>
             </Grid>
-                <BasicTable rows = {userFind} />
+            
+            <BasicTable rows = {userFind} />
+            <Grid item xs = {12}>
+                <div className="centrate"><Button variant="contained" style={{"padding":"2%"}} onClick={() => {
+                    dispatch(togglefilterUser(false))
+                    dispatch(toggleUserData(true))
+                }}>Usuario Nuevo</Button></div>
+            </Grid>
         </Grid>
     </>
 }

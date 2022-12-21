@@ -10,7 +10,7 @@
 .h500{height: 500px;}
 
 
-.modalDiv{overflow-y: scroll; overflow-x: hidden;}
+.modalDiv{overflow-y: auto; overflow-x: hidden;}
 
 .modalCentratedSmall{height: 40%; padding: 5%; margin-left:10%; margin-right: 10%; margin-top: 10%; background-color: white;}
 .modalStaticValues{ height: 60%; padding: 5%; margin-left:10%; margin-right: 10%; margin-top: 10%; background-color: white;}
@@ -36,6 +36,10 @@
     width: 120%;
     top: 40%;
     left: 40%;
+}
+/* efecticos */
+.hoverDown:hover{
+    background-color: gray;
 }
 
 

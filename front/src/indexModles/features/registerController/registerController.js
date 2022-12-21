@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    filterUserActive: false, userDataActive: false, selectedUserActive: false
+    filterUserActive: true, userDataActive: false, selectedUserActive: false
 }
 
 export const registerController = createSlice({

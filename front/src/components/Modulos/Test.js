@@ -1,17 +1,16 @@
-//React
-import { useState } from "react"
 //MUI
 import { Button } from "@mui/material"
 
 //Redux
 import { useDispatch, useSelector } from "react-redux"
-import { clearData } from "../../indexModles/features/userData/userData"
+//import { clearData } from "../../indexModles/features/userData/userData"
 
 //modulos
 import FilterUsers from "./testRegisterModules/FilterUsers"
 import UserData from "./testRegisterModules/UserData"
 import MedicalRecord from "./testRegisterModules/MedicalRecord"
 import SelectedUser from './Independientes/SelectedUser'
+import { togglefilterUser, toggleUserData } from "../../indexModles/features/registerController/registerController"
 
 
 export function Test (props){
@@ -19,15 +18,10 @@ export function Test (props){
     console.log('estado de register controller: ', registerState)
     
     const dispatch = useDispatch()
-    const [renderRegister, toggleRegister] = useState(true)//para mostrar el registrar o buscar personas
 
-    if(renderRegister){
+    if(registerState.filterUserActive){
         return<>
             <FilterUsers />{/* Busqueda de usuarios */}
-            <SelectedUser />
-            <div className="centrate">
-                <Button variant="contained" style={{"padding":"2%"}} onClick={() => {toggleRegister(false)}} >Usuario Nuevo</Button>
-            </div>
             
             <MedicalRecord />{/* Registro de Historia Medica */}
             
@@ -35,22 +29,22 @@ export function Test (props){
         </>
     }
 
-
-    
-    else {return <>
-        <UserData />{/* Ingresar los Datos */}
-        <SelectedUser />
-            <div className="centrate horizontalFlex">
-                <Button variant="contained" style={{"margin":"2%"}} onClick={() => {
-                    dispatch(clearData())
-                    toggleRegister(true)
-                }}>Borrar Datos</Button>
-            </div>
+    else if(registerState.userDataActive) {return <>
+        <UserData />{/* Ingresar los Datos del usuario*/}
+        
 
         <MedicalRecord /> {/* Registro de Historia Medica */}
 
         <div className="centrate">   <Button variant="contained" style={{"margin":"2%"}}>Registar</Button>   </div>
-        
+    </>}
+    else{return<>
+        <SelectedUser />
+        <div className="centrate horizontalFlex">
+            <Button variant="contained" onClick={() => {dispatch(togglefilterUser(true))}}>Buscar Otro Usuario</Button>
+            <Button variant="contained" onClick={() => {dispatch(toggleUserData(true))}}>Volver a Llenar Datos</Button>
+        </div>
+
+        <MedicalRecord />
     </>}
     
 }
