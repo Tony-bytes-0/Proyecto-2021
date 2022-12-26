@@ -46,6 +46,7 @@ export default function UserData(props){//MAIN
     }
 
     function createDataObject (){//extends
+        const unusedData = cellphone + emergency + municipio + parroquia;console.log('datos que aun no uso ', unusedData);
         return {
             nombre:name,
             apellido:lastName,
@@ -54,10 +55,10 @@ export default function UserData(props){//MAIN
             "direccion":sector,
             "tipo_sangre": bloodType,
             "sexo":gender,
-            "telefono":cellphone,
-            "telefono_emergencia":emergency,
-            "municipio":municipio,
-            "parroquia":parroquia,
+            // "cellphone":cellphone,
+            // "emergencyNumber":emergency,
+            // "municipio":municipio,
+            // "parroquia":parroquia,
         }
     }
     //Post
@@ -75,7 +76,7 @@ export default function UserData(props){//MAIN
             clearInputs()
         })
         .catch((response) => {
-            alert('ocurrio un error, recargue la paguina :(', )
+            alert('ocurrio un error, recargue la paguina :(')
         })
         console.log('postPerson end')
         }
