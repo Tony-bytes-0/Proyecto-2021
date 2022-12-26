@@ -3,6 +3,7 @@ import { Test } from './Modulos/Test';
 import SideBar from './Modulos/SideBar';
 import UserData from './Modulos/testRegisterModules/UserData';
 import ShowAllUsers from  './Modulos/ShowAllUsers';
+import AllergiesCrud from './Modulos/AllergiesCrud';
 
 //React-Router
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
@@ -39,7 +40,14 @@ export default function Application(){
                         <Grid item xs={2} > <SideBar /> </Grid> 
                         <Grid item xs={10}> <ShowAllUsers/> </Grid>
                     </Grid>                     
-                </> } />
+                </> } /> 
+
+                <Route path='/AllergiesCrud' element ={<>
+                    <Grid container>
+                        <Grid item xs={2} > <SideBar /> </Grid> 
+                        <Grid item xs={10}> <AllergiesCrud/> </Grid>
+                    </Grid>                     
+                </> } /> 
 
                 
 

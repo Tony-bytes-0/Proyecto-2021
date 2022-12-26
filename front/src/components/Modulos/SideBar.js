@@ -32,6 +32,11 @@ export default function SideBar(props) {
                         Ver Todos los Usuarios
                     </Button>
 
+                    <Button variant='contained' onClick={ () => {navigate('/AllergiesCrud')} }
+                        sx = {{"padding":"15px","marginTop":"20px"}}>
+                        Gestionar Alergias 
+                    </Button>
+
                     
                     {/* <Button variant='contained' onClick={ printStoreData }
                         sx = {{"padding":"15px","marginTop":"20px"}}>

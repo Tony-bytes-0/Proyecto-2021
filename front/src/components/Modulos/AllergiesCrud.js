@@ -2,29 +2,27 @@
 import { useState } from "react";
 import ClipLoader from 'react-spinners/ClipLoader';
 //Mui
-import { Grid, Button,Table,TableBody,TableCell, TableContainer, TableHead, TableRow, Paper, Modal, ButtonGroup } from "@mui/material";
+import { Grid, Button,Table,TableBody,TableCell, TableContainer, TableHead, TableRow, Paper, Modal, ButtonGroup, TextField } from "@mui/material";
 //Axios
 import axios from "axios"
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { updateUsers } from "../../indexModles/features/userData/userList";
-import UserData from "./testRegisterModules/UserData";
+import { updateAllergies } from "../../indexModles/features/allergies/allergieList";
 
 
 
 
-const emptyObject = {id:"",  identificacion:"", nombre:"", apellido:"", telefono:"",telefono_emergencia:"", sexo:""}//estado inicial del estado del usuario seleccionado
+const emptyObject = {id:"", body:""}//estado inicial del estado del usuario seleccionado - Debo hace esto dinamico
 
 
-function BasicTable(props) { const [selected, setSelected] = useState(emptyObject)	
+function BasicTable() { const [selected, setSelected] = useState(emptyObject)	
   	//WEAS DE LA MODAL
   	const [modalState, setModal] = useState(false)
     function openModal(rowId){//al abrir la modal, se llenan los datos del usuario seleccionado: "selected"
         setModal(true); 
         //buscar en la lista de objetos, por ID
-        const found = userList.find( x =>  x.id === rowId)
-        if (found){ setSelected(found) }
-        else{ console.log('ocurrio algun error al buscar el id: ', rowId) }
+        const found = allergieList.find( x =>  x.id === rowId)
+        if (found){ setSelected(found) } else{ console.log('ocurrio algun error al buscar el id: ', rowId) } //DEV
     } 
   	const closeModal = () => {setModal(false)}
     //Modal de confirmacion
@@ -41,21 +39,18 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
         setConfirm(false)
         setModal(false)
     }
-
     //CRUD
-    const userList = useSelector(state => state.userList)
-
-
+    const allergieList = useSelector(state => state.allergieList)
+    
     function deleteUser(id){
-        axios.delete('http://localhost:300/person/' + id)
+        axios.delete('http://localhost:300/alergia/' + id)
             .then(response => {
-                console.log('se ha borrado con exito el usuario: ', response)
+                console.log('respuesta de Eliminado', response)
             })
             .catch(e => {
                 console.log('ocurrio algun tipo de error')
             })
             .finally( () => normalize() )
-            
     }
 
 
@@ -67,50 +62,40 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>{/* aqui defino la cantidad de filas! */}
-            <TableCell><b>ID</b></TableCell>
-            <TableCell align="right"><b>Nombre</b></TableCell>
-            <TableCell align="right"><b>Apellido</b></TableCell>
-            <TableCell align="right"><b>Cedula</b></TableCell>
-            <TableCell align="right"><b>Genero</b></TableCell>
-            <TableCell align="right"><b></b></TableCell>
+            <TableCell align="center"><b>ID</b></TableCell>
+            <TableCell align="center"><b>Alergia</b></TableCell>
+            <TableCell align="center"><b></b></TableCell>{/* rellenar para el boton */}
           </TableRow>
         </TableHead>
 
         <TableBody>
 
-          {userList.map((row) => (
+          {allergieList.map((row) => (
             <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell component="th" scope="row">{row.id}</TableCell>
-              <TableCell align="right">{row.nombre}</TableCell>
-              <TableCell align="right">{row.apellido}</TableCell>
-              <TableCell align="right">{row.identificacion}</TableCell>
-              <TableCell align="right">{row.sexo}</TableCell>
-              <TableCell align="right"><Button variant='contained' onClick={() => {openModal(row.id)}}>Examinar</Button></TableCell>
+              <TableCell align="center">{row.id}</TableCell>
+              <TableCell align="center">{row.tipo}</TableCell>
+              <TableCell align="center"><Button variant='contained' onClick={() => {openModal(row.id)}}>Examinar</Button></TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
 
-    {/* Modal de Vista de datos del usuario*/}
+    {/* Modal de Vista de Especificaciones*/}
     <Modal open={modalState} disableScrollLock={false} onClose={closeModal}>
       <Grid container direction="column" alignItems="center" justifyContent="center">
         <div className='modalCentratedSmall'>
-        <Grid item xs = {12}><div className="centrate separator basicBorders tittle"><h4><b>Datos del Usuario</b></h4></div> </Grid>
-
+        <Grid item xs = {12}><div className="centrate separator basicBorders tittle"><h4><b>Especificaciones</b></h4></div> </Grid>
+            
             <Grid item xs={12} className='centrate'> ID: {selected.id} </Grid>
-            <Grid item xs={12} className='centrate'> Nombre: {selected.nombre} </Grid>
-            <Grid item xs={12} className='centrate'>Apellido: {selected.apellido}</Grid>
-            <Grid item xs={12} className='centrate'>Genero:  {selected.sexo} </Grid>  
-            <Grid item xs={12} className='centrate'>Cedula: {selected.identificacion}</Grid>
-            <Grid item xs={12} className='centrate'>telefono: {selected.telefono}</Grid>
-            <Grid item xs={12} className='centrate'>Telefono de Emergencia: {selected.telefono_emergencia}</Grid>
+            <Grid item xs={12} className='centrate'> Nombre: {selected.tipo} </Grid>
+
            
 
             <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons" className="basicBorders">
 				<Button variant="contained" onClick={closeModal} className='basicBorders'>Volver</Button>
-				<Button variant="contained" onClick={openUpdate}>Editar Datos</Button>
-				<Button variant="contained" onClick={openConfirm}>Eliminar Usuario</Button>
+				<Button variant="contained" onClick={openUpdate}>Editar</Button>
+				<Button variant="contained" onClick={openConfirm}>Eliminar</Button>
             </ButtonGroup>
 
         </div>
@@ -119,8 +104,8 @@ function BasicTable(props) { const [selected, setSelected] = useState(emptyObjec
 	{/* Modal para actualizar */}
 	<Modal open={update} onClose={closeUpdate} disableScrollLock={false}>
 		<Grid container direction="column" alignItems="center" justifyContent="center">
-			<div className="updateModal modalDiv modalColor">
-				<UserData toggleUpdate={true} target={selected} />
+			<div className="updateModal modalDiv modalColor basicBorders">
+                <CreateAllergie target={selected} toggleUpdate id={selected.id}/>
 				<div className="centrate"><Button variant='contained' onClick={closeUpdate}>Terminar Edicion</Button></div>
 			</div>
 		</Grid>
@@ -156,17 +141,67 @@ function StaticTableData (){
         </TableContainer>
 }
 
+function CreateAllergie (props){
+    const [data, setData] = useState('')
+    const handleData = (event) => {setData(event.target.value)}
+    const [welcome, setWelcome] = useState(true)//para hacer acciones solamente al cargar la pagina :)
+    if(welcome && props.toggleUpdate){//esto trigerea al abrir la modal de edicion
+        setWelcome(false)
+        setData(props.target.tipo)
+    }
+    function postData(){//extends
+        if(data === ''){alert('inserte algun dato')}
 
+        else{//si alguno de los campos contienen datos:
+            axios.post('http://localhost:300/alergia', {tipo:data})
+            .then((response) =>{
+                alert('Tipo de Alergia Creado con Exito');
+                setData('')
+            })
+            .catch((response) => {
+                alert('ocurrio un error, recargue la paguina :(')
+            })
+            .finally(() => document.getElementById('getBtn').click())
+        } 
+    }
+    function updateData(){
+        if(data === ''){alert('inserte algun dato')}
 
-export default function FilterUsers(props){//Main
+        else{//si alguno de los campos contienen datos:
+            axios.put('http://localhost:300/alergia/' + props.id, {tipo:data})
+            .then((response) =>{
+                alert('Datos de la alergia Actualizados con exito');
+                setData('')
+            })
+            .catch((response) => {
+                alert('ocurrio un error, recargue la paguina :(')
+            })
+            .finally(() => document.getElementById('getBtn').click())
+        } 
+    }
+    function RenderedButton(props){
+        if(props.update){
+            return <Button variant="contained" onClick={updateData}>Actualizar</Button>
+        }
+        else{
+            return <Button variant="contained" onClick={postData}>Crear!</Button>
+        }
+    }
+    return <><Grid container direction="column" alignItems="center" justifyContent="center">
+        <TextField variant="outlined" label="Tipo de Alergia" value={data} onChange={handleData} />
+        <RenderedButton update={props.toggleUpdate} />
+    </Grid></>
+}
+
+export default function FilterUsers(){//Main
   const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
 
-    async function getUsers() {
+    async function getAllergies() {
         setLoading(true)
-        axios.get('http://localhost:300/person')
+        axios.get('http://localhost:300/alergia')//Debo hacer esto dinamico
             .then(response => {
-                dispatch(updateUsers(response.data));
+                dispatch(updateAllergies(response.data));
                 setLoading(false)
             })
             .catch(e => {
@@ -177,11 +212,12 @@ export default function FilterUsers(props){//Main
 
     return<>
         <Grid container style={{"padding":"2%"}}>
-          <Grid item xs = {12}><div className="centrate separator basicBorders tittle"><h4><b>Buscar Usuarios</b></h4></div> </Grid>
-          
+          <Grid item xs = {12}><div className="centrate separator basicBorders tittle"><h4><b>Gestionar Alergias</b></h4></div> </Grid>
+
+            <CreateAllergie/>
             <Grid item xs={12} >
                 <div className="centrate" style={{"position":"relative","top":"10%"}} >
-                    <Button id='getBtn' variant='contained' fullWidth onClick={() => {getUsers()}}>Mostrar todos los usuarios</Button>
+                    <Button id='getBtn' variant='contained' fullWidth onClick={() => {getAllergies()}}>Mostrar Alergias</Button>
                 </div>    
             </Grid>
 

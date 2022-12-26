@@ -7,13 +7,13 @@ const parroquiaList = ['Altagracia', 'Ayacucho', 'Santa Ines', 'Raul Leoni', 'Sa
 const municipioList = ['Andrés Eloy Blanco', 'Andrés Mata', 'Arismendi', 'Benítez', 'Bermúdez', 'Bolívar', 'Cajigal', 'Cruz Salmerón Acosta']
 
 const oc ={
-    irumi:{nombre:"Irumi", apellido:"FrozenHeart", identificacion:"27080311", fecha_de_nacimiento:'07-01-1999', direccion: 'Ciudad Jardin', tipo_sangre:'A+', sexo: 'femenino'},
-    monica:{nombre:"Monica", apellido:"Strikes", identificacion:"27080555", fecha_de_nacimiento:'01-01-2006', direccion: 'El Cerro', tipo_sangre:'B+', sexo: 'femenino'} ,
-    poison:{nombre:"Poison", apellido:"Poison", identificacion:"27080301", fecha_de_nacimiento:'01-10-2006', direccion: 'Ciudad Jardin', tipo_sangre:'AB+', sexo: 'femenino'},
-    karen:{nombre:"Karen", apellido:"Oletto", identificacion:"27080333", fecha_de_nacimiento:'05-05-2000', direccion: 'Ciudad Jardin', tipo_sangre:'O+', sexo: 'femenino'} ,
-    omega:{nombre:"Omega", apellido:"@", identificacion:"27080311", fecha_de_nacimiento:'01-02-2006', direccion: 'Ciudad Jardin', tipo_sangre:'A+', sexo: 'femenino'} ,
-    tomate:{nombre:"Tomate", apellido:"AlaPlancha", identificacion:"27080311", fecha_de_nacimiento:'19-11-1999', direccion: 'Ciudad Jardin', tipo_sangre:'O-', sexo: 'masculino'} , 
-    rebecca:{nombre:"Rebecca", apellido:"Knows", identificacion:"27060322", fecha_de_nacimiento:'20-11-1999', direccion: 'Ciudad Jardin', tipo_sangre:'O+', sexo: 'femenino'} , 
+    irumi:{nombre:"Irumi", apellido:"FrozenHeart", identificacion:"270803111", fecha_de_nacimiento:'07-01-1999', telefono:'04248754443', telefono_emergencia:'04248754443', direccion: 'Ciudad Jardin', tipo_sangre:'A+', sexo: 'femenino'},
+    monica:{nombre:"Monica", apellido:"Strikes", identificacion:"27080555", fecha_de_nacimiento:'01-01-2006', telefono:'04248754443', telefono_emergencia:'04248754443', direccion: 'El Cerro', tipo_sangre:'B+', sexo: 'femenino'} ,
+    poison:{nombre:"Poison", apellido:"Poison", identificacion:"27080301", fecha_de_nacimiento:'01-10-2006', telefono:'04248754443', telefono_emergencia:'04248754443', direccion: 'Ciudad Jardin', tipo_sangre:'AB+', sexo: 'femenino'},
+    karen:{nombre:"Karen", apellido:"Oletto", identificacion:"27080333", fecha_de_nacimiento:'05-05-2000', telefono:'04248754443', telefono_emergencia:'04248754443', direccion: 'Ciudad Jardin', tipo_sangre:'O+', sexo: 'femenino'} ,
+    omega:{nombre:"Omega", apellido:"@", identificacion:"27080300", fecha_de_nacimiento:'01-02-2006', telefono:'04248754443', telefono_emergencia:'04248754443', direccion: 'Ciudad Jardin', tipo_sangre:'A+', sexo: 'femenino'} ,
+    tomate:{nombre:"Tomate", apellido:"AlaPlancha", identificacion:"27080311", fecha_de_nacimiento:'19-11-1999', telefono:'04248754443', telefono_emergencia:'04248754443', direccion: 'Ciudad Jardin', tipo_sangre:'O-', sexo: 'masculino'} , 
+    rebecca:{nombre:"Rebecca", apellido:"Knows", identificacion:"27060322", fecha_de_nacimiento:'20-11-1999', telefono:'04248754443', telefono_emergencia:'04248754443', direccion: 'Ciudad Jardin', tipo_sangre:'O+', sexo: 'femenino'} , 
 }
 
 export function createDataObject (name, lastName, dni, birthdate, sector, bloodType, gender ){//extends
@@ -37,3 +37,4 @@ export {bloodList, genders, sectorList, parroquiaList, municipioList,  oc}
 
 
 //const symptoms = ['Fiebre', 'Dolor de Cabeza', 'Tos', 'Tos Seca', 'Mareos', 'Nauseas',' Vomitos','Dolores Estomacales','Dolores Abdominales']
+// direction="column" alignItems="center" justifyContent="center" pa poner centrado los Grid

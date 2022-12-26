@@ -85,6 +85,7 @@ export default function UserData(props){//MAIN
     //Update
     function setUpdateValues(){//extends
         setDni(props.target.identificacion);setName(props.target.nombre);setLastName(props.target.apellido);setGender(props.target.sexo);
+        setCellphone(props.target.telefono);setEmergency(props.target.telefono_emergencia)
         setBirthdate(props.target.fecha_de_nacimiento)
         setSector(props.target.direccion);
     }

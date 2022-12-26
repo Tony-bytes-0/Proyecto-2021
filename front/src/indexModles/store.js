@@ -11,6 +11,8 @@ import labTestList from './features/laboratory/labTests'
 //Controladores de Radiografias
 import activeRadiography from './features/radiography/activeRadiography'
 import radiographyList from './features/radiography/radiographyList'
+//Alergias
+import allergieList from './features/allergies/allergieList'
 
 //controlador del estado Register/Test
 import registerController from  './features/registerController/registerController' 
@@ -29,6 +31,8 @@ export default configureStore({
     activeRadiography, radiographyList,
     
     userData, userList,
-    registerController
+    registerController,
+
+    allergieList
   }
 })
