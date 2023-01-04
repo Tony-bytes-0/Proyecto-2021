@@ -4,6 +4,7 @@ import SideBar from './Modulos/SideBar';
 import UserData from './Modulos/testRegisterModules/UserData';
 import ShowAllUsers from  './Modulos/ShowAllUsers';
 import AllergiesCrud from './Modulos/AllergiesCrud';
+import LoginScreen from './Modulos/LoginScreen';
 
 //React-Router
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
@@ -20,8 +21,13 @@ export default function Application(){
         <BrowserRouter>
             <Routes>
 
-
                 <Route path='/' element ={<>
+                    <Grid container>
+                        <Grid item xs={12}> <LoginScreen/> </Grid>
+                    </Grid>                     
+                </> } />
+
+                <Route path='/register' element ={<>
                     <Grid container>
                         <Grid item xs={2} > <SideBar /> </Grid> 
                         <Grid item xs={10}> <Test /> </Grid>
@@ -48,6 +54,7 @@ export default function Application(){
                         <Grid item xs={10}> <AllergiesCrud/> </Grid>
                     </Grid>                     
                 </> } /> 
+
 
                 
 

@@ -22,7 +22,7 @@ export default function SideBar(props) {
                         Registro de Personas
                     </Button>
 
-                    <Button  variant='contained' onClick={() => {navigate('/')}} 
+                    <Button  variant='contained' onClick={() => {navigate('/register')}} 
                         sx = {{"padding":"15px","marginTop":"20px"}}>
                         Registro de Historia Medica
                     </Button>
@@ -36,6 +36,7 @@ export default function SideBar(props) {
                         sx = {{"padding":"15px","marginTop":"20px"}}>
                         Gestionar Alergias 
                     </Button>
+                    
 
                     
                     {/* <Button variant='contained' onClick={ printStoreData }

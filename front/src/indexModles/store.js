@@ -23,15 +23,20 @@ import userData from './features/userData/userData'
 //lista Datos retornados por Get a person los usa el modulo: "ShowAllUsers"
 import userList from './features/userData/userList'
 
+//usuarios estaticos locales, para probar el login
+import localUsers from './features/users/testUsers'
+//import loginController from 
+
 export default configureStore({
-  reducer: {
+  reducer: {localUsers,
     activeSymptoms, symptomList,
     activeEmatology, ematologyList,
     activeLabTests, labTestList,
     activeRadiography, radiographyList,
     
     userData, userList,
-    registerController,
+
+    registerController, 
 
     allergieList
   }
