@@ -3,11 +3,13 @@ import { Avatar, Button, Grid, TextField } from "@mui/material";
 import {useNavigate} from 'react-router-dom';
 import { useState } from "react";
 //Redux
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
+import { newLoggin } from '../../indexModles/features/users/loginController';
 
 const sm = { width: '100%', maxWidth: '100%', padding: '10px' }
 
 export default function LoginScreen(){
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const [login, setLogin] = useState(true)
     const localUsers = useSelector(state => state.localUsers)
@@ -17,8 +19,6 @@ export default function LoginScreen(){
     const[confirm, setConfirm] = useState(''); const handleConfirm = (event) => {setConfirm(event.target.value)}
     
     function resetInputs(){setUser(''); setPassword(''); setConfirm('')}
-    //function createObject(){return {"usuario":user, "contraseña":password} }
-    function loginAction(){navigate('/register')}
     function validateUser(){
         let validate = false
         localUsers.forEach(element => { if(element.usuario === user && element.clave === password){ validate = true } });
@@ -27,6 +27,10 @@ export default function LoginScreen(){
             alert('inicio de sesion exitoso, accediendo')
             loginAction()
         }
+    }
+    function loginAction(){
+        dispatch(newLoggin( {"usuario":user, "clave":password} ))
+        navigate('/register')
     }
 
     if(login)return<><Grid container direction='column' alignContent='center' justifyContent='center' align='center' spacing={10}>

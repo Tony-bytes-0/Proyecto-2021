@@ -25,10 +25,10 @@ import userList from './features/userData/userList'
 
 //usuarios estaticos locales, para probar el login
 import localUsers from './features/users/testUsers'
-//import loginController from 
+import loginController from './features/users/loginController'
 
 export default configureStore({
-  reducer: {localUsers,
+  reducer: {
     activeSymptoms, symptomList,
     activeEmatology, ematologyList,
     activeLabTests, labTestList,
@@ -38,6 +38,9 @@ export default configureStore({
 
     registerController, 
 
-    allergieList
+    allergieList,
+    //login
+    localUsers,
+    loginController
   }
 })
