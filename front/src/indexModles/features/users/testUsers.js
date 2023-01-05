@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 let initialValue = [
-    {"usuario":"lonson", "clave":"0302"},
+    {"usuario":"tony", "clave":"tomas"},
     {"usuario":"lonson", "clave":"6898"},
     {"usuario":"pepe", "clave":"pepe"}
 ]

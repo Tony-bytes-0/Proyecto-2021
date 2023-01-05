@@ -51,6 +51,9 @@ export default function LoginScreen(){
                 resetInputs()
                 setLogin(false)
             }}>Crear Usuario</Button></div>
+        <Grid container ><div className="centrate">Usuarios disponibles de forma local:{/* Dev */}
+            {localUsers.map((e) => <div className="centrate">Usuario: {e.usuario} Clave: {e.clave}</div>)}
+        </div></Grid>
 
         </div></Grid>
 

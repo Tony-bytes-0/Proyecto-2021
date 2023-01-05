@@ -13,7 +13,7 @@ import SelectedUser from './Independientes/SelectedUser'
 import { togglefilterUser, toggleUserData } from "../../indexModles/features/registerController/registerController"
 
 
-export function Test (props){
+export function Register (props){
     const registerState = useSelector(state => state.registerController)
     console.log('estado de register controller: ', registerState)
     

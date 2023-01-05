@@ -8,9 +8,9 @@ import { ButtonGroup, Modal } from '@mui/material';
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { newLoggin } from '../../indexModles/features/users/loginController';
-
+import { disconect } from '../../indexModles/features/users/loginController';
 //import playstore from './Independientes/playstore.PNG
+
 
 
 
@@ -40,14 +40,14 @@ function LoggedData(props){
 }
 
 
-export default function SideBar() {
+export default function SideBar() {//MAIN
     const loggedUser = useSelector(state => state.loginController)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
         return <div className='SIDEBAR'>
             <LoggedData user={loggedUser.usuario} />
-            <ButtonGroup fullWidth={true} 
+            <ButtonGroup  
                 disableElevation
                 variant="contained"
                 orientation="vertical"
@@ -73,18 +73,15 @@ export default function SideBar() {
                         Gestionar Alergias 
                     </Button>
                     
-                    <Button variant='contained' onClick={ () => {
-                        dispatch(newLoggin({"usuario":"prueba"}))
+                    <Button variant='outlined' size='small' onClick={ () => {
+                        dispatch(disconect())
+                        navigate('/')
                     }}
                         sx = {{"padding":"15px","marginTop":"20px"}}>
-                        Weas del loggin en consola plox 
+                        Cerrar Sesion
                     </Button>
 
-                    
-                    {/* <Button variant='contained' onClick={ printStoreData }
-                        sx = {{"padding":"15px","marginTop":"20px"}}>
-                        Ver Redux Storage
-                    </Button> */}
+                
             </ButtonGroup>
         </div>
 }

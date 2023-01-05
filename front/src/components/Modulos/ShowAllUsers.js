@@ -7,13 +7,12 @@ import { Grid, Button,Table,TableBody,TableCell, TableContainer, TableHead, Tabl
 import axios from "axios"
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { updateUsers } from "../../indexModles/features/userData/userList";
+import { updateUsers } from "../../indexModles/features/userData/userList";//reducer
+//Modules
 import UserData from "./testRegisterModules/UserData";
 
-
-
-
-const emptyObject = {id:"",  identificacion:"", nombre:"", apellido:"", telefono:"",telefono_emergencia:"", sexo:""}//estado inicial del estado del usuario seleccionado
+//estado inicial del estado del usuario seleccionado
+const emptyObject = {id:"",  identificacion:"", nombre:"", apellido:"", telefono:"",telefono_emergencia:"", sexo:""}
 
 
 function BasicTable(props) { const [selected, setSelected] = useState(emptyObject)	
