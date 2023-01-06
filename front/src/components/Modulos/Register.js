@@ -15,7 +15,7 @@ import { togglefilterUser, toggleUserData } from "../../indexModles/features/reg
 
 export function Register (props){
     const registerState = useSelector(state => state.registerController)
-    console.log('estado de register controller: ', registerState)
+    //console.log('estado de register controller: ', registerState)
     
     const dispatch = useDispatch()
 

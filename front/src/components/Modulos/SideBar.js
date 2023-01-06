@@ -1,52 +1,52 @@
 //React
 import {useNavigate} from 'react-router-dom';
-import { useState } from 'react';
+
 
 //MUI
 import Button from '@mui/material/Button';
-import { ButtonGroup, Modal } from '@mui/material';
+import { ButtonGroup} from '@mui/material';
 
 //Redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { disconect } from '../../indexModles/features/users/loginController';
 //import playstore from './Independientes/playstore.PNG
 
 
 
 
-function LoggedData(props){
-    const navigate = useNavigate()
-    const [modal] = useState(true); const closeModal = () => navigate('/')
-    function validate(){if(props.user !== false){
-        return {"user":props.user, "status": "Conectado" } }
-        else return {"user":"a", "status":"Desconectado"}
-    }
+// function LoggedData(props){
+//     const navigate = useNavigate()
+//     const [modal] = useState(true); const closeModal = () => navigate('/')
+//     function validate(){if(props.user !== false){
+//         return {"user":props.user, "status": "Conectado" } }
+//         else return {"user":"a", "status":"Desconectado"}
+//     }
 
-    var message =  validate()
+//     var message =  validate()
     
-    if(props.user)return<div className='centrate verticalFlex'>
-        <b>{message.status}</b>
-        <b>Bienvenido: {message.user}</b>
-    </div>
-    else return <> {/* Logeadon't */}
-    <Modal open={modal} onClose={closeModal} disableScrollLock={false} ><div className='modalColor modalCentratedSmall verticalFlex centrate'>
+//     if(props.user)return<div className='centrate verticalFlex'>
+//         <b>{message.status}</b>
+//         <b>Bienvenido: {message.user}</b>
+//     </div>
+//     else return <> {/* Logeadon't */}
+//     <Modal open={modal} onClose={closeModal} disableScrollLock={false} ><div className='modalColor modalCentratedSmall verticalFlex centrate'>
 
-        Adonde tan deslogueado mi rey?
-        <Button variant='contained' onClick={() => navigate ('/')} >Pa la Playstore</Button>
-        {/* <img src = {playstore} alt='palaPlaystore' className='flexible'  */}
+//         Adonde tan deslogueado mi rey?
+//         <Button variant='contained' onClick={() => navigate ('/')} >Pa la Playstore</Button>
+//         {/* <img src = {playstore} alt='palaPlaystore' className='flexible'  */}
 
-    </div></Modal>
-    </>
-}
+//     </div></Modal>
+//     </>
+// }
 
 
 export default function SideBar() {//MAIN
-    const loggedUser = useSelector(state => state.loginController)
+    //const loggedUser = useSelector(state => state.loginController)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
         return <div className='SIDEBAR'>
-            <LoggedData user={loggedUser.usuario} />
+            
             <ButtonGroup  
                 disableElevation
                 variant="contained"
@@ -75,7 +75,7 @@ export default function SideBar() {//MAIN
                     
                     <Button variant='outlined' size='small' onClick={ () => {
                         dispatch(disconect())
-                        navigate('/')
+                        //navigate('/') DEV
                     }}
                         sx = {{"padding":"15px","marginTop":"20px"}}>
                         Cerrar Sesion

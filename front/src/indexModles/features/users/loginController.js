@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-let initialValue = {"usuario": false, "clave": false}
+let initialValue = {"usuario": "admin", "clave": "admin"}
 
 export const loginController = createSlice({
   name: 'loginController',
