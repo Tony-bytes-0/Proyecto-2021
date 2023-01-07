@@ -14,7 +14,7 @@ import axios from "axios"
 
 //Modulos
 import blueLobster from '../Independientes/blue-Lobster.jpg'
-import { oc, sectorList, parroquiaList, municipioList, bloodList } from '../Independientes/staticValuesList'//objeto con personas estatico
+import { persons, sectorList, parroquiaList, municipioList, bloodList } from '../Independientes/staticValuesList'//objeto con personas estatico
 
 
 
@@ -226,15 +226,19 @@ export default function UserData(props){//MAIN
 
             <Modal open={modal} onClose={handleClose}>
                 <div className='centrate verticalFlex modalMedium'>
-                    <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.irumi)} }>Insertar Irumi!</Button>
+                    {/* <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.irumi)} }>Insertar Irumi!</Button>
                     <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.monica)} }>Insertar Monica!</Button>
                     <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.poison)} }>Insertar Poison!</Button>
                     <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.tomate)} }>Insertar Tomate!</Button>
                     <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.omega)} }>Insertar Omega!</Button>
                     <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.karen)} }>Insertar Karen!</Button>
-                    <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.rebecca)} }>Insertar Rebecca!</Button>
-
-                    <Button variant='contained' className='basicBorders' style={{"margin":"40px"}} onClick={handleClose}>Cerrar modal alv</Button>
+                    <Button variant='contained' className='basicBorders' onClick={() => {postPerson(oc.rebecca)} }>Insertar Rebecca!</Button> */}
+                    <Button variant='contained' className='basicBorders' onClick={() => {postPerson(persons.simon)} }>Insertar Simon</Button>
+                    <Button variant='contained' className='basicBorders' onClick={() => {postPerson(persons.marie)} }>Insertar marie</Button>
+                    <Button variant='contained' className='basicBorders' onClick={() => {postPerson(persons.elon)} }>Insertar elon</Button>
+                    <Button variant='contained' className='basicBorders' onClick={() => {postPerson(persons.nikola)} }>Insertar nikola</Button>
+                    
+                    <Button variant='contained' className='basicBorders' style={{"margin":"40px"}} onClick={handleClose}>Cerrar modal</Button>
                 </div>
             </Modal>
 

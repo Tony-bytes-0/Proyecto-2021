@@ -1,44 +1,42 @@
 //React
-//import { useNavigate } from "react-router-dom";
-//import useState from "react"
+import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
 //MUI
 import { Avatar } from "@mui/material"
 import { deepPurple} from '@mui/material/colors';
-//import {Button, Modal} from "@mui/material";
+import {Button, Modal} from "@mui/material";
 //Redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { disconect } from "../../../indexModles/features/users/loginController";
 
-function LoggedData(props) {
-    // const navigate = useNavigate()
+function LoggedData() {
+    const [modal] = useState(true); 
+    const closeModal = () => {navigate('/')};
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const loggedUser = useSelector(state => state.loginController)
-    // const [modal] = useState(true); const closeModal = () => navigate('/')
-    // function validate() {
-    //     if (loggedUser.usuario !== false) {
-    //         return { "user": loggedUser.usuario, "status": "Conectado" }
-    //     }
-    //     else return { "user": "a", "status": "Desconectado" }
-    // }
-    //var message = validate()
-    console.log(loggedUser)
-    if(loggedUser.usuario !== false) return <b>usuario Logeado: {loggedUser.usuario}</b>
-
-    else return <b>Desconectado</b>
     
-    // else return <> {/* Logeadon't */}
-    //     <Modal open={modal} onClose={closeModal} disableScrollLock={false} ><div className='modalColor modalCentratedSmall verticalFlex centrate'>
 
-    //         Adonde tan deslogueado mi rey?
-    //         <Button variant='contained' onClick={() => navigate('/')} >Pa la Playstore</Button>
-    //         {/* <img src = {playstore} alt='palaPlaystore' className='flexible'  */}
-
-    //     </div></Modal>
-    // </>
+    //console.log(loggedUser) //Dev
+    if(loggedUser.usuario !== false) return <div className="verticalFlex"><b>{loggedUser.usuario}</b>
+        <div className="flexible"><a className='hoverDown' onClick={() => {
+            dispatch(disconect())
+            navigate('/')
+        }}>Cerrar Sesion</a></div>
+    </div>
+    //else return <b>Desconectado</b>
+    else return <> {/* Logeadon't */}
+        <Modal open={modal} onClose={closeModal} disableScrollLock={false} ><div className='modalColor modalCentratedSmall verticalFlex centrate'>
+            Para Continuar, es Necesario Ingresar un Usuario
+            <Button variant='contained' onClick={() => navigate('/')} >Iniciar Sesion</Button>
+        </div></Modal>
+    </>
 }
 
 export default function StatusBar(){//Main
     
     return <div className="STATUSBAR right">
-        <div >
+        <div className="horizontalFlex">
             <LoggedData  />
             <Avatar sx={{ bgcolor: deepPurple[500] }}></Avatar>
         </div>

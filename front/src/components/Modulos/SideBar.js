@@ -4,15 +4,7 @@ import {useNavigate} from 'react-router-dom';
 
 //MUI
 import Button from '@mui/material/Button';
-import { ButtonGroup} from '@mui/material';
-
-//Redux
-import { useDispatch } from 'react-redux';
-import { disconect } from '../../indexModles/features/users/loginController';
-//import playstore from './Independientes/playstore.PNG
-
-
-
+import { ButtonGroup } from '@mui/material';
 
 // function LoggedData(props){
 //     const navigate = useNavigate()
@@ -43,7 +35,6 @@ import { disconect } from '../../indexModles/features/users/loginController';
 export default function SideBar() {//MAIN
     //const loggedUser = useSelector(state => state.loginController)
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
         return <div className='SIDEBAR'>
             
@@ -73,13 +64,13 @@ export default function SideBar() {//MAIN
                         Gestionar Alergias 
                     </Button>
                     
-                    <Button variant='outlined' size='small' onClick={ () => {
+                    {/* <Button variant='outlined' size='small' onClick={ () => {
                         dispatch(disconect())
-                        //navigate('/') DEV
+                        navigate('/') //DEV
                     }}
                         sx = {{"padding":"15px","marginTop":"20px"}}>
                         Cerrar Sesion
-                    </Button>
+                    </Button> */}
 
                 
             </ButtonGroup>
